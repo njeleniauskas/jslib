@@ -1,7 +1,7 @@
 # JavaScript Library
 A library of components and modules for building modern, accesible products.
 
-![GitHub tag (with filter)](https://img.shields.io/github/v/tag/njeleniauskas/java-script-library?color=27B17E)
+![GitHub tag (with filter)](https://img.shields.io/github/v/tag/njeleniauskas/jslib?color=27B17E)
 ![Static Badge](https://img.shields.io/badge/Language-JavaScript-%232C67BF)
 ![Static Badge](https://img.shields.io/badge/Format-Modules-%232C67BF)
 ![Static Badge](https://img.shields.io/badge/License-MIT-%232C67BF)
