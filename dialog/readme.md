@@ -4,6 +4,7 @@ A class handling a single dialog component.
 ![Static Badge](https://img.shields.io/badge/Version-1.0-%2327B17E)
 ![Static Badge](https://img.shields.io/badge/Status-Stable-%2327B17E)
 
+<br>
 
 ## Overview and Use
 This dialog component is an implementation of a moded dialog window.
@@ -43,7 +44,7 @@ In addition, the following arguments may also be included:
 
 <br>
 
-Both the toggle string relies on CSS to transition the visual state of the window, while the inert string, if used, gates the dialog control from being used if a timing argument is used (for separating access to assistive technolgies from animation).
+The toggle string relies on CSS to transition the visual state of the window, while the inert string, if used, gates the dialog control from being used if a timing argument is used (for separating access to assistive technolgies from animation).
 
 <br>
 
