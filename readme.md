@@ -11,7 +11,7 @@ A library of components and modules for building modern, accessible products.
 
 
 ## Project Overview
-The goal of this project is to help authors build modern, accessible products quickly and easily in a no-dependency environment. It's designed with the goal of separating functionalities into discrete, reusable packages, and structured into three types of modules/functions that help with these different needs.
+The goal of this project is to help authors build modern, accessible products quickly and easily in a no-dependency environment. It's designed with the goal of separating functionalities into discrete, reusable packages. And it is structured into three types of modules/functions that help with these different needs:
 
 <br>
 
