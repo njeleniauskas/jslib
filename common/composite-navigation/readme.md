@@ -21,6 +21,8 @@ There are several details and authors should know about if using this module to 
 ### Requirements
 While this module is very flexible, there are two requirements necessary for it to work:
 
+<br>
+
 - An `id` **must** be passed as an argument to properly identify the specific component and its elements in the DOM.
 - A `<div>` or `<table>` element **must** be used to represent the component node (`<table>` for interactive tables/grids only). This restriction helps preserve the native semantics of the component/children by lowering the manual adjustments necessary for any type of component.
 

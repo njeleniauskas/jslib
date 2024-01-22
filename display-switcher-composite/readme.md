@@ -1,4 +1,4 @@
-# View Switcher (Composite)
+# Display Switcher (Composite)
 A component that handles the toggling of sections within a page, from a contollable composite element.
 
 ![Static Badge](https://img.shields.io/badge/Version-1.0-%2327B17E)
@@ -11,7 +11,7 @@ A component that handles the toggling of sections within a page, from a contolla
 
 
 ## Overview
-A view switcher is a component that handles the changing of specific sections of a web page from a collection of control options. Functionally this component is similar to a `tablist`, however it is more flexible as the relationship between control and views can be **one-to-many** as well as non-adjacent to one another.
+A display switcher is a component that handles the changing of specific sections of a web page from a collection of control options. Functionally this component is similar to a `tablist`, however it is more flexible as the relationship between control and views can be **one-to-many** as well as non-adjacent to one another.
 
 Note that using this component requires an understanding of how composite navigation works (see that module's readme for more).
 
@@ -32,6 +32,8 @@ Assuming all of the dependencies are in the right place, setting up this compone
 
 ### Configuration
 Setting up the script module and configuration is fairly easy, and depends on the type of navigation the author wishes to implement (both roving and reference navigation are available). Below is a sample configuration using all of the available options:
+
+<br>
 
 ```html
 <script type="module">
@@ -91,7 +93,7 @@ A more practical example using only required arguments is the following configur
 ### HTML
 Beyond the `CompositeNavigation` requirements, the HTML of the component needs a few extra things to function properly.
 
-First, controls need to have a selection attribute (like `aria-selected`) to express the state of that control. These attributes depend on the exact implementaion desired. For example, if a view switcher is built using aria `radiogroup` roles, `aria-checked` is needed for the selected attribute.
+First, controls need to have a selection attribute (like `aria-selected`) to express the state of that control. These attributes depend on the exact implementaion desired. For example, if a display switcher is built using aria `radiogroup` roles, `aria-checked` is needed for the selected attribute.
 
 Second, both controls and views need a data- attribute to store a common value that links the control to that view (or views). An example is the following:
 

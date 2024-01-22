@@ -33,6 +33,8 @@ Note that a passing element can also be a receiver, enabling many different conf
 ## Types of Focus
 Within an interface, there are two types of focus that can occur: direct or indirect.
 
+<br>
+
 - **Direct**: Direct focus is 'normal' focus, where an element in the dom has focus, and whose state can be monitored through focus/blur or the documents `activeElement`.
 - **Indirect**: Indirect focus is where, through JavaScript, an element is in 'focus' despite it not being the current `activeElement`. This situation happens in composite elements like interactive tables, tabs, or similar components that have unfocusable, interactive children.
 
