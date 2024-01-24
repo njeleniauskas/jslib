@@ -1,4 +1,4 @@
-import attributeStateByValue from '../../common/utilities/attribute-state-by-value.js';
+//import attributeStateByValue from '../../common/utilities/attribute-state-by-value.js';
 
 import filterStateEmpty from './filter-state-empty.js';
 
@@ -8,30 +8,30 @@ import filterStateEmpty from './filter-state-empty.js';
  * @param {object} resetNodes 
  * @param {boolean} params.multiSelection 
  * @param {boolean} params.hasReset 
+ * @param {boolean} params.resetByValue 
+ * @param {boolean} params.resetVisibilityValue 
  * @param {object} params.filter 
- * @param {string} params.pointer - the pointer used for the state of the reset node.
- * @param {string} params.resetType 
+ * @param {string} params.pointerVisibility - the pointerVisibility used for the state of the reset node.
+ * @param {string} params.pointerChange - the pointer used for the state of the reset node.
  * @returns boolean
  */
 
 function getResetNodeConditions(params) {
 	if (params.multiSelection && params.hasReset) {
 		const resetNode = params.nodes.reset;
-		const resetByValue = attributeStateByValue(params.pointer);
 		const filterEmpty = filterStateEmpty(params.filter);
 		let flagged;
 
-		if (params.resetType === 'class') {
-			flagged = resetNode.classList.contains(params.pointer);
+		if (params.resetByValue) {
+			let value = JSON.stringify(params.resetVisibilityValue);
+
+			flagged = (resetNode.getAttribute(params.pointerVisibility) === value);
 		} else {
-			if (resetByValue) {
-				flagged = (resetNode.getAttribute(params.pointer) === 'false');
-			} else {
-				flagged = resetNode.hasAttribute(params.pointer);
-			}
+			flagged = resetNode.hasAttribute(params.pointerVisibility);
 		}
-		
+
 		if (!filterEmpty && !flagged || filterEmpty && flagged) {
+
 			return true;
 		}
 	}

@@ -68,3 +68,10 @@ When using `<input>` elements as filters, users can use delimiters to separate o
 
 ### Filter Values
 For binary selection, values should match the value desired, ignoring case sensitivity. One special case exists however. When a filter control has the `all` value, it will always return `true` for the entire filter group when selected. This should only be used for single-selection, binary filter groups (it's only relevant there).
+
+In addition, `FilterGroup` components cannot overlap another existing `FilterGroup`. For example, if one FilterGroup contains `propA` and `propB`, these strings cannot be used in another component (it will throw errors).
+
+<br>
+
+## Roadmap
+- allow multiple filter groups of the same type (through disable/swapping, or through filter changes).

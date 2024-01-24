@@ -59,10 +59,6 @@ function validateFilterGroupConfig(params) {
 			}
 		}	
 
-		if (invalidPropertyValue(params, 'selectionByValue')) {
-			errors.push(new Error('selectionByValue is required.'));
-		}
-
 		validateDependentArguments(errors, [
 			{
 				'key': 'reset',
@@ -70,15 +66,15 @@ function validateFilterGroupConfig(params) {
 				'location': params.attributes,
 			},
 			{
-				'key': 'reset',
-				'type': 'indicators',
+				'key': 'resetVisibility',
+				'type': 'attributes',
 				'location': params.indicators,
 			},
 			{
-				'key': 'resetType',
-				'type': 'prop',
-				'location': params,
-			},
+				'key': 'resetChange',
+				'type': 'indicators',
+				'location': params.indicators,
+			}
 		]);
 	} else {
 		if (invalidPropertyValue(params.attributes, 'method')) {

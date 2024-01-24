@@ -26,7 +26,10 @@ Because of the flexibility, updating a selection group is accomplished by using 
 ### Reset Features
 Resetting a selection group is useful when one or more selections are possible. In this case, functions exist to help reset the selection group to its initial state, and toggle the reset control.
 
-Toggling a reset control simply flags the control with an attribute or class in case the control is dynamically shown (not always the case).
+Toggling a reset control flags the element with an attribute and a class in case authors wish to dynamically show the control. Note that the attribute controls visibility, and the class transitioning.
+
+In addition, when toggling by attribute value, resetting needs to know if being visible is truthy or falsy.
+
 
 <br>
 

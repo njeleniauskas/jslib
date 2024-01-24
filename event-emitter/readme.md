@@ -1,6 +1,10 @@
 # Event Emitter
 A class to handle reactive events in an application.
 
+![Static Badge](https://img.shields.io/badge/Version-1.0-%2327B17E)
+![Static Badge](https://img.shields.io/badge/Status-Stable-%2327B17E)
+
+
 <br>
 
 ## Overview

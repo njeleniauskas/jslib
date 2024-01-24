@@ -4,7 +4,6 @@ import updateMultipleSelection from '../../common/group-selection/update-multi-s
 import toggleResetNode from '../../common/group-selection/toggle-reset-node.js';
 
 import updateFilterState from './update-filter-state.js';
-import filterStateEmpty from './filter-state-empty.js';
 import getResetNodeConditions from './get-reset-node-conditions.js';
 
 /**
@@ -36,7 +35,6 @@ function handleBinaryEvent(params) {
 
 	if (params.props.multiSelection) {
 		args.resetAttribute = params.props.attributes.reset;
-		args.resetType = params.props.indicators.resetType;
 		
 		update = true;
 		updateFunction = updateMultipleSelection;
@@ -61,16 +59,20 @@ function handleBinaryEvent(params) {
 			'hasReset': 'reset' in params.props.attributes,
 			'multiSelection': params.props.multiSelection,
 			'filter': params.state.filter,
-			'pointer': params.props.indicators.reset,
-			'resetType': params.props.resetType,
+			'pointerVisibility': params.props.indicators.resetVisibility,
+			'pointerChange': params.props.indicators.resetChange,
+			'resetByValue': params.props.resetByValue,
+			'resetVisibilityValue': params.props.resetVisibilityValue,
 		});
 
 		if (isValidResetCondition) {
 			toggleResetNode({
-				'resetType': params.props.resetType,
 				'node': params.nodes.reset,
-				'pointer': params.props.indicators.reset,
+				'pointerVisibility': params.props.indicators.resetVisibility,
+				'pointerChange': params.props.indicators.resetChange,
 				'resetByValue': params.props.resetByValue,
+				'resetVisibilityValue': params.props.resetVisibilityValue,
+				'timing': params.props.resetTiming,
 			});
 		}
 

@@ -55,8 +55,6 @@ function testData(params) {
 			prefixFunction = testNumberComparison;
 		}
 
-		//console.log(objectData, filterData)
-
 		result = prefixFunction(objectData, filterData, prefix);
 		results.push(result);
 	}

@@ -24,14 +24,18 @@ function updateFilterState(state, params) {
 			const isToggleAndExists = (!params.selectionByValue && node.hasAttribute(params.indicators.selected));
 
 			if (isValueAndTrue || isToggleAndExists) {
-				value = node.getAttribute(params.attributes.control).toLowerCase().trim();
+				const values = node.getAttribute(params.attributes.control).split(' ');
 
-				if (node.hasAttribute(params.attributes.method)) {
-					method = node.getAttribute(params.attributes.method).toLowerCase().trim();
-					operator = ': ';
-				}
+				values.forEach((item) => {
+					value = item.toLowerCase().trim();
 
-				result.push(method.concat(operator, value));
+					if (node.hasAttribute(params.attributes.method)) {
+						method = node.getAttribute(params.attributes.method).toLowerCase().trim();
+						operator = ': ';
+					}
+	
+					result.push(method.concat(operator, value));
+				});
 			}
 		});
 	}

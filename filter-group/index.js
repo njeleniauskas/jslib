@@ -1,5 +1,4 @@
 import invalidPropertyValue from '../common/utilities/invalid-property-value.js';
-import attributeStateByValue from '../common/utilities/attribute-state-by-value.js';
 
 import validateFilterGroupConfig from './library/validate-filter-group-config.js';
 import getNodes from './library/get-nodes.js';
@@ -10,7 +9,8 @@ import getToggleNodeState from './library/get-toggle-node-state.js';
 
 /**
  * @param {object} params
- * @param {string} params.type - The type of control in the group (binary or input).
+ * @param {'binary' | 'input'} params.type - The type of control in the group (binary or input).
+ * @param {boolean} [params.multiSelection] - Flag for single, or multiselection behavior.
  * @param {object} params.attributes - Data attribute strings (without brackets).
  * @param {string} params.attributes.group - The group reference property (private).
  * @param {string} params.attributes.control - The attribute identifying filter controls.
@@ -21,14 +21,15 @@ import getToggleNodeState from './library/get-toggle-node-state.js';
  * 
  * @param {object} [params.indicators] - Strings inditacting the attribute or class states needed.
  * @param {string} [params.indicators.selected] - The selected-state attribute (must be accessible).
- * @param {string} [params.indicators.toggle] - The state attribute for the toggle control (must be accessible).
- * @param {string} [params.indicators.reset] - The class or attribute used to mark the reset control as 'available'. 
+ * @param {string} [params.indicators.toggled] - The state attribute for the toggle control (must be accessible).
+ * @param {string} [params.indicators.resetVisibility] - The class or attribute used to mark the reset control as 'available'.
+ * @param {string} [params.indicators.resetChange] - The class or attribute used to mark the reset transition state (if animating).
  * 
- * @param {boolean} [params.multiSelection] - Flag for single, or multiselection behavior.
  * @param {boolean} [params.selectionByValue] - Selected state is attribute=value, or a toggled attribute.
  * @param {boolean} [params.toggleByValue] - Toggle state is attribute=value, or toggled attribute.
- * @param {string} [params.resetType] - Whether the reseting indicator is a class or attribute.
  * @param {boolean} [params.resetByValue] - Flag: the flag for reset being available is either attribute=value, or toggled attribute.
+ * @param {boolean} [params.resetVisibilityValue] - Indicates the 'visible' state of the reset nodes attribute value.
+ * @param {boolean} [params.resetTiming] - A custom timing window to toggle the flagging of the reset visibility indicator.
  * @param {boolean} [params.delay] - The delay window for the keyup event on input elements.
  * @param {boolean} [params.toggleResetsFilter] - Toggle function will also reset the filter group.
  * @param {object} params.emitter - The event emitter (communication with other classes/components).
@@ -51,12 +52,14 @@ class FilterGroup {
 			'indicators': {
 				'selected': null,
 				'toggle': null,
-				'reset': null,
+				'resetVisibility': null,
+				'resetChange': null,
 			},
 			'selectionByValue': true,
 			'toggleByValue': false,
-			'resetType': null,
-			'resetByValue': false,
+			'resetByValue': true,
+			'resetVisibilityValue': false,
+			'resetTiming': 0,
 			'delay': 250,
 			'toggleResetsFilter': false,
 		};
@@ -96,14 +99,6 @@ class FilterGroup {
 
 		if (this.props.type === 'input') {
 			this.props.multiSelection = false;
-		}
-
-		if (!invalidPropertyValue(this.props.indicators, 'selected')) {
-			this.props.selectionByValue = attributeStateByValue(this.props.indicators.selected);
-		}
-
-		if (!invalidPropertyValue(this.props.indicators, 'toggle')) {
-			this.props.toggleByValue = attributeStateByValue(this.props.indicators.toggle);
 		}
 	}
 

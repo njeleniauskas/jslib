@@ -26,7 +26,7 @@ function addInterfaceEvents(params) {
 		if (params.props.type === 'binary') {
 			node.addEventListener('click', (event) => {
 				args.targetNode = node;
-
+				
 				handleBinaryEvent(args);
 			});
 		}

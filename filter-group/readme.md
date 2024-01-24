@@ -110,12 +110,18 @@ const args = {
 		reset: 'data-{reset}',
 	},
 	indicators: {
-		reset: 'is-visible',
+		resetVisibility: 'aria-hidden', //a data- or aria- attribute
+		resetChange: 'is-visible',
 	},
-	resetType: 'class', //class || attribute
-	resetByValue: false, //default: false
+	resetByValue: false, //default: true
+	resetVisibilityValue: true, //default: true
+	resetTiming: 200 //delay window for the visibility indicator.
 }
 ```
+
+<br>
+
+Note that resetting must use a `data-` or `aria-` attribute for the visibility of the control, and a class for the visual state of the element.
 
 <br>
 
@@ -125,11 +131,11 @@ For any type of filter control (binary or input), authors may add a `method` att
 <br>
 
 ```html
-	<button 
-		data-{id}-method="&lt"
-		data-{id}-control="20">
-		&lt; 20
-	</button>
+<button 
+	data-{method}="&lt"
+	data-{control}="20">
+	&lt; 20
+</button>
 ```
 
 <br>
@@ -139,10 +145,10 @@ or
 <br>
 
 ```html
-	<input 
-		type="text"
-		data-{id}-method="includes"
-		data-{id}-control/>
+<input 
+	type="text"
+	data-{method}="includes"
+	data-{control}/>
 ```
 
 <br>
@@ -152,8 +158,8 @@ There are a number of accepted methods that authors can use:
 <br>
 
 ```javascript
-	['=', '<', '≤', '<=', '>=', '≥', '>', 'range'] //number methods
-	['includes'] //string methods
+['=', '<', '≤', '<=', '>=', '≥', '>', 'range'] //number methods
+['includes'] //string methods
 ```
 
 <br> 
@@ -168,10 +174,10 @@ Directly related to methods, a comparison element can also be included when user
 <br>
 
 ```html
-	<select data-f4-comparison>
-		<option value="&lt;">&lt;</option>
-		<option value="&gt;">&gt;</option>
-	</select>
+<select data-{comparison}>
+	<option value="&lt;">&lt;</option>
+	<option value="&gt;">&gt;</option>
+</select>
 ```
 
 <br>
@@ -183,8 +189,8 @@ While this class allows for a number of configurations, there are a few notes au
 <br>
 
 - An EventEmitter class is required to run properly.
+- Binary controls can have multiple, space-separated values, in case a control with multiple options is desired.
 - Only single selection is allowed for `type:input`.
 - If using a toggle control, an attribute is required for statedness.
 - The reset function is only available for `type:binary`.
 - Selection statedness must be accessible, hence the use of attributes in the class.
-- The value(s) of `props.group` cannot overlap another existing FilterGroup. For example, if one FilterGroup contains `propA` and `propB`, these strings cannot be used in another component (it will throw errors).

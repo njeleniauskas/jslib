@@ -4,26 +4,40 @@ import setAttributeByValue from '../utilities/set-attribute-by-value.js';
 /**
  * 
  * @param {object} params
- * @param {string} params.resetType - Class or attribute resetting.
  * @param {object} params.node - The reset node.
- * @param {string} params.pointer - The class or attribute used to handle state.
+ * @param {string} params.pointerVisibility - The attribute used to handle the visibility of the reset node.
+ * @param {string} params.pointerChange - The class used to handle the transition of the element (if needed).
  * @param {boolean} params.resetByValue - Flag to use value or toggle attribute function.
+ * @param {boolean} [params.resetVisibilityValue] - Flag that indicates that the element is visible when the attribute's value is false.
+ * @param {number} params.timing - The delay window to trigger the pointerVisibility attribute to "hidden".
  */
 
 function toggleResetNode(params) {
-	if (params.resetType === 'class') {
-		params.node.classList.toggle(params.pointer);
+	let visibilityValue;
+	let value;
+	let setFunction;
+	let isVisible;
+
+	if (params.resetByValue) {
+		visibilityValue = params.node.getAttribute(params.pointerVisibility);
+		value = !JSON.parse(visibilityValue);
+		setFunction = setAttributeByValue;
+		isVisible = (params.resetVisibilityValue !== value);
+	} else {
+		visibilityValue = params.node.hasAttribute(params.pointerVisibility);
+		value = !visibilityValue;
+		setFunction = setAttributeByToggle;
+		isVisible = params.node.hasAttribute(params.pointerVisibility);
 	}
-
-	if (params.resetType === 'attribute') {
-		const attributeValue = params.node.getAttribute(params.pointer);
-		const value = !JSON.parse(attributeValue);
-
-		if (params.resetByValue) {
-			setAttributeByValue(params.node, params.pointer, value);
-		} else {
-			setAttributeByToggle(params.node, params.pointer, value);
-		}
+	
+	if (!isVisible) {
+		params.node.classList.add(params.pointerChange);
+		setFunction(params.node, params.pointerVisibility, value);
+	} else {
+		params.node.classList.remove(params.pointerChange);
+		setTimeout(() => {
+			setFunction(params.node, params.pointerVisibility, value);
+		}, params.timing);
 	}
 }
 
