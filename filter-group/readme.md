@@ -1,7 +1,7 @@
 # Filter Group
 A class managing a single FilterGroup component.
 
-![Static Badge](https://img.shields.io/badge/Version-1.0-%2327B17E)
+![Static Badge](https://img.shields.io/badge/Version-1.1-%2327B17E)
 ![Static Badge](https://img.shields.io/badge/Status-Stable-%2327B17E)
 
 
@@ -110,18 +110,54 @@ const args = {
 		reset: 'data-{reset}',
 	},
 	indicators: {
-		resetVisibility: 'aria-hidden', //a data- or aria- attribute
-		resetChange: 'is-visible',
+		resetVisible: 'is-visible', //class only
+		resetHidden: 'is-hiding', //class only
 	},
-	resetByValue: false, //default: true
-	resetVisibilityValue: true, //default: true
-	resetTiming: 200 //delay window for the visibility indicator.
+	resetTiming: 200 //delay window for the visibility indicator. default: 0
 }
 ```
 
 <br>
 
-Note that resetting must use a `data-` or `aria-` attribute for the visibility of the control, and a class for the visual state of the element.
+Two important notes about reset args should be made. Due to accessibility and potential behaviors, resetting requires the usage of two classes that will be inversely toggled on a valid reset change.
+
+If authors wish to animate these indicators, they *must* use keyframe animations, as they are the only solution that can maintain accessibility, and not also create statedness errors. Also note that the hidden class will be cleared after a delay, to return the element to 'idle'. An example is below:
+
+<br>
+
+```scss
+.is-visible {
+	animation-name: resetIn;
+}
+
+.is-hiding {
+	animation-name: resetOut;
+}
+
+@keyframes resetIn {
+	0% {
+		visibility: visible;
+		//start styles
+	}
+	100% {
+		//end styles
+	}
+}
+
+@keyframes resetOut {
+	0% {
+		//start with resetIn end styles
+	}
+	100% {
+		visibility: hidden;
+		//end with resetIn start styles
+	}
+}
+```
+
+<br> 
+
+Finally, this also means that when the page renders, the `resetHidden` class should not be included on the reset control, otherwise unwanted animations may occur.
 
 <br>
 
@@ -194,3 +230,10 @@ While this class allows for a number of configurations, there are a few notes au
 - If using a toggle control, an attribute is required for statedness.
 - The reset function is only available for `type:binary`.
 - Selection statedness must be accessible, hence the use of attributes in the class.
+
+
+<br>
+
+## Roadmap
+- Enable cloned filter groups (linked groups).
+- Enable global clearing button.

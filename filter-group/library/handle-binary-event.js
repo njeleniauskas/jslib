@@ -59,19 +59,14 @@ function handleBinaryEvent(params) {
 			'hasReset': 'reset' in params.props.attributes,
 			'multiSelection': params.props.multiSelection,
 			'filter': params.state.filter,
-			'pointerVisibility': params.props.indicators.resetVisibility,
-			'pointerChange': params.props.indicators.resetChange,
-			'resetByValue': params.props.resetByValue,
-			'resetVisibilityValue': params.props.resetVisibilityValue,
+			'indicatorVisible': params.props.indicators.resetVisible,
 		});
 
 		if (isValidResetCondition) {
 			toggleResetNode({
 				'node': params.nodes.reset,
-				'pointerVisibility': params.props.indicators.resetVisibility,
-				'pointerChange': params.props.indicators.resetChange,
-				'resetByValue': params.props.resetByValue,
-				'resetVisibilityValue': params.props.resetVisibilityValue,
+				'indicatorVisible': params.props.indicators.resetVisible,
+				'indicatorHidden': params.props.indicators.resetHidden,
 				'timing': params.props.resetTiming,
 			});
 		}

@@ -22,9 +22,9 @@ import getToggleNodeState from './library/get-toggle-node-state.js';
  * @param {object} [params.indicators] - Strings inditacting the attribute or class states needed.
  * @param {string} [params.indicators.selected] - The selected-state attribute (must be accessible).
  * @param {string} [params.indicators.toggled] - The state attribute for the toggle control (must be accessible).
- * @param {string} [params.indicators.resetVisibility] - The class or attribute used to mark the reset control as 'available'.
- * @param {string} [params.indicators.resetChange] - The class or attribute used to mark the reset transition state (if animating).
- * 
+ * @param {string} [params.indicators.resetVisible] - The class triggering visibility on the reset node.
+ * @param {string} [params.indicators.resetHidden] - The class triggering hiding on the reset node.
+
  * @param {boolean} [params.selectionByValue] - Selected state is attribute=value, or a toggled attribute.
  * @param {boolean} [params.toggleByValue] - Toggle state is attribute=value, or toggled attribute.
  * @param {boolean} [params.resetByValue] - Flag: the flag for reset being available is either attribute=value, or toggled attribute.
@@ -52,13 +52,11 @@ class FilterGroup {
 			'indicators': {
 				'selected': null,
 				'toggle': null,
-				'resetVisibility': null,
-				'resetChange': null,
+				'resetVisible': null,
+				'resetHidden': null,
 			},
 			'selectionByValue': true,
 			'toggleByValue': false,
-			'resetByValue': true,
-			'resetVisibilityValue': false,
 			'resetTiming': 0,
 			'delay': 250,
 			'toggleResetsFilter': false,

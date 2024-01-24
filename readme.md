@@ -40,4 +40,5 @@ specific-module/
 <br>
 
 ## Notes
-Authors should consult `readme.md` files to learn how to use modules successfully.
+- Authors should consult `readme.md` files to learn how to use modules successfully.
+- Within readme files `data-` attributes will commonly be shown as `data-{identifier}` to help explain context. Authors should replace `{identifier}` with the attribute they want to use in production.

@@ -8,11 +8,8 @@ import filterStateEmpty from './filter-state-empty.js';
  * @param {object} resetNodes 
  * @param {boolean} params.multiSelection 
  * @param {boolean} params.hasReset 
- * @param {boolean} params.resetByValue 
- * @param {boolean} params.resetVisibilityValue 
  * @param {object} params.filter 
- * @param {string} params.pointerVisibility - the pointerVisibility used for the state of the reset node.
- * @param {string} params.pointerChange - the pointer used for the state of the reset node.
+ * @param {string} params.indicatorVisible
  * @returns boolean
  */
 
@@ -22,16 +19,9 @@ function getResetNodeConditions(params) {
 		const filterEmpty = filterStateEmpty(params.filter);
 		let flagged;
 
-		if (params.resetByValue) {
-			let value = JSON.stringify(params.resetVisibilityValue);
-
-			flagged = (resetNode.getAttribute(params.pointerVisibility) === value);
-		} else {
-			flagged = resetNode.hasAttribute(params.pointerVisibility);
-		}
+		flagged = resetNode.classList.contains(params.indicatorVisible);
 
 		if (!filterEmpty && !flagged || filterEmpty && flagged) {
-
 			return true;
 		}
 	}

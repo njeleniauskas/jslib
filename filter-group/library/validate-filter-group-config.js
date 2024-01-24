@@ -66,12 +66,12 @@ function validateFilterGroupConfig(params) {
 				'location': params.attributes,
 			},
 			{
-				'key': 'resetVisibility',
-				'type': 'attributes',
+				'key': 'resetVisible',
+				'type': 'indicators',
 				'location': params.indicators,
 			},
 			{
-				'key': 'resetChange',
+				'key': 'resetHidden',
 				'type': 'indicators',
 				'location': params.indicators,
 			}

@@ -64,7 +64,6 @@ class DataCollection {
 	async getCollection(params) {
 		try {
 			const args = {};
-			const validParams = (params !== undefined && !emptyObject(params) && 'filepath' in params);
 			
 			if (params !== undefined && !('filepath' in params)) {
 				throw new Error ('getCollection: A filepath must be provided if supplying an object with arguments.');

@@ -1,42 +1,24 @@
-import setAttributeByToggle from '../utilities/set-attribute-by-toggle.js';
-import setAttributeByValue from '../utilities/set-attribute-by-value.js';
-
 /**
- * 
+ * Toggle show/hide classes on the reset node.
  * @param {object} params
  * @param {object} params.node - The reset node.
- * @param {string} params.pointerVisibility - The attribute used to handle the visibility of the reset node.
- * @param {string} params.pointerChange - The class used to handle the transition of the element (if needed).
- * @param {boolean} params.resetByValue - Flag to use value or toggle attribute function.
- * @param {boolean} [params.resetVisibilityValue] - Flag that indicates that the element is visible when the attribute's value is false.
+ * @param {string} params.indicatorVisible - The class to flag the node as visible.
+ * @param {string} params.indicatorHidden - The class to flag the node as 'moving to hidden'.
  * @param {number} params.timing - The delay window to trigger the pointerVisibility attribute to "hidden".
  */
 
 function toggleResetNode(params) {
-	let visibilityValue;
-	let value;
-	let setFunction;
-	let isVisible;
+	const isVisible = params.node.classList.contains(params.indicatorVisible);
 
-	if (params.resetByValue) {
-		visibilityValue = params.node.getAttribute(params.pointerVisibility);
-		value = !JSON.parse(visibilityValue);
-		setFunction = setAttributeByValue;
-		isVisible = (params.resetVisibilityValue !== value);
-	} else {
-		visibilityValue = params.node.hasAttribute(params.pointerVisibility);
-		value = !visibilityValue;
-		setFunction = setAttributeByToggle;
-		isVisible = params.node.hasAttribute(params.pointerVisibility);
-	}
-	
 	if (!isVisible) {
-		params.node.classList.add(params.pointerChange);
-		setFunction(params.node, params.pointerVisibility, value);
+		params.node.classList.remove(params.indicatorHidden);
+		params.node.classList.add(params.indicatorVisible);
 	} else {
-		params.node.classList.remove(params.pointerChange);
+		params.node.classList.remove(params.indicatorVisible);
+		params.node.classList.add(params.indicatorHidden);
+
 		setTimeout(() => {
-			setFunction(params.node, params.pointerVisibility, value);
+			params.node.classList.remove(params.indicatorHidden);
 		}, params.timing);
 	}
 }
