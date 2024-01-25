@@ -8,16 +8,18 @@
 async function fetchJSON(filepath, options = {}) {
 	const request = new Request(filepath);
 	const headers = new Headers();
-	const args = {};
-
-	args.method = 'GET';
-	args.headers = headers;
-	args.mode = 'cors';
+	let args = {...request};
 
 	headers.append('Content-Type', 'application/json');
+	
+	if (!('headers' in args)) {
+		args.headers = {};
+	}
+
+	args.headers = {...headers};
 
 	if (Object.keys(options).length !== 0) {
-		Object.assign(args, options);
+		args = {...args, ...options};
 	}
 
 	try {
