@@ -14,12 +14,16 @@ function getLanguageAndNavigationContext(params) {
 	const orientationAttribute = params.orientationAttribute;
 	const state = {};
 
+	if (!node.hasAttribute(orientationAttribute)) {
+		throw new Error('Orientation attribute missing.');
+	}
+
 	state.language = getDocumentLanguageSettings();
 	state.orientation = node.getAttribute(orientationAttribute);
 	state.navigationKeys = getNavigationKeys({
 		'orientation': state.orientation,
 		'languageSettings': state.language
-	})
+	});
 
 	return state;
 }

@@ -2,29 +2,33 @@ import removeBracketsFromString from '../../common/utilities/remove-brackets-fro
 import collectInteractiveElements from '../../common/focus-trap/collect-interactive-elements.js';
 import getFirstAndLastElements from '../../common/focus-trap/get-first-and-last-elements.js';
 
-function initializeDialog(params) {
-	const strings = params.props.strings;
+/**
+ * @param {object} module - The class module.
+ */
+
+function initializeDialog(module) {
+	const strings = module.props.strings;
 	const controlString = removeBracketsFromString(strings.control);
 
-	params.nodes.passer = Array.from(document.querySelectorAll(strings.passer));
-	params.nodes.receiver = Array.from(document.querySelectorAll(strings.receiver));
-	params.nodes.window = document.querySelector(strings.window);
-	params.nodes.control = params.nodes.passer.find((element) => element.hasAttribute(controlString));
+	module.nodes.passer = Array.from(document.querySelectorAll(strings.passer));
+	module.nodes.receiver = Array.from(document.querySelectorAll(strings.receiver));
+	module.nodes.window = document.querySelector(strings.window);
+	module.nodes.control = module.nodes.passer.find((element) => element.hasAttribute(controlString));
 
-	const windowInteractive = (params.nodes.window.hasAttribute('tabindex') 
-		&& params.nodes.window.getAttribute('tabindex') === '-1');
-	const nodes = collectInteractiveElements(params.nodes.window);
+	const windowInteractive = (module.nodes.window.hasAttribute('tabindex') 
+		&& module.nodes.window.getAttribute('tabindex') === '-1');
+	const nodes = collectInteractiveElements(module.nodes.window);
 
-	params.nodes.ix = {...getFirstAndLastElements(nodes)};
+	module.nodes.ix = {...getFirstAndLastElements(nodes)};
 
 	if (windowInteractive) {
-		params.state.windowInteractive = true;
+		module.state.windowInteractive = true;
 	}
 
-	const hasInert = (params.props.strings.hasOwnProperty('inert') && params.props.strings.inert !== '');
+	const hasInert = (module.props.strings.hasOwnProperty('inert') && module.props.strings.inert !== '');
 
 	if (hasInert) {
-		params.state.gateControl = true;
+		module.state.gateControl = true;
 	}
 }
 

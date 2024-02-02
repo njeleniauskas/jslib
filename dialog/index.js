@@ -3,7 +3,7 @@ import initializeDialog from './library/initialize-dialog.js';
 import addEvents from './library/add-events.js';
 
 /**
- * Note: this function should be retired in 2025–6 once Safari catches up
+ * A class handling a single dialog component.
  * @param {object} strings - Strings used to identify nodes, or represent statedness.
  * @param {string} strings.passer - The attribute for the passing node.
  * @param {string} strings.receiver - The attribute for the receiving node.
@@ -13,7 +13,9 @@ import addEvents from './library/add-events.js';
  * @param {string} [strings.toggle] - The string controlling the transition state of the window.
  * @param {string} [strings.inert] - The string gating interaction on the control element (if a delay is used).
  * @param {string} [timing] - The delay window for toggling the hidden string to the "hidden" state.
- */
+ * 
+ * Note: this function should be retired in 2025–6 once Safari catches up.
+*/
 
 class Dialog {
 	constructor(params) {
@@ -45,15 +47,9 @@ class Dialog {
 	}
 
 	init(params) {
-		const args = {
-			props: this.props,
-			nodes: this.nodes,
-			state: this.state,
-		};
-
-		setConfiguration(this.props, params);
-		initializeDialog(args);
-		addEvents(args);
+		setConfiguration(this, params);
+		initializeDialog(this);
+		addEvents(this);
 	}
 }
 

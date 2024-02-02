@@ -1,13 +1,17 @@
 import clearStack from './stack-clear.js';
 import updateFocusStack from './update-focus-stack.js';
-import passFocus from './pass-focus.js';
 import closeDialog from './close-dialog.js';
+import updateFocusPair from '../../common/focus-passer/update-focus-pair.js';
 
-function handleClearEvent(params) {
-	const context = params.state.stack[0];
+/**
+ * @param {object} module - The class module.
+ */
+
+function handleClearEvent(module) {
+	const context = module.state.stack[0];
 	const args = {
 		update: {
-			stack: params.state.stack
+			stack: module.state.stack,
 		},
 		pass: {
 			passer: context.receiver,
@@ -16,8 +20,8 @@ function handleClearEvent(params) {
 	};
 	
 	updateFocusStack(args.update, clearStack);
-	passFocus(args.pass);
-	closeDialog(params);
+	updateFocusPair(args.pass);
+	closeDialog(module);
 }
 
 export default handleClearEvent;

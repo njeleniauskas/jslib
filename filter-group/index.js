@@ -8,6 +8,7 @@ import updateFilterState from './library/update-filter-state.js';
 import getToggleNodeState from './library/get-toggle-node-state.js';
 
 /**
+ * A class managing a single FilterGroup component.
  * @param {object} params
  * @param {'binary' | 'input'} params.type - The type of control in the group (binary or input).
  * @param {boolean} [params.multiSelection] - Flag for single, or multiselection behavior.
@@ -38,34 +39,34 @@ import getToggleNodeState from './library/get-toggle-node-state.js';
 class FilterGroup {
 	constructor(params) {
 		this.props = {
-			'type': null,
-			'group': null,
-			'multiSelection': false,
-			'attributes': {
-				'group': null,
-				'control': null,
-				'toggle': null,
-				'comparison': null,
-				'method': null,
-				'reset': null,
+			type: null,
+			group: null,
+			multiSelection: false,
+			attributes: {
+				group: null,
+				control: null,
+				toggle: null,
+				comparison: null,
+				method: null,
+				reset: null,
 			},
-			'indicators': {
-				'selected': null,
-				'toggle': null,
-				'resetVisible': null,
-				'resetHidden': null,
+			indicators: {
+				selected: null,
+				toggle: null,
+				resetVisible: null,
+				resetHidden: null,
 			},
-			'selectionByValue': true,
-			'toggleByValue': false,
-			'resetTiming': 0,
-			'delay': 250,
-			'toggleResetsFilter': false,
+			selectionByValue: true,
+			toggleByValue: false,
+			resetTiming: 0,
+			delay: 250,
+			toggleResetsFilter: false,
 		};
 		this.nodes = {};
 		this.emitter = {};
 		this.state = {
-			'active': true,
-			'filter': {},
+			active: true,
+			filter: {},
 		};
 
 		this.init(params);
@@ -102,20 +103,12 @@ class FilterGroup {
 
 	initializeComponent() {
 		getNodes(this.nodes, this.props.attributes);
-		addInterfaceEvents({
-			'props': this.props,
-			'nodes': this.nodes,
-			'state': this.state,
-			'emitter': this.emitter,
-		});
+		addInterfaceEvents(this);
 		
 		this.props.group = this.nodes.group.getAttribute(this.props.attributes.group);
+		this.props.id = this.props.group;
 
-		addEmitterEvents({
-			'emitter': this.emitter,
-			'group': this.props.group,
-			'filter': this.state.filter,
-		});
+		addEmitterEvents(this);
 
 		if (!invalidPropertyValue(this.props.attributes, 'toggle')) {
 			this.state.active = getToggleNodeState({

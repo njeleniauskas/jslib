@@ -13,16 +13,16 @@ import addEmitterEvents from './library/add-emitter-events.js';
 class DataCollectionFilter {
 	constructor(params) {
 		this.props = {
-			'delay': 250,
-			'deepFilter': false,
+			delay: 250,
+			deepFilter: false,
 		};
 		this.emitter = null;
 		this.data = null;
 		this.state = {
-			'filters': {},
-			'groupedKeys': {},
-			'filtered': false,
-			'ready': false
+			filters: {},
+			groupedKeys: {},
+			filtered: false,
+			ready: false
 		};
 
 		this.init(params);
@@ -32,10 +32,7 @@ class DataCollectionFilter {
 		try {
 			validateConfig(params);
 			this.setConfiguration(params);
-			addEmitterEvents({
-				'module': this,
-				'emitter': this.emitter,
-			});
+			addEmitterEvents(this);
 		} catch (errors) {
 			if (errors instanceof AggregateError) {
 				console.error(errors.message)

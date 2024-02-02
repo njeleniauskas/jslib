@@ -3,6 +3,7 @@ const data = {
 		component: null,
 		reference: null,
 		contexts: null,
+		views: null,
 	}
 }
 

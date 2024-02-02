@@ -1,5 +1,12 @@
 import removeBracketsFromString from '../../common/utilities/remove-brackets-from-string.js';
 
+/**
+ * @param {object} params 
+ * @param {object} params.props
+ * @param {object} params.nodes
+ * @param {object} params.state
+ */
+
 function closeDialog(params) {
 	const attribute = removeBracketsFromString(params.props.strings.hidden);
 	params.state.opened = false;

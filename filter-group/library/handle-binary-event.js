@@ -5,6 +5,7 @@ import toggleResetNode from '../../common/group-selection/toggle-reset-node.js';
 
 import updateFilterState from './update-filter-state.js';
 import getResetNodeConditions from './get-reset-node-conditions.js';
+import broadcastEmitterEvents from './broadcast-emitter-events.js';
 
 /**
  * 
@@ -72,7 +73,12 @@ function handleBinaryEvent(params) {
 		}
 
 		if (params.state.active) {
-			params.emitter.emit('update-filter-group', params.state.filter);
+			broadcastEmitterEvents({
+				emitter: params.emitter,
+				props: params.props,
+				component: params.nodes.group,
+				state: params.state,
+			});
 		}
 	}
 }

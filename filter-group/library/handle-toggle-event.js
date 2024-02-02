@@ -1,8 +1,8 @@
 import resetGroupSelection from '../../common/group-selection/reset-group-selection.js';
 import filterStateEmpty from './filter-state-empty.js';
 import getToggleNodeState from './get-toggle-node-state.js';
-
 import updateFilterState from './update-filter-state.js';
+import broadcastEmitterEvents from './broadcast-emitter-events.js';
 
 /**
  * @param {object} params 
@@ -72,7 +72,12 @@ function handleToggleEvent(params) {
 		updateFilterState(params.state, stateArgs);
 	}
 
-	params.emitter.emit('update-filter-group', params.state.filter);
+	broadcastEmitterEvents({
+		emitter: params.emitter,
+		props: params.props,
+		component: params.nodes.group,
+		state: params.state,
+	});
 }
 
 export default handleToggleEvent;

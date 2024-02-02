@@ -3,6 +3,10 @@ import state from '../data/state.js';
 
 import resetFocusState from './reset-focus-state.js';
 
+/**
+ * @param {object} event - The global pointerdown event.
+ */
+
 function handleGlobalPointerdownEvent(event) {
 	const componentQueryString = `[${props.attributes.component}="${props.id}"]`;
 	const contextQueryString = `[${props.attributes.context}="${props.id}"]`;

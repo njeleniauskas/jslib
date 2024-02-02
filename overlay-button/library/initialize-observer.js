@@ -1,3 +1,8 @@
+/**
+ * @param {object} module - The class module.
+ * @returns object (IntersectionObserver)
+ */
+
 function initializeObserver(module) {
 	return new IntersectionObserver((entries) => {
 		entries.forEach((entry) => {

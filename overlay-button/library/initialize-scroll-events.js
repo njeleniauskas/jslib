@@ -1,6 +1,10 @@
 import debounce from '../../common/utilities/debounce.js';
 import computeScrollState from './compute-scroll-state.js';
 
+/**
+ * @param {object} module - The class module.
+ */
+
 function initializeScrollEvents(module) {
 	const props = module.props;
 	
@@ -24,7 +28,6 @@ function initializeScrollEvents(module) {
 				}, props.timing);
 			}
 		}
-
 	}, props.delay));
 
 	

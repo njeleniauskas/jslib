@@ -1,12 +1,17 @@
 import handleClearEvent from './handle-clear-event.js';
 
-function handleClickOutsideEvent(event, params) {
-	const attribute = params.props.strings.window;
+/**
+ * @param {event} event - The click event outside of the dialog window.
+ * @param {object} module - The class module. 
+ */
+
+function handleClickOutsideEvent(event, module) {
+	const attribute = module.props.strings.window;
 	const outsideDialog = (event.target.closest(attribute) === null);
-	const isNotControl = (event.target !== params.nodes.control);
+	const isNotControl = (event.target !== module.nodes.control);
 	
-	if (params.state.opened && outsideDialog && isNotControl) {
-		handleClearEvent(params);
+	if (module.state.opened && outsideDialog && isNotControl) {
+		handleClearEvent(module);
 	}
 }
 

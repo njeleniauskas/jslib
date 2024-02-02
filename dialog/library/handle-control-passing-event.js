@@ -9,43 +9,39 @@ import updateStack from './stack-update.js';
 import clearStack from './stack-clear.js';
 
 /**
- * 
- * @param {object} params 
- * @param {object} params.props 
- * @param {object} params.nodes 
- * @param {object} params.state 
- * @param {object} node
+ * @param {object} node - The node that triggered the event.
+ * @param {object} module - The class module.
  */
 
-function handlePasserTriggerEvent(node, params) {
-	const isControl = (node === params.nodes.control);
-	const passerAttribute = removeBracketsFromString(params.props.strings.passer);
-	const receiverAttribute = removeBracketsFromString(params.props.strings.receiver);
+function handleControlPassingEvent(node, module) {
+	const isControl = (node === module.nodes.control);
+	const passerAttribute = removeBracketsFromString(module.props.strings.passer);
+	const receiverAttribute = removeBracketsFromString(module.props.strings.receiver);
 	const id = node.getAttribute(passerAttribute);
-	const receiver = findItemByAttributeValue(params.nodes.receiver, receiverAttribute, id);
+	const receiver = findItemByAttributeValue(module.nodes.receiver, receiverAttribute, id);
 
 	const args = {
 		update: {
+			stack: module.state.stack,
 			passer: node,
 			receiver: receiver,
 			id: id,
-			stack: params.state.stack
 		}
 	};
 	
 	if (isControl) {
-		if (!params.state.opened) {
+		if (!module.state.opened) {
 			args.pass = {
 				receiver: receiver,
 				passer: node,
 			};
 
 			updateFocusStack(args.update, updateStack);
-			openDialog(params);
+			openDialog(module);
 			updateFocusPair(args.pass)
 		} else {
 			updateFocusStack(args.update, updateStack);
-			closeDialog(params);
+			closeDialog(module);
 		}
 	}
 
@@ -57,8 +53,8 @@ function handlePasserTriggerEvent(node, params) {
 
 		updateFocusStack(args.update, clearStack);
 		updateFocusPair(args.pass)
-		closeDialog(params);
-	} 
+		closeDialog(module);
+	}
 }
 
-export default handlePasserTriggerEvent;
+export default handleControlPassingEvent;

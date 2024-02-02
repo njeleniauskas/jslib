@@ -1,5 +1,5 @@
 # Display Switcher (Composite)
-A component that handles the toggling of sections within a page, from a contollable composite element.
+A component that handles the toggling of sections within a page, from a controllable composite element.
 
 ![Static Badge](https://img.shields.io/badge/Version-1.0-%2327B17E)
 ![Static Badge](https://img.shields.io/badge/Status-Stable-%2327B17E)

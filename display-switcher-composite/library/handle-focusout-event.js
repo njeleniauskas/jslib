@@ -3,8 +3,11 @@ import data from '../data/data.js';
 import state from '../data/state.js';
 
 import isFocusAttributePresentAndTrue from '../../common/composite-navigation/is-focus-attribute-present-and-true.js';
-
 import resetFocusState from './reset-focus-state.js';
+
+/**
+ * @param {event} event - The focusout event.
+ */
 
 function handleFocusoutEvent(event) {
 	let contextSelector = `[${props.attributes.context}="${props.id}"]`;

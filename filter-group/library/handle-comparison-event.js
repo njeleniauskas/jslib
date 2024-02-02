@@ -1,5 +1,5 @@
 import updateFilterState from './update-filter-state.js';
-
+import broadcastEmitterEvents from './broadcast-emitter-events.js';
 
 /**
  * @param {object} params 
@@ -31,7 +31,12 @@ function handleComparisonEvent(params) {
 			updateFilterState(params.state, args);
 
 			if (params.state.active) {
-				params.emitter.emit('update-filter-group', params.state.filter);
+				broadcastEmitterEvents({
+					emitter: params.emitter,
+					props: params.props,
+					component: params.nodes.group,
+					state: params.state,
+				});
 			}
 		}
 	});

@@ -1,9 +1,13 @@
-import updateSingleSelection from '../../common/group-selection/update-single-selection.js';
 import itemInArray from '../../common/utilities/item-in-array.js';
+import updateSingleSelection from '../../common/group-selection/update-single-selection.js';
 
 import props from '../data/props.js';
 import state from '../data/state.js';
 import updateViewState from './update-view-state.js';
+
+/**
+ * @param {event} event - The keyup event.
+ */
 
 function handleKeyupEvent(event) {
 	if (itemInArray(props.keys.selection, event.key)) {

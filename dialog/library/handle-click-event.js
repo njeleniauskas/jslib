@@ -1,10 +1,15 @@
-import handlePasserTriggerEvent from './handle-passer-trigger-event.js';
+import handleControlPassingEvent from './handle-control-passing-event.js';
 
-function handleClickEvent(event, params) {
-	const hasClass = params.nodes.control.classList.contains(params.props.strings.inert);
+/**
+ * @param {event} event - The click event.
+ * @param {object} module - The class module.
+ */
 
-	if (!params.state.gateControl || params.state.gateControl && !hasClass) {
-		handlePasserTriggerEvent(event.target, params);
+function handleClickEvent(event, module) {
+	const hasClass = module.nodes.control.classList.contains(module.props.strings.inert);
+
+	if (!module.state.gateControl || module.state.gateControl && !hasClass) {
+		handleControlPassingEvent(event.target, module);
 	}
 }
 

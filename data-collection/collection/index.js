@@ -1,9 +1,8 @@
 import validateConfig from './library/validate-config.js';
 import collectData from './library/collect-data.js';
-import emptyObject from '../../common/utilities/empty-object.js';
 
 /**
- * The core DataCollection class, containing the dataset, and state of the collection.
+ * The core DataCollection class, containing the reference and live datasets.
  * @param {object} params
  * @param {string} [params.name] - The human-readable name of the collection (akin to aria-label or name attribute).
  * @param {string} [params.filepath] - The path and filename of the data needed.
@@ -20,16 +19,16 @@ import emptyObject from '../../common/utilities/empty-object.js';
 class DataCollection {
 	constructor(params) {
 		this.props = {
-			'name': null,
-			'filepath': null,
-			'objectKeyName': null,
-			'prefilter': null,
-			'presort': null,
+			name: null,
+			filepath: null,
+			objectKeyName: null,
+			prefilter: null,
+			presort: null,
 		};
 		this.emitter = null;
 		this.data = {
-			'ref': null,
-			'live': null,
+			ref: null,
+			live: null,
 		};
 
 		this.init(params);

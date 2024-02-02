@@ -4,8 +4,7 @@ import state from '../data/state.js';
 
 import getTargetElementIndexByFocus from '../../common/composite-navigation/get-target-element-index-by-focus.js';
 import getFocusValuesByAttribute from '../../common/composite-navigation/get-focus-values-by-attribute.js';
-
-import updateFocusState from '../library/update-focus-state.js';
+import updateFocusState from './update-focus-state.js';
 
 function handleFocusinEvent() {
 	if (state.isKeyEvent) {

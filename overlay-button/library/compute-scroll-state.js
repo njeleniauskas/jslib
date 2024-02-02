@@ -1,3 +1,8 @@
+/**
+ * @param {object} module - The class module.
+ * @returns object containing viewport information.
+ */
+
 function computeScrollState(module) {
 	return {
 		viewportHeight: window.innerHeight,

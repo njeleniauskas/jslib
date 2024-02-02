@@ -1,5 +1,6 @@
 import inputValueMatchesFilter from './input-value-matches-filter.js';
 import updateFilterState from './update-filter-state.js';
+import broadcastEmitterEvents from './broadcast-emitter-events.js';
 
 /**
  * 
@@ -28,7 +29,12 @@ function handleInputEvent(params) {
 		updateFilterState(params.state, args);
 
 		if (params.state.active) {
-			params.emitter.emit('update-filter-group', params.state.filter);
+			broadcastEmitterEvents({
+				emitter: params.emitter,
+				props: params.props,
+				component: params.nodes.group,
+				state: params.state,
+			});
 		}
 	}
 }

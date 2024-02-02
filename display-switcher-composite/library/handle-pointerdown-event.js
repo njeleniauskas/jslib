@@ -2,8 +2,11 @@ import props from '../data/props.js';
 import state from '../data/state.js';
 
 import getTargetElementIndexByFocus from '../../common/composite-navigation/get-target-element-index-by-focus.js';
-
 import updateFocusState from './update-focus-state.js';
+
+/**
+ * @param {event} event - The pointerdown event.
+ */
 
 function handlePointerdownEvent(event) {
 	let targetChild;

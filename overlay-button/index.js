@@ -3,7 +3,7 @@ import initializeConfiguration from './library/initialize-config.js';
 import addEvents from './library/add-events.js';
 
 /**
- * 
+ * A button overlaid onto a user interface.
  * @param {string} params
  * @param {'scroll'} params.config - The type of disclosure.
  * @param {object} params.strings
@@ -18,7 +18,15 @@ import addEvents from './library/add-events.js';
 class OverlayButton {
 	constructor(params) {
 		this.props = {
+			config: 'scroll',
+			strings: {
+				control: null,
+				clearing: null,
+				visibility: null,
+				hidden: null
+			},
 			delay: 50,
+			screenfuls: 0,
 			timing: 0,
 		};
 		this.nodes = {};

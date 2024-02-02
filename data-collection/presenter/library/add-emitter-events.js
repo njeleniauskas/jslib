@@ -4,18 +4,15 @@ import updateState from './update-state.js';
 import renderCollection from './render-collection.js';
 
 /**
- * 
- * @param {object} params
- * @param {object} params.module
- * @param {object} params.emitter 
+ * @param {object} module - The class module.
  */
 
-function addEmitterEvents(params) {
-	params.emitter.add('connect-data-collection', (args) => connectDataCollection(params.module, args));
-	params.emitter.add('update-collection-name', (args) => updateCollectionName(params.module, args));
-	params.emitter.add('update-presenter-state', (args) => updateState(params.module, args));
-	params.emitter.add('process-collection', () => renderCollection(params.module), 3);
-	params.emitter.add('process-render', () => renderCollection(params.module));
+function addEmitterEvents(module) {
+	module.emitter.add('connect-data-collection', (args) => connectDataCollection(module, args));
+	module.emitter.add('update-collection-name', (args) => updateCollectionName(module, args));
+	module.emitter.add('update-presenter-state', (args) => updateState(module, args));
+	module.emitter.add('process-collection', () => renderCollection(module), 3);
+	module.emitter.add('process-render', () => renderCollection(module));
 }
 
 export default addEmitterEvents;

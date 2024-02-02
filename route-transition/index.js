@@ -4,7 +4,7 @@ import delayLinkRouting from './library/delay-routing.js';
 import animateRouteChange from './library/animate-route-change.js';
 
 /**
- * 
+ * A class that handles sever-side rendered routing transitions.
  * @param {object} params - The parameters needed for the functions to work.
  * @param {string} params.domain - The string of the local domain.
  * @param {string} params.selector - The query selector for animation nodes.

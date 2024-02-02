@@ -4,17 +4,14 @@ import addFilterGroups from './add-filter-groups.js';
 import processFilter from './process-filter.js';
 
 /**
- * 
- * @param {*} params 
- * @param {*} params.module
- * @param {*} params.emitter
+ * @param {object} module - The class module.
  */
 
-function addEmitterEvents(params) {
-	params.emitter.add('connect-data-collection', (args) => connectDataCollection(params.module, args))
-	params.emitter.add('update-filter-group', (args) => handleFilterGroupUpdate(params.module, args));
-	params.emitter.add('add-grouped-filter-keys', (args) => addFilterGroups(params.module, args));
-	params.emitter.add('process-collection', () => processFilter(params.module), 0);
+function addEmitterEvents(module) {
+	module.emitter.add('connect-data-collection', (args) => connectDataCollection(module, args))
+	module.emitter.add('update-filter-group', (args) => handleFilterGroupUpdate(module, args));
+	module.emitter.add('add-grouped-filter-keys', (args) => addFilterGroups(module, args));
+	module.emitter.add('process-collection', () => processFilter(module), 0);
 }
 
 export default addEmitterEvents;

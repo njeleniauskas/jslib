@@ -1,5 +1,9 @@
 import validateDependentArguments from '../../common/utilities/validate-dependent-arguments.js';
 
+/**
+ * @param {object} params - Arguments passed to the class.
+ */
+
 function validateConfig(params) {
 	const errors = [];
 

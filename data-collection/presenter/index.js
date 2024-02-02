@@ -17,27 +17,27 @@ import addEmitterEvents from './library/add-emitter-events.js';
 class DataCollectionPresenter {
 	constructor(params) {
 		this.props = {
-			'id': null,
-			'attributes': {
-				'container': null,
-				'collection': null,
-				'liveRegion': null,
+			id: null,
+			attributes: {
+				container: null,
+				collection: null,
+				liveRegion: null,
 			},
-			'templates': {},
-			'name': null,
-			'messages' : {
-				'emptyCollection': null,
-				'updatedCollection': null,
+			templates: {},
+			name: null,
+			messages : {
+				emptyCollection: null,
+				updatedCollection: null,
 			}
 		};
 		this.emitter = null;
 		this.data = null;
 		this.nodes = {};
 		this.state = {
-			'display': 'list',
-			'startingIndex': null,
-			'endingIndex': null,
-			'displaySize': null,
+			display: 'list',
+			startingIndex: null,
+			endingIndex: null,
+			displaySize: null,
 		};
 
 		this.init(params);
@@ -72,10 +72,7 @@ class DataCollectionPresenter {
 		const templateKeys = Object.keys(this.props.templates);
 		
 		this.nodes = getPresenterNodes(this.props);
-		addEmitterEvents({
-			'module': this,
-			'emitter': this.emitter,
-		});
+		addEmitterEvents(this);
 		updateState(this, {'display': templateKeys[0]});
 	}
 }

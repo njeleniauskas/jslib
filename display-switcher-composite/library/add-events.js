@@ -1,4 +1,3 @@
-import props from '../data/props.js';
 import data from '../data/data.js';
 import state from '../data/state.js';
 

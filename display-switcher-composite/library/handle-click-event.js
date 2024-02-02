@@ -4,6 +4,10 @@ import props from '../data/props.js';
 import state from '../data/state.js';
 import updateViewState from './update-view-state.js';
 
+/**
+ * @param {event} event - The click event.
+ */
+
 function handleClickEvent(event) {
 	const targetChild = event.target.closest(`[${props.attributes.child}="${props.id}"]`);
 	let isSelected = false;

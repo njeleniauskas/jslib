@@ -6,9 +6,12 @@ import itemInArray from '../../common/utilities/item-in-array.js';
 
 import getLanguageAndNavigationContext from '../../common/composite-navigation/get-language-and-navigation-context.js';
 import getTargetElementIndexByKey from '../../common/composite-navigation/get-target-element-index-by-key.js';
-
 import setLanguageAndNavigationData from './set-language-and-navigation-data.js';
 import updateFocusState from './update-focus-state.js';
+
+/**
+ * @param {event} event - The keydown event.
+ */
 
 function handleKeydownEvent(event) {
 	if (itemInArray(props.keys.scroll, event.key)) {

@@ -5,6 +5,10 @@ import state from '../data/state.js';
 import getFocusValuesByAttribute from '../../common/composite-navigation/get-focus-values-by-attribute.js';
 import isFocusAttributePresentAndTrue from '../../common/composite-navigation/is-focus-attribute-present-and-true.js';
 
+/**
+ * @param {number} targetIndex - The index of the target child to focus.
+ */
+
 function updateFocusState(targetIndex) {
 	const targetChild = state.navigation.children[targetIndex];
 	const targetChildValue = targetChild.getAttribute(props.attributes.childFocus);

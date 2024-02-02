@@ -1,3 +1,11 @@
+/**
+ * @param {object} params 
+ * @param {object} params.stack - The object storing data on opened windows. 
+ * @param {object} params.receiver - The element receiving focus.
+ * @param {object} params.passer - The element losing focus.
+ * @param {string} params.id - The unique id of the window. 
+ */
+
 function updateStack(params) {
 	let inStack = false;
 

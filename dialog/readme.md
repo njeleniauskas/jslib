@@ -46,7 +46,9 @@ In addition, the following arguments may also be included:
 
 The toggle string relies on CSS to transition the visual state of the window, while the inert string, if used, gates the dialog control from being used if a timing argument is used (for separating access to assistive technolgies from animation).
 
+
 <br>
+
 
 ## Notes
 This Dialog should be used in place of the native HTML `<dialog>` element until Safari has enough support (approx. 2025–6).

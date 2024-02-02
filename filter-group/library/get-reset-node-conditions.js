@@ -1,5 +1,3 @@
-//import attributeStateByValue from '../../common/utilities/attribute-state-by-value.js';
-
 import filterStateEmpty from './filter-state-empty.js';
 
 /**

@@ -1,3 +1,7 @@
+/**
+ * A class to handle reactive events in an application.
+ */
+
 class EventEmitter {
 	constructor() {
 		this.events = {};

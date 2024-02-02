@@ -1,5 +1,11 @@
 import props from '../data/props.js';
 
+/**
+ * @param {object} params 
+ * @param {object} params.navConfig - The configuration object for navigation.
+ * @param {object} params.viewConfig - The configuration object for the state of the component.
+ */
+
 function setConfiguration(params) {
 	const navConfig = params.navConfig;
 	const viewConfig = params.viewConfig;

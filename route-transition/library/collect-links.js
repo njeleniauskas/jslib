@@ -1,3 +1,8 @@
+/**
+ * @param {string} domain - The domain name string — to check for local links.
+ * @returns array of internal links.
+ */
+
 function collectLocalLinks(domain) {
 	const anchors = Array.from(document.querySelectorAll('a'));
 	const results = [];
