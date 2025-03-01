@@ -15,11 +15,13 @@ At minimum, HTML for the container and live region must be present. The collecti
 
 ```html
 <div data-{container}="ID">
-	<div aria-live="polite" data-{live-region}="ID"></div>
 	<div data-{collection}="ID">
 		...
 	</div>
 </div>
+
+<!--somewhere else -->
+<div aria-live="polite" data-{live-region}=""></div>
 ```
 
 <br>
@@ -94,5 +96,17 @@ Note that the last two arguments are only useful when the pagination module is i
 
 
 ## Behavior and Usage
+### Live Region Managers
+If there are multiple collections in the DOM, you will need to pass a liveEventManager property to the class, so that no messages get lost in processing. To include this functionality, simply pass the LiveRegionManager class to the presenter:
+
+```javascript
+const presenterArgs = {
+	liveRegionManager: lrManager
+};	
+```
+
+<br>
+
+
 ### Template Keys
 When passed to the class, template keys identify the type of display that should be rendered — for example 'list' or 'grid'. If more than one semplate is supplied, the first key in the tempalte object will be the default.

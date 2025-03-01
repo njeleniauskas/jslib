@@ -37,6 +37,7 @@ import DataCollectionPresenter from '../data-collection/presenter/index.min.js';
 const emitter = new EventEmitter();
 
 const collectionArgs = {
+	id: 'fruits',
 	name: 'Fruits',
 	filepath: './test-data.json',
 	emitter: emitter
@@ -45,6 +46,7 @@ const collectionArgs = {
 const collection = new DataCollection(collectionArgs);
 
 const filterArgs = {
+	id: 'fruits',
 	emitter: emitter
 };
 
@@ -76,7 +78,7 @@ collection.getCollection()
 
 <br>
 
-With the overall setup, there are two important notes to be made. First, the `EventEmitter` must be instantiated before everything else. And second, authors only need to explicitly run the `emitter.emit('process-collection')` event if the collection is not first rendered server-side.
+With the overall setup, there are three important notes to be made. First, each collection needs to share a unique ID so that processing can be bundled around that collection. Second, the `EventEmitter` must be instantiated before everything else. And finally, authors only need to explicitly run the `emitter.emit('process-collection')` event if the collection is not first rendered server-side.
 
 See each module for additional details on how each can be configured.
 

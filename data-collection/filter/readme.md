@@ -5,12 +5,13 @@ The `DataCollectionFilter` class handles the live filtering of the collection. I
 
 
 ## Setup
-The basic configuration of the filter module is very simple as it only needs the emitter to function:
+The basic configuration of the filter module is very simple as it only needs an ID and an emitter to function:
 
 <br>
 
 ```javascript
 const filterArgs = {
+	id: 'fruits',
 	emitter: emitter
 }
 ```

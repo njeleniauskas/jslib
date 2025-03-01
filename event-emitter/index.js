@@ -14,7 +14,7 @@ class EventEmitter {
 
 		if (index && index >= 0) {
 			if (this.events[name][index]) {
-				this.events[name][index].splice(index + 1, 0, callback);
+				this.events[name].splice(index + 1, 0, callback);
 			} else  {
 				this.events[name][index] = callback;
 			}

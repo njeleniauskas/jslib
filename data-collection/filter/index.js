@@ -12,6 +12,7 @@ import addEmitterEvents from './library/add-emitter-events.js';
 
 class DataCollectionFilter {
 	constructor(params) {
+		this.id = null;
 		this.props = {
 			delay: 250,
 			deepFilter: false,
@@ -47,9 +48,10 @@ class DataCollectionFilter {
 	}
 	
 	setConfiguration(params) {
-		const {emitter, ...args} = params;
+		const {emitter, id, ...args} = params;
 		this.props = {...this.props, ...args};
 		this.emitter = params.emitter;
+		this.id = params.id;
 	}
 
 	

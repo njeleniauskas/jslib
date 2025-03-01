@@ -10,6 +10,7 @@ The basic setup of the collection module is as follows:
 
 ```javascript
 const collectionArgs = {
+	id: 'fruits',
 	emitter: emitter
 }
 ```
@@ -25,6 +26,7 @@ Additional arguments are as follows:
 
 ```javascript
 /**
+ * @param {string | number} params.id - The ID to connect each class together.
  * @param {string} [params.name] - The human-readable name of the collection (akin to aria-label or name attribute).
  * @param {string} [params.filepath] - The path and filename of the data needed.
  * @param {string} [params.objectKeyName] - The property name for the key that will store the object property key. When the JSON is an object of objects (not an array of objects).
@@ -51,6 +53,7 @@ In order for the entire feature to work, a dataset must be fetched asynchronousl
 
 ```javascript
 collection.getCollection({
+	id: 'fruits',
 	name: 'Fruits',
 	filepath: './test-fruits.json',
 	presort: {

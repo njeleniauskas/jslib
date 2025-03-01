@@ -4,6 +4,7 @@ import collectData from './library/collect-data.js';
 /**
  * The core DataCollection class, containing the reference and live datasets.
  * @param {object} params
+ * @param {string | number} params.id - The ID to connect each class together.
  * @param {string} [params.name] - The human-readable name of the collection (akin to aria-label or name attribute).
  * @param {string} [params.filepath] - The path and filename of the data needed.
  * @param {string} [params.objectKeyName] - The property name for the key that will store the object property key. When the JSON is an object of objects (not an array of objects).
@@ -18,6 +19,7 @@ import collectData from './library/collect-data.js';
 
 class DataCollection {
 	constructor(params) {
+		this.id = null;
 		this.props = {
 			name: null,
 			filepath: null,
@@ -52,10 +54,10 @@ class DataCollection {
 	}
 
 	setConfiguration(params) {
-		const {emitter, ...props} = params;
-
+		const {emitter, id, ...props} = params;
 		this.props = {...this.props, ...props};
 		this.emitter = params.emitter;
+		this.id = params.id;
 	}
 
 

@@ -8,7 +8,7 @@ import createNewFragment from './create-new-fragment.js';
 
 function renderCollection(presenter, params) {
 	const attribute = presenter.props.attributes.collection;
-	const id = presenter.props.id;
+	const id = presenter.id;
 	let newFragment;
 	let message;
 
@@ -26,7 +26,7 @@ function renderCollection(presenter, params) {
 		'startingIndex': presenter.state.startingIndex,
 		'endingIndex': presenter.state.endingIndex,
 		'collectionAttribute': presenter.props.attributes.collection,
-		'id': presenter.props.id,
+		'id': presenter.id,
 		'message': message
 	};
 
@@ -40,7 +40,11 @@ function renderCollection(presenter, params) {
 		presenter.nodes.collection = newFragment;
 	}
 
-	presenter.nodes.liveRegion.innerHTML = message;
+	if (presenter.liveRegionManager !== null) {
+		presenter.liveRegionManager.addMessage(message);
+	} else {
+		presenter.nodes.liveRegion.innerHTML = message;
+	}
 }
 
 export default renderCollection;

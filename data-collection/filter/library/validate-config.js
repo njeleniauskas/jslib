@@ -7,6 +7,10 @@ function validateConfig(params) {
 		throw new Error('args is either missing or empty.');
 	}
 
+	if (invalidPropertyValue(params, 'id')) {
+		errors.push(new Error('An ID is required.'));
+	}
+
 	if (invalidPropertyValue(params, 'emitter')) {
 		errors.push(new Error('An EventEmitter is required.'));
 	}

@@ -10,7 +10,13 @@ function getPresenterNodes(params) {
 	const nodes = {};
 
 	for (const [key, value] of Object.entries(params.attributes)) {
-		nodes[key] = document.querySelector(`[${value}="${params.id}"]`);
+		let string = `[${value}="${params.id}"]`;
+
+		if (key === 'liveRegion') {
+			string = `${value}`;
+		}
+		
+		nodes[key] = document.querySelector(string);
 	}
 
 	return nodes;

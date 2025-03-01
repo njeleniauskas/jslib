@@ -5,7 +5,9 @@
  */
 
 function connectDataCollection(module, DataCollection) {
-	module.data = DataCollection.data;
+	if (module.id === DataCollection.id && module.data === null) {
+		module.data = DataCollection.data;
+	}
 }
 
 export default connectDataCollection;

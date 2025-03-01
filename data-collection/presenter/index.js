@@ -16,8 +16,8 @@ import addEmitterEvents from './library/add-emitter-events.js';
 
 class DataCollectionPresenter {
 	constructor(params) {
+		this.id = null;
 		this.props = {
-			id: null,
 			attributes: {
 				container: null,
 				collection: null,
@@ -31,6 +31,7 @@ class DataCollectionPresenter {
 			}
 		};
 		this.emitter = null;
+		this.liveRegionManager = null;
 		this.data = null;
 		this.nodes = {};
 		this.state = {
@@ -62,16 +63,21 @@ class DataCollectionPresenter {
 	}
 
 	setConfiguration(params) {
-		const {emitter, ...args} = params;
-
+		const {emitter, id, ...args} = params;
 		this.props = {...this.props, ...args};
 		this.emitter = params.emitter;
+		this.id = params.id;
+
+		if ('liveRegionManager' in params) {
+			this.liveRegionManager = params.liveRegionManager;
+		}
 	}
 
 	initializePresenter() {
 		const templateKeys = Object.keys(this.props.templates);
+		const props = {...this.props, id: this.id};
 		
-		this.nodes = getPresenterNodes(this.props);
+		this.nodes = getPresenterNodes(props);
 		addEmitterEvents(this);
 		updateState(this, {'display': templateKeys[0]});
 	}
