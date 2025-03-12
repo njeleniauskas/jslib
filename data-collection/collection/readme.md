@@ -74,4 +74,13 @@ Note that the `getCollection()` method will ***only*** use provided arguments if
 <br> 
 
 ### Pre-Filtering and Sorting
-If arguments are provided, the data collection can be filtered and/or sorted to condition the reference data as needed. Note however that if these features are used that only shallow keys are available for pre-filtering/sorting at present (no nested keys).
+If arguments are provided, the data collection can be filtered and/or sorted to condition the reference data as needed. Note however that if these features are used that only shallow keys are available for pre-filtering/sorting at present (no nested keys). Filters do however take an array of objects to allow multiple filters to be used:
+
+```javascript
+prefilter : [
+	{
+		prop: 'type',
+		value; 'item'
+	}
+]
+```

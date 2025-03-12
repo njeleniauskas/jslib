@@ -8,7 +8,9 @@
  */
 
 function prefilterCollection(array, params) {
-	const result = array.filter(item => item[params.prop].toLowerCase() === params.value.toLowerCase());
+	const result = array.filter((item) => {
+		return params.every(({prop, value}) => item[prop] === value);
+	});
 
 	return result;
 }

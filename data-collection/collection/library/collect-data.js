@@ -26,10 +26,7 @@ async function collectData(filepath, params) {
 	}
 
 	if (!invalidPropertyValue(params, 'prefilter') && Object.keys(params.prefilter).length !== 0) {
-		results = prefilterCollection(results, {
-			'prop': params.prefilter.prop,
-			'value': params.prefilter.value
-		})
+		results = prefilterCollection(results, params.prefilter);
 	}
 
 	if (!invalidPropertyValue(params, 'presort') && Object.keys(params.presort).length !== 0) {
