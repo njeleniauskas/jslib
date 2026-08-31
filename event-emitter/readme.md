@@ -8,7 +8,7 @@ A class to handle reactive events in an application.
 <br>
 
 ## Overview
-The `EventEmitter` class is similar to most standard versions of this class. The methods that can be used are `add`, `remove`, and `emit`. And there is one special edition.
+The `EventEmitter` class is similar to most standard versions of this class. The methods that can be used are `add`, `remove`, and `emit`. And there is one special edition. Note that in order to reliably unsubscribe a function, it must not be anonymous.
 
 <br>
 
