@@ -5,10 +5,10 @@ function setConfig(module, params) {
 	module.props.attributes.target = 'target' in params.attributes ?
 		params.attributes.target : 'data-de-target';
 
-	module.props.attributes.pressed = 'pressed' in params.pressed ?
+	module.props.attributes.pressed = 'pressed' in params.attributes ?
 		params.attributes.pressed : 'data-pressed';
 
-	module.props.attributes.visibility = 'visibility' in params.visibility ?
+	module.props.attributes.visibility = 'visibility' in params.attributes ?
 		params.attributes.visibility : 'data-hidden';
 }
 

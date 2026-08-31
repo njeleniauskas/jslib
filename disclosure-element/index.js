@@ -1,5 +1,7 @@
 import validateConfig from './library/validate-config.js';
 import setConfig from './library/set-config.js';
+import getNodes from './library/get-nodes.js';
+import addEvents from './library/add-events.js';
 
 /**
  * @param {object} params
@@ -22,7 +24,6 @@ class DisclosureElement {
 		};
 		this.nodes = {};
 
-
 		this.init(params);
 	}
 
@@ -33,3 +34,5 @@ class DisclosureElement {
 		addEvents(this);
 	}
 }
+
+export default DisclosureElement;
