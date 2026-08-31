@@ -4,6 +4,10 @@ function addEvents(module) {
 
 		module.nodes.control.setAttribute(module.props.attributes.pressed, String(!pressed));
 		module.nodes.target.setAttribute(module.props.attributes.visibility, String(pressed));
+
+		if (module.emitter) {
+			module.emitter.emit('onClick', !pressed);
+		}
 	});
 }
 

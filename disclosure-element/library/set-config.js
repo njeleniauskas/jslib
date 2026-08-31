@@ -10,6 +10,11 @@ function setConfig(module, params) {
 
 	module.props.attributes.visibility = 'visibility' in params.attributes ?
 		params.attributes.visibility : 'data-hidden';
+
+	if ('emitter' in params) {
+		module.emitter = params.emitter;
+		Reflect.deleteProperty(params, 'emitter');
+	}
 }
 
 export default setConfig;

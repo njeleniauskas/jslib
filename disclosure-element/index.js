@@ -6,6 +6,7 @@ import addEvents from './library/add-events.js';
 /**
  * @param {object} params
  * @param {string} params.id - the id that links the control and target together
+ * @param {string} [params.emitter] - an emitter to extend the click behaviors of the control
  * @param {string} [params.attributes.control] - the data- attribute identifying the control node
  * @param {string} [params.attributes.target] - the data- attribute identifying the target node
  * @param {string} [params.attributes.pressed] - the data- attribute for the button state
@@ -23,6 +24,8 @@ class DisclosureElement {
 			}
 		};
 		this.nodes = {};
+		this.emitter = null;
+		this.functions = new Set();
 
 		this.init(params);
 	}
