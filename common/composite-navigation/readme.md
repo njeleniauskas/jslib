@@ -114,12 +114,12 @@ Apart from the `id` and configuration, several arguments left to the discretion 
 <br>
 
 #### Nodes
-Node aguments allow authors to use their own custom-named data- attributes if they wish. The default being `data-ce-{node}` or `data-ce` for the component. 
+Node aguments allow authors to use their own custom-named data- attributes if they wish. The default being `data-cn-{node}` or `data-cn` for the component.
 
 If no argument is provided, node attributes — excluding children — have a fallback. If no `referenceNode` or `contextNode` arguments are provided, both will used the `componentNode` attribute instead. If no `parentNode` argument is provided, it first falls back to the `contextNode` attribute. And if that argument also isn't provided, the `componentNode` attribute string is used.
 
 <br>
- 
+
 #### Orientation
 If authors wish to enable aria support for the orientation of the component (for semantic/accessible reasons), `aria-orientation` can be passed via the `orientation` argument.
 
@@ -135,7 +135,7 @@ See [Data Objects and Properties](#data-objects-and-properties) for more propert
 <br>
 
 ### HTML, and Attribute Relationships
-As previously noted, the element representing the component must be a `<div>` or `<table>` — the latter being used to represent interactive grids or tables. 
+As previously noted, the element representing the component must be a `<div>` or `<table>` — the latter being used to represent interactive grids or tables.
 
 Apart from this requirement however the HTML architecture can be very flexible and meet many different design approaches. However, because of this flexibility some usage and relationship details needs to be clarified.
 
@@ -162,7 +162,7 @@ First and foremost, descriptive arguments are tied to specific nodes internally.
 					{child-focus}
 					{selected}
 					>
-					
+
 				</child>
 				…
 			</parent>
@@ -222,7 +222,7 @@ As an example, in a roving navigation pattern, while children technically get fo
 
 
 ## Data Objects and Properties
-When using this module, three "data" objects are required for it to function: `props`, `data`, and `state`. 
+When using this module, three "data" objects are required for it to function: `props`, `data`, and `state`.
 
 <br>
 
@@ -237,17 +237,17 @@ The `props` object stores read-only data, and is where the configuration is stor
  * @param {string} attributes.context - The data- attribute for context nodes.
  * @param {string} attributes.parent - The data- attribute for parent nodes.
  * @param {string} attributes.child - The data- attribute for child nodes.
- * 
+ *
  * @param {string} attributes.oreintation - The orientation of the component (horizontal, vertical, etc…).
  * @param {string} attributes.activeDescendant - The data- or aria- attribute storing the current active descendant.
  * @param {string} attributes.referenceFocus - he attribute used to track focus on the reference node.
  * @param {string} attributes.childfocus - The attribute used to track focus on child nodes.
  * @param {string} attributes.selected - The attribute used for "selection" within the component.
- * 
+ *
  * @param {Object} keys - An object storing navigation key names.
  * @param {array} keys.navigation - Keys used for composite navigation.
  * @param {array} keys.scroll - Keys that control scrolling.
- * 
+ *
  * @param {string} navigationType - Either "tabindex" (roving), or "activedescendant" (reference).
  * @param {boolean} selection - Indicates the component has selectable children.
  * @param {boolean} multiAxis - Indicates the component has multi-axis navigation.
@@ -279,16 +279,16 @@ Finally, the `state` object handles the context and data state of the module:
  *  @param {array} navigation.children - The children in the current navigation context.
  *  @param {Object} navigation.focusedChild - The current child that is "focused."
  *  @param {Object} navigation.lastFocusedChild - The last child that was "focused."
- * 
+ *
  * @param {boolean} isKeyEvent - Indicates if the current event is a key event.
  * @param {boolean} isPointerEvent - Indicates if the current event is a pointer event.
  * @param {boolean} clickEscapesConteext - Helps determine if a pointer event leaves the component.
  * @param {boolean} isInitial - Indicates if the component is in its initial state.
- * 
+ *
  * @param {Object} language - An object storing the direction and writing mode of the document.
  * @param {string} language.direction - The current direction of the document.
  * @param {string} language.writingMode - The current writing-mode of the document.
- * 
+ *
  * @param {Object} navigationKeys - The valid, and conditioned navigation keys for the component.
  * @param {string} orientation - The current orientation value of the component.
  * /

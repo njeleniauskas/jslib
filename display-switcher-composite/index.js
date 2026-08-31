@@ -19,7 +19,7 @@ import getViewConfig from './library/get-view-config.js';
 /**
  * A component that handles the toggling of sections within a page, from a controllable composite element.
  * @param {object} params
- * @param {object} params.id - The id used to identify the collection of elements.
+ * @param {string} params.id - The id used to identify the collection of elements.
  * @param {object} params.attributes - 
  * @param {string} [params.attributes.componentNode] - The data- attribute for the component node.
  * @param {string} [params.attributes.contextNode] - The data- attribute for context nodes.

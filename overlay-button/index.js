@@ -4,7 +4,7 @@ import addEvents from './library/add-events.js';
 
 /**
  * A button overlaid onto a user interface.
- * @param {string} params
+ * @param {object} params
  * @param {'scroll'} params.config - The type of disclosure.
  * @param {object} params.strings
  * @param {string} params.strings.control - The string identifying the control node.
@@ -12,7 +12,7 @@ import addEvents from './library/add-events.js';
  * @param {string} params.strings.visibility - The class to show/hide the button.
  * @param {string} params.strings.hidden - The attribute used to show/hide content to assistive technologies.
  * @param {number} [params.screenfuls] - The number of screenfuls before showing the button.
- * @param {number} [params.timing] - The delay window for hiding the button. 
+ * @param {number} [params.timing] - The delay window for hiding the button.
  */
 
 class OverlayButton {

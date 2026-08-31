@@ -17,7 +17,7 @@
 
 function getNavigationConfig(params) {
 	const attributes = params.attributes;
-	const fallbackAttribute = 'data-ce';
+	const fallbackAttribute = 'data-cn';
 	const props = {
 		'attributes': {}
 	};
@@ -36,18 +36,18 @@ function getNavigationConfig(params) {
 	if (props.attributes.childFocus === 'tabindex') {
 		props.navigationType = 'tabindex';
 	}
-	
+
 	if ('activeDescendant' in attributes && props.attributes.childFocus !== 'tabindex') {
 		props.navigationType = 'activedescendant';
 	}
-	
+
 	if (props.navigationType === 'activedescendant') {
 		fallbackDescendantAttribute = 'data-activedescendant';
 	}
-	
-	props.attributes.activeDescendant = 'activeDescendant' in attributes ? 
+
+	props.attributes.activeDescendant = 'activeDescendant' in attributes ?
 		attributes.activeDescendant : fallbackDescendantAttribute;
-	
+
 	if ('contextNode' in attributes) {
 		fallbackParentAttribute = attributes.contextNode;
 	}
@@ -56,16 +56,16 @@ function getNavigationConfig(params) {
 		fallbackParentAttribute = attributes.componentNode;
 	}
 
-	props.attributes.component = 'componentNode' in attributes ? 
-		attributes.componentNode : 'data-ce';
-	props.attributes.reference = 'referenceNode' in attributes ? 
+	props.attributes.component = 'componentNode' in attributes ?
+		attributes.componentNode : 'data-cn';
+	props.attributes.reference = 'referenceNode' in attributes ?
 		attributes.referenceNode : props.attributes.component;
-	props.attributes.context = 'contextNode' in attributes ? 
+	props.attributes.context = 'contextNode' in attributes ?
 		attributes.contextNode : props.attributes.component;
-	props.attributes.parent = 'parentNode' in attributes ? 
+	props.attributes.parent = 'parentNode' in attributes ?
 		attributes.parentNode : fallbackParentAttribute;
-	props.attributes.child = 'childNode' in attributes ? 
-		attributes.childNode : 'data-ce-child';
+	props.attributes.child = 'childNode' in attributes ?
+		attributes.childNode : 'data-cn-child';
 
 	return props;
 }
