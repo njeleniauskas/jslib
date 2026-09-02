@@ -8,6 +8,7 @@ import getFocusValuesByAttribute from './get-focus-values-by-attribute.js';
  * @returns {boolean}
  */
 
+
 function isFocusAttributePresentAndTrue(params) {
 	const attribute = params.attribute;
 	const node = params.node;

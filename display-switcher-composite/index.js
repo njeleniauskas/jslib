@@ -1,6 +1,6 @@
-import props from './data/props.js';
-import data from './data/data.js';
-import state from './data/state.js';
+import createProps from './data/props.js';
+import createData from './data/data.js';
+import createState from './data/state.js';
 
 import getNavigationConfig from '../common/composite-navigation/get-navigation-config.js';
 import getReferenceNodes from '../common/composite-navigation/get-reference-nodes.js';
@@ -20,29 +20,34 @@ import getViewConfig from './library/get-view-config.js';
  * A component that handles the toggling of sections within a page, from a controllable composite element.
  * @param {object} params
  * @param {string} params.id - The id used to identify the collection of elements.
- * @param {object} params.attributes - 
+ *
+ * @param {object} [params.attributes]
+ * @param {string} [params.attributes.controlID] - The data- attribute used to link views and controls.
+ * @param {string} [params.attributes.viewID] - The data- attribute used to link controls and views.
+ * @param {string} [params.attributes.viewNode] - The data- attribute for the view elements.
+ * @param {string} [params.attributes.display] - The data- attribute tracking the display status of views.
+ *
+ * Composite navigation params
  * @param {string} [params.attributes.componentNode] - The data- attribute for the component node.
  * @param {string} [params.attributes.contextNode] - The data- attribute for context nodes.
  * @param {string} [params.attributes.parentNode] - The data- attribute for the parent node.
  * @param {string} [params.attributes.childNode] - The data- attribute for child nodes.
  * @param {string} [params.attributes.eventNode] - The data- attribute for the node events will be attached to.
+ * @param {string} [params.attributes.contextState] - The data- attribute to ID the current context.
  * @param {string} [params.attributes.orientation] - Optional property to assign aria- string.
  * @param {string} [params.attributes.activeDescendant] -  Optional property to assign aria- string.
- * @param {string} [params.attributes.referenceFocus] - String based on roving or reference navigation needs.
- * @param {string} [params.attributes.childFocus] - String based on roving or reference navigation needs.
- * @param {string} [params.attributes.selected] - Used to allow function to know last component selection.
+ * @param {string} [params.attributes.referenceFocus] - The reference attribute based on the type of navigation.
+ * @param {string} [params.attributes.childFocus] - The child attribute based on the type of navigation.
+ * @param {string} [params.attributes.selected] - The attribute that expresses the state of a control (selected, checked, etc…).
  *
- * @param {string} params.attributes.viewNode - The data- attribute for the view elements.
- * @param {string} params.attributes.viewID - The data- attribute used to link controls and views.
- * @param {string} params.attributes.controlID - The data- attribute used to link views and controls.
- * @param {string} params.attributes.display - The data- attribute tracking the display status of views.
  */
 
 class DisplaySwitcherComposite {
 	constructor(params) {
-		this.props = props;
-		this.data = data;
-		this.state = state;
+		this.props = createProps();
+		this.data = createData();
+		this.state = createState();
+
 		this.init(params);
 	}
 
@@ -56,56 +61,60 @@ class DisplaySwitcherComposite {
 
 			validateNavigationConfig(navigationProps);
 			setConfiguration({
-				'navConfig': navigationProps, 
+				'navConfig': navigationProps,
 				'viewConfig': viewProps,
-			});
-	
+			}, this.props);
+
 			referenceNodes = getReferenceNodes({
-				'id': props.id,
+				'id': this.props.id,
 				'nodes': {
 					'component': {
 						'array': false,
-						'attribute': props.attributes.component
+						'attribute': this.props.attributes.component
 					},
 					'reference': {
 						'array': false,
-						'attribute': props.attributes.reference
+						'attribute': this.props.attributes.reference
 					},
 					'contexts': {
 						'array': true,
-						'attribute': props.attributes.context
+						'attribute': this.props.attributes.context
 					},
 					'views': {
 						'array': true,
-						'attribute': props.attributes.view
+						'attribute': this.props.attributes.view
 					}
 				}
 			});
 
 			validateReferenceNodes(referenceNodes);
-			setReferenceNodes(referenceNodes);
+			setReferenceNodes(referenceNodes, this);
 
-			contextNodes = getNavigationContext({
-				'contexts': data.nodes.contexts,
-				'id': props.id,
-				'childAttribute': props.attributes.child,
-				'parentAttribute': props.attributes.parent,
-				'initializing': true,
-			});
+			contextNodes = getNavigationContext(
+				'initial',
+				{
+					'contexts': this.data.nodes.contexts,
+					'attribute': this.props.attributes.contextState,
 
-			setNavigationContext(contextNodes);
+					'id': this.props.id,
+					'parentAttribute': this.props.attributes.parent,
+					'childAttribute': this.props.attributes.child,
+				}
+			);
+
+			setNavigationContext(contextNodes, this);
 
 			languageAndNavigationData = getLanguageAndNavigationContext({
-				'node': data.nodes.reference,
-				'orientationAttribute': props.attributes.orientation
+				'node': this.data.nodes.reference,
+				'orientationAttribute': this.props.attributes.orientation
 			});
-			
-			setLanguageAndNavigationData(languageAndNavigationData);
-			addEvents();
+
+			setLanguageAndNavigationData(languageAndNavigationData, this);
+			addEvents(this);
 		} catch (errors) {
 			if (errors instanceof AggregateError) {
 				console.error(errors.message)
-				
+
 				for (const error of errors.errors) {
 					console.error(error.message);
 				}

@@ -1,7 +1,3 @@
-import props from '../data/props.js';
-import data from '../data/data.js';
-import state from '../data/state.js';
-
 import itemInArray from '../../common/utilities/item-in-array.js';
 
 import getLanguageAndNavigationContext from '../../common/composite-navigation/get-language-and-navigation-context.js';
@@ -11,38 +7,39 @@ import updateFocusState from './update-focus-state.js';
 
 /**
  * @param {event} event - The keydown event.
+ * @param {class} event - The class module.
  */
 
-function handleKeydownEvent(event) {
-	if (itemInArray(props.keys.scroll, event.key)) {
+function handleKeydownEvent(event, module) {
+	if (itemInArray(module.props.keys.scroll, event.key)) {
 		event.preventDefault();
 	}
-	
-	if (itemInArray(props.keys.navigation, event.key)) {
+
+	if (itemInArray(module.props.keys.navigation, event.key)) {
 		let targetElementIndex;
 		let validNavigationKeys;
 		let languageAndNavigationData = getLanguageAndNavigationContext({
-			'node': data.nodes.reference,
-			'orientationAttribute': props.attributes.orientation
+			'node': module.data.nodes.reference,
+			'orientationAttribute': module.props.attributes.orientation
 		});
-		
-		setLanguageAndNavigationData(languageAndNavigationData);
-		
-		validNavigationKeys = state.navigationKeys.prev.concat(state.navigationKeys.next);
-		
+
+		setLanguageAndNavigationData(languageAndNavigationData, module);
+
+		validNavigationKeys = module.state.navigationKeys.prev.concat(module.state.navigationKeys.next);
+
 		if (itemInArray(validNavigationKeys, event.key)) {
 			targetElementIndex = getTargetElementIndexByKey({
 				'eventKey': event.key,
-				'children': state.navigation.children,
-				'currentFocusedChild': state.navigation.focusedChild,
-				'navigationKeysNext': state.navigationKeys.next
+				'children': module.state.navigation.children,
+				'currentFocusedChild': module.state.navigation.focusedChild,
+				'navigationKeysNext': module.state.navigationKeys.next
 			});
 
-			updateFocusState(targetElementIndex);
+			updateFocusState(targetElementIndex, module);
 
-			state.navigation.lastFocusedChild = state.navigation.focusedChild;
-			state.navigation.focusedChild = state.navigation.children[targetElementIndex];
-			state.isInitial = false;
+			module.state.navigation.lastFocusedChild = module.state.navigation.focusedChild;
+			module.state.navigation.focusedChild = module.state.navigation.children[targetElementIndex];
+			module.state.isInitial = false;
 		}
 	}
 }

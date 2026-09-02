@@ -1,57 +1,55 @@
-import props from '../data/props.js';
-import state from '../data/state.js';
-
 import getTargetElementIndexByFocus from '../../common/composite-navigation/get-target-element-index-by-focus.js';
 import updateFocusState from './update-focus-state.js';
 
 /**
  * @param {event} event - The pointerdown event.
+ * @param {class} module - The class module.
  */
 
-function handlePointerdownEvent(event) {
+function handlePointerdownEvent(event, module) {
 	let targetChild;
 	let targetChildIndex;
 	let isChildClick;
 
 	//prepare data
-	if (props.navigationType === 'tabindex') {
-		targetChild = event.target.closest(`[${props.attributes.child}]`);
-		targetChildIndex = state.navigation.children.indexOf(targetChild);
+	if (module.props.navigationType === 'tabindex') {
+		targetChild = event.target.closest(`[${module.props.attributes.child}]`);
+		targetChildIndex = module.state.navigation.children.indexOf(targetChild);
 		isChildClick = (targetChild !== null);
 	}
 
-	if (props.navigationType === 'activedescendant') {
-		targetChild = event.target.closest(`[${props.attributes.child}]`);
+	if (module.props.navigationType === 'activedescendant') {
+		targetChild = event.target.closest(`[${module.props.attributes.child}]`);
 		isChildClick = (targetChild !== null);
 
 		if (isChildClick) {
-			targetChildIndex = state.navigation.children.indexOf(targetChild);
+			targetChildIndex = module.state.navigation.children.indexOf(targetChild);
 		} else {
 			targetChildIndex = getTargetElementIndexByFocus({
-				'selection': props.selection,
-				'array': state.navigation.children,
-				'selectedAttribute': props.attributes.selected,
-				'childAttribute': props.attributes.child,
+				'selection': module.props.selection,
+				'array': module.state.navigation.children,
+				'selectedAttribute': module.props.attributes.selected,
+				'childAttribute': module.props.attributes.child,
 			});
 		}
 
-		targetChild = state.navigation.children[targetChildIndex];
+		targetChild = module.state.navigation.children[targetChildIndex];
 	}
 
 	//update component
-	if (props.navigationType === 'tabindex' && isChildClick ||
-		props.navigationType === 'activedescendant' && isChildClick ||
-		props.navigationType === 'activedescendant' && state.isInitial) {
-		updateFocusState(targetChildIndex);
-	
-		if (state.isInitial) {
-			state.navigation.lastFocusedChild = targetChild;
+	if (module.props.navigationType === 'tabindex' && isChildClick ||
+		module.props.navigationType === 'activedescendant' && isChildClick ||
+		module.props.navigationType === 'activedescendant' && module.state.isInitial) {
+		updateFocusState(targetChildIndex, module);
+
+		if (module.state.isInitial) {
+			module.state.navigation.lastFocusedChild = targetChild;
 		} else {
-			state.navigation.lastFocusedChild = state.navigation.focusedChild;
+			module.state.navigation.lastFocusedChild = module.state.navigation.focusedChild;
 		}
 
-		state.navigation.focusedChild = targetChild;
-		state.isInitial = false;
+		module.state.navigation.focusedChild = targetChild;
+		module.state.isInitial = false;
 	}
 }
 

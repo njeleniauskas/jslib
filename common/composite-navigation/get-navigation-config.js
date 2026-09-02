@@ -3,6 +3,7 @@
  * @param {Object} params - An object containing all parameters.
  * @param {string} params.id - The id that defines the context of data- attributes.
  * @param {string} [params.attributes.componentNode] - The data- attribute for the component node.
+ * @param {string} [params.attributes.referenceNode] - The data- attribute for the reference node.
  * @param {string} [params.attributes.contextNode] - The data- attribute for context nodes.
  * @param {string} [params.attributes.parentNode] - The data- attribute for the parent node.
  * @param {string} [params.attributes.childNode] - The data- attribute for child nodes.
@@ -12,6 +13,7 @@
  * @param {string} [params.attributes.referenceFocus] - String based on roving or reference navigation needs.
  * @param {string} [params.attributes.childFocus] - String based on roving or reference navigation needs.
  * @param {string} [params.attributes.selected] - Used to allow function to know last component selection.
+ * @param {string} [params.attributes.contextState] - Used to identify which context should be used for navigation.
  * @returns {Object} Properties to overwrite global object data.
  */
 
@@ -52,7 +54,7 @@ function getNavigationConfig(params) {
 		fallbackParentAttribute = attributes.contextNode;
 	}
 
-	if ('componentNode' in attributes) {
+	if ('componentNode' in attributes && !('contextNode' in attributes)) {
 		fallbackParentAttribute = attributes.componentNode;
 	}
 
@@ -66,6 +68,9 @@ function getNavigationConfig(params) {
 		attributes.parentNode : fallbackParentAttribute;
 	props.attributes.child = 'childNode' in attributes ?
 		attributes.childNode : 'data-cn-child';
+
+	props.attributes.contextState = 'contextState' in attributes ?
+		attributes.contextState : 'data-cn-current';
 
 	return props;
 }

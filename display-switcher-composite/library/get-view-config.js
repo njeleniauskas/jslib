@@ -13,10 +13,10 @@ function getViewConfig(params) {
 		'attributes': {}
 	};
 
-	props.attributes.controlID = 'controlID' in attributes ? attributes.controlID : 'data-control';
-	props.attributes.viewID = 'viewID' in attributes ? attributes.viewID : 'data-target';
+	props.attributes.controlID = 'controlID' in attributes ? attributes.controlID : 'data-cn-control';
+	props.attributes.viewID = 'viewID' in attributes ? attributes.viewID : 'data-cn-target';
 	props.attributes.view = 'viewNode' in attributes ? attributes.viewNode : 'data-cn-view';
-	props.attributes.display = 'display' in attributes ? attributes.display : 'data-hidden';
+	props.attributes.display = 'display' in attributes ? attributes.display : 'data-cn-hidden';
 
 	return props;
 }

@@ -30,7 +30,7 @@ function getReferenceNodes(params) {
 				let hasAttribute = false;
 
 				if (currentAttribute === checkedItem.attribute) {
-					hasAttribute = true;	
+					hasAttribute = true;
 				}
 
 				if (hasAttribute && keys[j] in nodes) {
@@ -40,7 +40,7 @@ function getReferenceNodes(params) {
 					} else {
 						nodes[keys[i]] = nodes[keys[j]];
 					}
-					
+
 					isConditionOne = false;
 				} else {
 					isConditionOne = true;

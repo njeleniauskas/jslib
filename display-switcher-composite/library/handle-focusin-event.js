@@ -1,50 +1,46 @@
-import props from '../data/props.js';
-import data from '../data/data.js';
-import state from '../data/state.js';
-
 import getTargetElementIndexByFocus from '../../common/composite-navigation/get-target-element-index-by-focus.js';
 import getFocusValuesByAttribute from '../../common/composite-navigation/get-focus-values-by-attribute.js';
 import updateFocusState from './update-focus-state.js';
 
-function handleFocusinEvent() {
-	if (state.isKeyEvent) {
+function handleFocusinEvent(module) {
+	if (module.state.isKeyEvent) {
 		let targetChildIndex;
 		let targetChild;
 		let referenceStates;
-		
-		if (state.isInitial === false) {
-			if (props.attributes.referenceFocus !== 'tabindex') {
-				data.nodes.reference.setAttribute(props.attributes.referenceFocus, 'true');
+
+		if (module.state.isInitial === false) {
+			if (module.props.attributes.referenceFocus !== 'tabindex') {
+				module.data.nodes.reference.setAttribute(module.props.attributes.referenceFocus, 'true');
 			}
 
-			if (props.attributes.childFocus !== 'tabindex') {
-				state.navigation.focusedChild.setAttribute(props.attributes.childFocus, 'true');
+			if (module.props.attributes.childFocus !== 'tabindex') {
+				module.state.navigation.focusedChild.setAttribute(module.props.attributes.childFocus, 'true');
 			}
 		}
 
-		if (state.isInitial) {
+		if (module.state.isInitial) {
 			targetChildIndex = getTargetElementIndexByFocus({
-				'selection': props.selection,
-				'array': state.navigation.children,
-				'selectedAttribute': props.attributes.selected,
-				'childAttribute': props.attributes.child,
+				'selection': module.props.selection,
+				'array': module.state.navigation.children,
+				'selectedAttribute': module.props.attributes.selected,
+				'childAttribute': module.props.attributes.child,
 			});
 
-			targetChild = state.navigation.children[targetChildIndex];
+			targetChild = module.state.navigation.children[targetChildIndex];
 
 			//side-effect: adds tabindex to an element without the attribute.
-			if (props.attributes.referenceFocus !== 'tabindex') {
-				referenceStates = getFocusValuesByAttribute(props.attributes.referenceFocus);
-				data.nodes.reference.setAttribute(props.attributes.referenceFocus, referenceStates.focus);
-			}
-			
-			if (props.attributes.child !== 'tabindex') {
-				updateFocusState(targetChildIndex);
+			if (module.props.attributes.referenceFocus !== 'tabindex') {
+				referenceStates = getFocusValuesByAttribute(module.props.attributes.referenceFocus);
+				module.data.nodes.reference.setAttribute(module.props.attributes.referenceFocus, referenceStates.focus);
 			}
 
-			state.navigation.lastFocusedChild = targetChild;
-			state.navigation.focusedChild = targetChild;
-			state.isInitial = false;
+			if (module.props.attributes.child !== 'tabindex') {
+				updateFocusState(targetChildIndex, module);
+			}
+
+			module.state.navigation.lastFocusedChild = targetChild;
+			module.state.navigation.focusedChild = targetChild;
+			module.state.isInitial = false;
 		}
 	}
 }

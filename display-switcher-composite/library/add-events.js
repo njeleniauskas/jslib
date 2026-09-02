@@ -1,6 +1,3 @@
-import data from '../data/data.js';
-import state from '../data/state.js';
-
 import handleFocusinEvent from './handle-focusin-event.js';
 import handleFocusoutEvent from './handle-focusout-event.js';
 import handlePointerdownEvent from './handle-pointerdown-event.js';
@@ -9,30 +6,51 @@ import handleKeydownEvent from './handle-keydown-event.js';
 import handleClickEvent from './handle-click-event.js';
 import handleKeyupEvent from './handle-keyup-event.js';
 
-function addEvents() {	
-	data.nodes.component.addEventListener('focusin', handleFocusinEvent);
-	data.nodes.component.addEventListener('focusout', handleFocusoutEvent);
+function addEvents(module) {
+	module.data.nodes.component.addEventListener(
+		'focusin',
+		() => handleFocusinEvent(module)
+	);
+	module.data.nodes.component.addEventListener(
+		'focusout',
+		(event) => handleFocusoutEvent(event, module)
+	);
 
-	document.addEventListener('pointerdown', handleGlobalPointerdownEvent);
-	data.nodes.component.addEventListener('pointerdown', handlePointerdownEvent);
+	document.addEventListener(
+		'pointerdown',
+		(event) => handleGlobalPointerdownEvent(event, module)
+	);
 
 	document.addEventListener('pointerup', () => {
-		state.isPointerEvent = false;
+		module.state.isPointerEvent = false;
 	});
 
 	//required to understand focusin type
 	document.addEventListener('keydown', () => {
-		state.isKeyEvent = true;
+		module.state.isKeyEvent = true;
 	});
 
-	data.nodes.component.addEventListener('keydown', handleKeydownEvent);
+	module.data.nodes.component.addEventListener(
+		'keydown',
+		(event) => handleKeydownEvent(event, module)
+	);
 
 	document.addEventListener('keyup', () => {
-		state.isKeyEvent = false;
+		module.state.isKeyEvent = false;
 	});
 
-	data.nodes.component.addEventListener('click', handleClickEvent);
-	data.nodes.component.addEventListener('keyup', handleKeyupEvent);
+	module.data.nodes.component.addEventListener(
+		'pointerdown',
+		(event) => handlePointerdownEvent(event, module)
+	);
+	module.data.nodes.component.addEventListener(
+		'click',
+		(event) => handleClickEvent(event, module)
+	);
+	module.data.nodes.component.addEventListener(
+		'keyup',
+		(event) => handleKeyupEvent(event, module)
+	);
 }
 
 export default addEvents;

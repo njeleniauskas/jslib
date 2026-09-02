@@ -1,48 +1,45 @@
-import props from '../data/props.js';
-import data from '../data/data.js';
-import state from '../data/state.js';
-
 import isFocusAttributePresentAndTrue from '../../common/composite-navigation/is-focus-attribute-present-and-true.js';
 import resetFocusState from './reset-focus-state.js';
 
 /**
  * @param {event} event - The focusout event.
+ * @param {class} module - The main class module.
  */
 
-function handleFocusoutEvent(event) {
-	let contextSelector = `[${props.attributes.context}="${props.id}"]`;
+function handleFocusoutEvent(event, module) {
+	let contextSelector = `[${module.props.attributes.context}="${module.props.id}"]`;
 	let isOutsideContext;
 	let isReferenceFocusAttributeTrue;
 
-	if (state.isKeyEvent && event.relatedTarget === null) {
+	if (module.state.isKeyEvent && event.relatedTarget === null) {
 		isReferenceFocusAttributeTrue = isFocusAttributePresentAndTrue({
-			'attribute': props.attributes.referenceFocus,
-			'node': data.nodes.reference
+			'attribute': module.props.attributes.referenceFocus,
+			'node': module.data.nodes.reference
 		});
 
 		if (isReferenceFocusAttributeTrue === true) {
-			data.nodes.reference.setAttribute(props.attributes.referenceFocus, 'false');
+			module.data.nodes.reference.setAttribute(module.props.attributes.referenceFocus, 'false');
 		}
 
-		if (state.navigation.focusedChild !== null && props.navigationType === 'activedescendant') {
-			state.navigation.focusedChild.setAttribute(props.attributes.childFocus, 'false');
+		if (module.state.navigation.focusedChild !== null && module.props.navigationType === 'activedescendant') {
+			module.state.navigation.focusedChild.setAttribute(module.props.attributes.childFocus, 'false');
 		}
 	}
-	
-	if (state.isKeyEvent && event.relatedTarget !== null) {
+
+	if (module.state.isKeyEvent && event.relatedTarget !== null) {
 		isOutsideContext = event.relatedTarget.closest(contextSelector);
-		
-		if (isOutsideContext === null) {
-			resetFocusState();
 
-			state.clickEscapesContext = false;
-			state.navigation.lastFocusedChild = null;
-			state.navigation.focusedChild = null;
-			state.isInitial = true;
+		if (isOutsideContext === null) {
+			resetFocusState(module);
+
+			module.state.clickEscapesContext = false;
+			module.state.navigation.lastFocusedChild = null;
+			module.state.navigation.focusedChild = null;
+			module.state.isInitial = true;
 		}
 	}
-	
-	state.clickEscapesContext = (event.relatedTarget === null);
+
+	module.state.clickEscapesContext = (event.relatedTarget === null);
 }
 
 export default handleFocusoutEvent;

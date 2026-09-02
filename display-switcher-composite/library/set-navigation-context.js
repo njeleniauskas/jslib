@@ -1,13 +1,12 @@
-import state from '../data/state.js';
-
 /**
- * @param {object} params 
+ * @param {object} params
+ * @param {class} module - the class module
  */
 
-function setNavigationContext(params) {
-	state.navigation.context = params.context;
-	state.navigation.parent = params.parent;
-	state.navigation.children = params.children;
+function setNavigationContext(params, module) {
+	module.state.navigation.context = params.context;
+	module.state.navigation.parent = params.parent;
+	module.state.navigation.children = params.children;
 }
 
 export default setNavigationContext;

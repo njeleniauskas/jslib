@@ -1,27 +1,23 @@
-import props from '../data/props.js';
-import state from '../data/state.js';
-
 import resetFocusState from './reset-focus-state.js';
 
 /**
  * @param {object} event - The global pointerdown event.
+ * @param {class} module - The class module.
  */
 
-function handleGlobalPointerdownEvent(event) {
-	const componentQueryString = `[${props.attributes.component}="${props.id}"]`;
-	const contextQueryString = `[${props.attributes.context}="${props.id}"]`;
-	const isWithinContext = (event.target.closest(contextQueryString) !== null);
+function handleGlobalPointerdownEvent(event, module) {
+	const componentQueryString = `[${module.props.attributes.component}="${module.props.id}"]`;
 	const isWithinComponent = (event.target.closest(componentQueryString) !== null);
 
-	state.isPointerEvent = true;
+	module.state.isPointerEvent = true;
 
-	if (!isWithinContext && !isWithinComponent) {
-		resetFocusState();
+	if (!isWithinComponent) {
+		resetFocusState(module);
 
-		state.clickEscapesContext = false;
-		state.navigation.lastFocusedChild = null;
-		state.navigation.focusedChild = null;
-		state.isInitial = true;
+		module.state.clickEscapesContext = false;
+		module.state.navigation.lastFocusedChild = null;
+		module.state.navigation.focusedChild = null;
+		module.state.isInitial = true;
 	}
 }
 

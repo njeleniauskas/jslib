@@ -1,14 +1,11 @@
-import props from '../data/props.js';
-
 /**
- * @param {object} params 
+ * @param {object} params
  * @param {object} params.navConfig - The configuration object for navigation.
  * @param {object} params.viewConfig - The configuration object for the state of the component.
  */
 
-function setConfiguration(params) {
-	const navConfig = params.navConfig;
-	const viewConfig = params.viewConfig;
+function setConfiguration(params, props) {
+	const { navConfig, viewConfig } = params;
 
 	//nav config
 	props.id = navConfig.id;
@@ -18,6 +15,7 @@ function setConfiguration(params) {
 	props.attributes.parent = navConfig.attributes.parent;
 	props.attributes.child = navConfig.attributes.child;
 
+	props.attributes.contextState = navConfig.attributes.contextState;
 	props.attributes.orientation = navConfig.attributes.orientation;
 	props.attributes.activeDescendant = navConfig.attributes.activeDescendant;
 	props.attributes.referenceFocus = navConfig.attributes.referenceFocus;

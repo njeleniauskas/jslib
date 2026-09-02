@@ -1,14 +1,13 @@
-import data from '../data/data.js';
-
 /**
  * @param {object} nodes - The object containing each node to map to the class nodes object.
+ * @param {class} module - The class module.
  */
 
-function setReferenceNodes(nodes) {
+function setReferenceNodes(nodes, module) {
 	const keys = Object.keys(nodes);
 
 	keys.forEach((key) => {
-		data.nodes[key] = nodes[key];
+		module.data.nodes[key] = nodes[key];
 	});
 }
 

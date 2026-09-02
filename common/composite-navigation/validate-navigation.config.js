@@ -1,3 +1,5 @@
+import isFocusable from '../utilities/is-focusable.js';
+
 function validateNavigationConfig(props) {
 	const errors = [];
 
@@ -6,15 +8,23 @@ function validateNavigationConfig(props) {
 	}
 
 	if (props.attributes.component === null) {
-		throw 'The "componentNode" attribute is required.';
+		errors.push(new Error('The "componentNode" attribute is required.'));
 	}
 
 	if (!props.multiAxis) {
-		if (props.attributes.referenceFocus !== null && 
-			props.attributes.referenceFocus !== 'tabindex' &&
-			props.attributes.childFocus !== null &&
-			props.attributes.childFocus !== 'tabindex') {
-			errors.push(new Error('A "tabindex" attribute is required on either the container, reference, or children for single-axis navigation.'));
+		const referenceString = `[${props.attributes.reference}="${props.id}"]`;
+		const referenceNode = document.querySelector(referenceString);
+		const childString = `[${props.attributes.child}="${props.id}"]`;
+		const childNode = document.querySelector(childString);
+		const referenceIsFocusable = isFocusable(referenceNode);
+		const childIsFocusable = isFocusable(childNode);
+
+		if (childIsFocusable && referenceIsFocusable) {
+			errors.push(new Error('Both the reference and control nodes are focusable.'));
+		}
+
+		if (!childIsFocusable && !referenceIsFocusable) {
+			errors.push(new Error('Neither the reference or control nodes are focusable.'));
 		}
 	}
 
@@ -26,7 +36,7 @@ function validateNavigationConfig(props) {
 
 	if (props.attributes.activeDescendant !== null &&
 		props.attributes.activeDescendant.startsWith('data-') &&
-		props.attributes.childFocus !== null && 
+		props.attributes.childFocus !== null &&
 		props.attributes.childFocus !== 'tabindex') {
 		errors.push(new Error('Using reference navigation with "data-activedescendant" is not an accessible technique. Use "aria-activedescendant" instead.'));
 	}
