@@ -1,12 +1,14 @@
 import createNewFragment from './create-new-fragment.js';
 
 /**
- * 
+ *
  * @param {object} params.presenter - The presenter class (passed due to emitter usage).
  * @param {object} params.params - Parameters passed to this function (not needed/?)
  */
 
 function renderCollection(presenter, params) {
+	presenter.emitter.emit('render-collection-start');
+
 	const attribute = presenter.props.attributes.collection;
 	const id = presenter.id;
 	let newFragment;
@@ -45,6 +47,8 @@ function renderCollection(presenter, params) {
 	} else {
 		presenter.nodes.liveRegion.innerHTML = message;
 	}
+
+	presenter.emitter.emit('render-collection-end');
 }
 
 export default renderCollection;

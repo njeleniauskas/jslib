@@ -6,7 +6,7 @@ The `DataCollectionPresenter` class handles rendering the collection based on ho
 ## Setup
 Because the presenter interacts directly with the DOM, proper setup includes a few more steps.
 
-<br> 
+<br>
 
 ### HTML
 At minimum, HTML for the container and live region must be present. The collection element is optional as it is automatically added on the first render:
@@ -43,7 +43,7 @@ const presenterArgs = {
 		'{display}': template,
 	},
 	emitter: emitter
-};	
+};
 ```
 
 <br>
@@ -61,7 +61,7 @@ const template = function(data, params) {
 
 		for (const object of data) {
 			const node = document.createElement('li');
-			
+
 			//..build each collection item
 
 			collection.appendChild(node);
@@ -96,17 +96,25 @@ Note that the last two arguments are only useful when the pagination module is i
 
 
 ## Behavior and Usage
+### Emitter Events for Processing
+Beyond the essential conection/update events that the emitter captures, additional state events exist as well if authors want to add behavior for these stages:
+
+- `render-collection-start`: fires when `renderCollection()` begins
+- `render-collection-end`: fires when `renderCollection()` ends
+
+<br>
+
 ### Live Region Managers
 If there are multiple collections in the DOM, you will need to pass a liveEventManager property to the class, so that no messages get lost in processing. To include this functionality, simply pass the LiveRegionManager class to the presenter:
 
 ```javascript
 const presenterArgs = {
 	liveRegionManager: lrManager
-};	
+};
 ```
 
 <br>
 
 
 ### Template Keys
-When passed to the class, template keys identify the type of display that should be rendered — for example 'list' or 'grid'. If more than one semplate is supplied, the first key in the tempalte object will be the default.
+When passed to the class, template keys identify the type of display that should be rendered — for example 'list' or 'grid'. If more than one template is supplied, the first key in the tempalte object will be the default.
