@@ -1,9 +1,7 @@
 /**
- * Filter an array of objects by a top-level object property.
- * @param {array} array 
- * @param {object} params 
- * @param {string} params.prop - The key to filter by.
- * @param {string} params.value  - The truthy value to filter from.
+ * Filter an array of objects by a collection of top-level object properties.
+ * @param {array} array
+ * @param {{prop: string, value: string}[]} params
  * @returns array
  */
 

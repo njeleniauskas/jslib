@@ -1,4 +1,4 @@
-import invalidPropertyValue from '../../../common/utilities/invalid-property-value.js';
+import validPropertyValue from '../../../common/utilities/valid-property-value.js';
 
 function validateConfig(params) {
 	const errors = [];
@@ -7,11 +7,11 @@ function validateConfig(params) {
 		throw new Error('args is either missing or empty.');
 	}
 
-	if (invalidPropertyValue(params, 'id')) {
+	if (!validPropertyValue(params, 'id')) {
 		errors.push(new Error('An ID is required.'));
 	}
 
-	if (invalidPropertyValue(params, 'emitter')) {
+	if (!validPropertyValue(params, 'emitter')) {
 		errors.push(new Error('An EventEmitter is required.'));
 	}
 

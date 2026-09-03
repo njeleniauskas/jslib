@@ -1,6 +1,6 @@
 /**
- * 
- * @param {object} object 
+ *
+ * @param {object} object
  * @param {string} [keyName] - The key name to add to the object.
  * @returns array
  */

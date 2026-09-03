@@ -1,4 +1,4 @@
-import invalidPropertyValue from '../common/utilities/invalid-property-value.js';
+import validPropertyValue from '../common/utilities/valid-property-value.js';
 
 import validateFilterGroupConfig from './library/validate-filter-group-config.js';
 import getNodes from './library/get-nodes.js';
@@ -19,7 +19,7 @@ import getToggleNodeState from './library/get-toggle-node-state.js';
  * @param {string} [params.attributes.comparison] - Attribute identifying the element changing the comparison method.
  * @param {string} [params.attributes.method] - The attribute on the value node that stores the comparison method.
  * @param {string} [params.attributes.reset] - The attribute identifying the reset control.
- * 
+ *
  * @param {object} [params.indicators] - Strings inditacting the attribute or class states needed.
  * @param {string} [params.indicators.selected] - The selected-state attribute (must be accessible).
  * @param {string} [params.indicators.toggled] - The state attribute for the toggle control (must be accessible).
@@ -104,13 +104,13 @@ class FilterGroup {
 	initializeComponent() {
 		getNodes(this.nodes, this.props.attributes);
 		addInterfaceEvents(this);
-		
+
 		this.props.group = this.nodes.group.getAttribute(this.props.attributes.group);
 		this.props.id = this.props.group;
 
 		addEmitterEvents(this);
 
-		if (!invalidPropertyValue(this.props.attributes, 'toggle')) {
+		if (validPropertyValue(this.props.attributes, 'toggle')) {
 			this.state.active = getToggleNodeState({
 				'toggleByValue': this.props.toggleByValue,
 				'node': this.nodes.toggle,
@@ -127,7 +127,7 @@ class FilterGroup {
 			'multiSelection': this.props.multiSelection,
 			'selectionByValue': this.props.selectionByValue,
 		};
-		
+
 		updateFilterState(this.state, args);
 	}
 }

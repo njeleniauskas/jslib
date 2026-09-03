@@ -1,4 +1,4 @@
-import invalidPropertyValue from '../../../common/utilities/invalid-property-value.js';
+import validPropertyValue from '../../../common/utilities/valid-property-value.js';
 import validateDependentArguments from '../../../common/utilities/validate-dependent-arguments.js';
 
 function validateConfig(params) {
@@ -8,22 +8,25 @@ function validateConfig(params) {
 		throw new Error('args is either missing or empty.');
 	}
 
-	if (invalidPropertyValue(params, 'id')) {
+	if (!validPropertyValue(params, 'id')) {
 		errors.push(new Error('An ID is required.'));
 	}
 
-	if (invalidPropertyValue(params, 'filepath')) {
-		errors.push(new Error('A filepath is required.'));
+	if (!('data' in params)) {
+		errors.push(new Error('Data arguments missing.'))
 	}
 
-	if (invalidPropertyValue(params, 'name')) {
+	if (!validPropertyValue(params.data, 'resource')) {
+		errors.push(new Error('A resource is required.'));
+	}
+
+	if (!validPropertyValue(params.data, 'name')) {
 		errors.push(new Error('A name is required.'));
 	}
 
-	if (invalidPropertyValue(params, 'emitter')) {
+	if (!validPropertyValue(params, 'emitter')) {
 		errors.push(new Error('An EventEmitter is required.'));
 	}
-
 
 	validateDependentArguments(errors, [
 		{
@@ -32,7 +35,7 @@ function validateConfig(params) {
 			'location': params
 		},
 		{
-			'key': 'filepath',
+			'key': 'resource',
 			'type': 'prop',
 			'location': params
 		}

@@ -1,20 +1,23 @@
 import validateConfig from './library/validate-config.js';
+import getCollectionArgs from './library/get-collection-args.js';
+import validateCollectionArgs from './library/validate-collection-args.js';
 import collectData from './library/collect-data.js';
 
 /**
  * The core DataCollection class, containing the reference and live datasets.
  * @param {object} params
  * @param {string | number} params.id - The ID to connect each class together.
- * @param {string} [params.name] - The human-readable name of the collection (akin to aria-label or name attribute).
- * @param {string} [params.filepath] - The path and filename of the data needed.
- * @param {string} [params.objectKeyName] - The property name for the key that will store the object property key. When the JSON is an object of objects (not an array of objects).
- * @param {object} [params.prefilter]
- * @param {string} [params.prefilter.prop] - The object property to filter by.
- * @param {string} [params.prefilter.value] - The property value to include.
- * @param {object} [params.presort] 
- * @param {string} [params.presort.prop] - The object property to sort by.
- * @param {'asc' | 'desc'} [params.presort.direction] - The sort direction needed.
  * @param {object} params.emitter - The event emitter.
+ *
+ * @param {object} [params.data] - The arguments needed (and optional) for data collection.
+ * @param {string} [params.data.name] - The human-readable name of the collection (akin to aria-label or name attribute).
+ * @param {string} params.data.resource - The uri of the resource needed.
+ * @param {string} [params.data.type] - The type of resource being requested [file, or query].
+ * @param {object} [params.data.args]
+ * @param {string} [params.data.args.objectKeyName] - The property name for the key that will store the object property key. When the JSON is a map (not an array of objects).
+ * @param {{prop: string, value: string}[]}} [params.data.args.prefilter] - An array of prefilter key/value objects. * @param {object} [params.data.args.presort]
+ * @param {string} [params.data.args.presort.prop] - The object property to sort by.
+ * @param {'asc' | 'desc'} [params.data.args.presort.direction] - The sort direction needed.
  */
 
 class DataCollection {
@@ -22,10 +25,13 @@ class DataCollection {
 		this.id = null;
 		this.props = {
 			name: null,
-			filepath: null,
-			objectKeyName: null,
-			prefilter: null,
-			presort: null,
+			type: null,
+			resource: null,
+			args: {
+				objectKeyName: null,
+				prefilter: null,
+				presort: null,
+			}
 		};
 		this.emitter = null;
 		this.data = {
@@ -35,7 +41,7 @@ class DataCollection {
 
 		this.init(params);
 	}
-	
+
 	init (params) {
 		try {
 			validateConfig(params);
@@ -43,7 +49,7 @@ class DataCollection {
 		} catch (errors) {
 			if (errors instanceof AggregateError) {
 				console.error(errors.message)
-				
+
 				for (const error of errors.errors) {
 					console.error(error.message);
 				}
@@ -54,48 +60,27 @@ class DataCollection {
 	}
 
 	setConfiguration(params) {
-		const {emitter, id, ...props} = params;
-		this.props = {...this.props, ...props};
-		this.emitter = params.emitter;
-		this.id = params.id;
+		const { data: { args, ...data }, ...props } = params;
+
+		this.props = {...this.props, ...data};
+		this.props.args = {...this.props.args, ...args};
+		this.emitter = props.emitter;
+		this.id = props.id;
+
+		this.props.type = 'type' in params.data ? params.data.type : 'file';
 	}
 
 
 	//public methods
 	async getCollection(params) {
 		try {
-			const args = {};
-			
-			if (params !== undefined && !('filepath' in params)) {
-				throw new Error ('getCollection: A filepath must be provided if supplying an object with arguments.');
-			}
+			const args = getCollectionArgs(params, this);
 
-			if (params !== undefined && 'filepath' in params) {
-				if (!('name' in params)) {
-					throw new Error ('getColltion: A name must be provided when including a filepath.');
-				}
+			validateCollectionArgs(args);
 
-				args.filepath = params.filepath;
-				args.name = params.name;
-				args.objectKeyName = 'objectKeyName' in params ? params.objectKeyName : null;
-				args.prefilter = 'prefilter' in params ? params.prefilter : null;
-				args.presort = 'presort' in params ? params.presort : null;
+			this.props = {...this.props, ...args};
 
-				this.props = {...this.props, ...args};
-			} else {
-				args.filepath = this.props.filepath;
-				args.name = this.props.name;
-				args.objectKeyName = this.props.objectKeyName;
-				args.prefilter = this.props.prefilter;
-				args.presort = this.props.presort;
-			}
-
-			if (args.filepath === null) {
-				throw new Error('getCollection: No filepath was provided. Cannot fetch dataset.');
-			}
-
-			this.data.ref = await collectData(args.filepath, args);
-
+			this.data.ref = await collectData(args.type, args);
 			//shallow copy (prevents ref mutation errors)
 			this.data.live = this.data.ref.slice();
 			this.emitter.emit('connect-data-collection', this);
@@ -103,6 +88,6 @@ class DataCollection {
 			console.error(error);
 		}
 	}
-}
+};
 
 export default DataCollection;
