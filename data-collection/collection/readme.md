@@ -15,10 +15,10 @@ const collectionArgs = {
 }
 ```
 
-<br> 
+<br>
 
 
-The only required argument on instantiation is the `emitter` arg. Every other argument can be passed here, or to the `getCollection()` method later on. 
+The only required argument on instantiation is the `emitter` arg. Every other argument can be passed here, or to the `getCollection()` method later on.
 
 Additional arguments are as follows:
 
@@ -33,7 +33,7 @@ Additional arguments are as follows:
  * @param {object} [params.prefilter]
  * @param {string} [params.prefilter.prop] - The object property to filter by.
  * @param {string} [params.prefilter.value] - The property value to include.
- * @param {object} [params.presort] 
+ * @param {object} [params.presort]
  * @param {string} [params.presort.prop] - The object property to sort by.
  * @param {'asc' | 'desc'} [params.presort.direction] - The sort direction needed.
  */
@@ -69,9 +69,9 @@ collection.getCollection({
 
 <br>
 
-Note that the `getCollection()` method will ***only*** use provided arguments if both the `filepath` and `name` arguments are provided. Otherwise it will default to what was initially passed to the class. 
+Note that the `getCollection()` method will ***only*** use provided arguments if both the `filepath` and `name` arguments are provided. Otherwise it will default to what was initially passed to the class.
 
-<br> 
+<br>
 
 ### Pre-Filtering and Sorting
 If arguments are provided, the data collection can be filtered and/or sorted to condition the reference data as needed. Note however that if these features are used that only shallow keys are available for pre-filtering/sorting at present (no nested keys). Filters do however take an array of objects to allow multiple filters to be used:

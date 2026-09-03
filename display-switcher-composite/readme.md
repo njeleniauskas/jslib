@@ -159,7 +159,7 @@ Lastly, if reference navigation is being used, each control will need an ID to c
 ## Properties (DisplaySwitcherComposite)
 When using this module, three "data" objects are used for internal functionality. The `props` object stores read-only data, and is where the configuration is stored:
 
-```jsdoc
+```javascript
 /**
  * @param {string} props.id - The id that defines the context of data- attributes.
  * @param {string} props.attributes.context - The data- attribute for the context nodes.
@@ -185,7 +185,7 @@ When using this module, three "data" objects are used for internal functionality
 
 The `data` object stores the static node references for the module:
 
-```jsdoc
+```javascript
 /**
  * @param {Object} nodes - An object containing static nodes.
  * @param {array} nodes.contexts - An array of all of the navigation contexts that exist.
@@ -198,7 +198,7 @@ The `data` object stores the static node references for the module:
 
 Finally, the `state` object handles the context and data state of the module:
 
-```jsdoc
+```javascript
 /**
  *  @param {Object} navigation - An object containing dynamically set nodes.
  *  @param {node} navigation.context - The node that represents the current navigation context.
