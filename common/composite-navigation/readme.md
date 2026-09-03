@@ -19,13 +19,13 @@ While this module is very flexible, there are two requirements necessary for it 
 
 <br>
 
-- An `id` **must** be passed as an argument to properly identify the specific component and its elements in the DOM.
-- A `<div>` or `<table>` element **must** be used to represent the component node (`<table>` for interactive tables/grids only). This restriction helps preserve the native semantics of the component/children by lowering the manual adjustments necessary for any type of component.
+- An `id` **must** be passed as an argument to properly identify the specific elements in the DOM that belong to this component.
+- A `<div>` or `<table>` element **must** be used to represent a context node (`<table>` for interactive tables/grids only). This restriction helps preserve the native semantics of the navigation context by lowering the adjustments needed for any type of component.
 
 <br>
 
 ### Module Arguments
-When using this module, several arguments can be passed to a component depending on the functionality that is desired. And as noted previously, only the `id` is required — other elements will fall back to other attribute names when not provided.
+When using this module, several arguments can be passed depending on the functionality that is desired. And as noted previously, only the `id` is required — other elements will fall back to other attribute names when not provided.
 
 <br>
 
@@ -37,10 +37,9 @@ const args = {
 
 //other available attributes and their default values
 attributes : {
-	componentNode: 'data-cn',
-	referenceNode: 'data-cn', //falls back to component
-	contextNode: 'data-cn', //falls back to component
-	parentNode: 'data-cn', //falls back to component or context (if supplied)
+	contextNode: 'data-cn',
+	referenceNode: 'data-cn', //falls back to context
+	parentNode: 'data-cn', //falls back to context
 	childNode: 'data-cn-child',
 
 	contextState: 'data-cn-current',
@@ -107,7 +106,7 @@ If no arguments are supplied or some are missing, the fallback configuration for
 
 ### Arguments
 #### Orientation
-Orientation is used internally to set up keyboard functionality, and if authors wish to enable aria support for the orientation of the component (for semantic/accessible reasons), `aria-orientation` can be passed via the `orientation` argument.
+Orientation is used internally to set up keyboard functionality, and if authors wish to enable aria support for the orientation of a navigation context (for semantic/accessible reasons), `aria-orientation` can be passed via the `orientation` argument.
 
 <br>
 
@@ -117,7 +116,7 @@ Different components need different "selection" attributes to function properly.
 <br>
 
 ### HTML, and Attribute Relationships
-As previously noted, the element representing the component must be a `<div>` or `<table>` — the latter being used to represent interactive grids or tables.
+As previously noted, the element representing the navigation context must be a `<div>` or `<table>` — the latter being used to represent interactive grids or tables.
 
 Apart from this requirement however the HTML architecture can be very flexible and meet many different design approaches. However, because of this flexibility some details needs to be clarified.
 
@@ -126,18 +125,15 @@ First, descriptive arguments are tied to specific nodes internally. This is refl
 <br>
 
 ```html
-<!-- components and their related attributes -->
-<component
-	data-{component}="{id}">
+<!-- html elements and their related attributes -->
+<context
+	data-{context}="{id}">
 
 <reference
 	data-{reference}="{id}"
 	{orientation}
 	{active-descendant}="{child-id}"
 	{reference-focus}>
-
-<context
-	data-{context}="{id}">
 
 <parent
 	data-{parent}="{id}">
@@ -151,32 +147,32 @@ First, descriptive arguments are tied to specific nodes internally. This is refl
 
 <br>
 
-Many times this kind of explicit property-to-html setup isn't needed, so internally, many nodes will fallback to other elements based on which attributes are passed in `args`. And as a result, a single html element can occupy several roles — for an example, the component element functioning as the `component`, `reference`, `context`, and `parent` node simultaneously.
+Many times this kind of explicit property-to-html setup isn't needed, so internally, many nodes will fallback to other elements based on which attributes are passed in `args`. And as a result, a single html element can occupy several roles — for an example, a single container element functioning as the `context`, `reference`, and `parent` node simultaneously.
 
 <br>
 
 ```html
-<component
-	data-{component}="{id}"
+<!--the context node is also acting as the reference and parent node in this example -->
+<context
+	data-{context}="{id}"
 	{orientation}>
 		<child
 			data-{child}="{id}">
 			…
 		</child>
 		…
-</component>
+</context>
 ```
 
 <br>
 
 Note that attributes to define the navigation configuration would also be needed in this setup, depending on whether the component uses roving or reference navigation.
 
-### Component, Reference, Context, and Parent attributes/nodes
-While many times, it will not be valuable to explicitly set up the `componentNode` `referenceNode`, `contextNode`, and `parentNode` attributes, there is a reason why each exists.
+### Context, Reference, and Parent attributes/nodes
+While many times, it will not be valuable to explicitly set up the `contextNode`, `referenceNode`, and `parentNode` attributes, there is a reason why each exists.
 
-- **componentNode**: this is just the topmost container.
-- **referenceNode**: use this attribute when the reference node should be different from the (interaction) context node.
 - **contextNode**: multiple context nodes can be provided in case a component needs to switch navigation contexts (internally), or if the collection of children will be rendered dynamically.
+- **referenceNode**: use this attribute when the reference node should be different from a navigation context.
 - **parentNode**: provide when the containing element and children will be dynamically rendered. Here, the context node will remain as the stable entry point to the DOM.
 
 <br>

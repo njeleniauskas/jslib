@@ -9,9 +9,8 @@ function setConfiguration(params, props) {
 
 	//nav config
 	props.id = navConfig.id;
-	props.attributes.component = navConfig.attributes.component;
-	props.attributes.reference = navConfig.attributes.reference;
 	props.attributes.context = navConfig.attributes.context;
+	props.attributes.reference = navConfig.attributes.reference;
 	props.attributes.parent = navConfig.attributes.parent;
 	props.attributes.child = navConfig.attributes.child;
 

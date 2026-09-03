@@ -2,9 +2,8 @@ const createProps = () => {
 	return {
 		id: null,
 		attributes: {
-			component: null,
-			reference: null,
 			context: null,
+			reference: null,
 			parent: null,
 			child: null,
 

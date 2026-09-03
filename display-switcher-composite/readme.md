@@ -41,7 +41,7 @@ import DisplaySwitcherComposite from './path-to-module/module/module.js'
 const args = {
 	id: 'dsc-1',
 	attributes : {
-		componentNode: 'data-dsc',
+		contextNode: 'data-dsc',
 		childNode: 'data-dsc-child',
 		viewNode: 'data-dsc-view',
 
@@ -69,7 +69,7 @@ import DisplaySwitcherComposite from './path-to-module/module/module.js'
 const args = {
 	id: 'dsc-1',
 	attributes : {
-		componentNode: 'data-dsc',
+		contextNode: 'data-dsc',
 		childNode: 'data-dsc-child',
 		viewNode: 'data-dsc-view',
 
@@ -157,18 +157,13 @@ Lastly, if reference navigation is being used, each control will need an ID to c
 
 
 ## Properties (DisplaySwitcherComposite)
-When using this module, three "data" objects are used for internal functionality: `props`, `data`, and `state`.
-
-<br>
-
-The `props` object stores read-only data, and is where the configuration is stored:
+When using this module, three "data" objects are used for internal functionality. The `props` object stores read-only data, and is where the configuration is stored:
 
 ```jsdoc
 /**
  * @param {string} props.id - The id that defines the context of data- attributes.
- * @param {string} props.attributes.component - The data- attribute for the component node.
- * @param {string} props.attributes.reference - The data- attribute for the reference node.
  * @param {string} props.attributes.context - The data- attribute for the context nodes.
+ * @param {string} props.attributes.reference - The data- attribute for the reference node.
  * @param {string} props.attributes.parent - The data- attribute for the parent node.
  * @param {string} props.attributes.child - The data- attribute for child nodes.
  *
@@ -193,9 +188,8 @@ The `data` object stores the static node references for the module:
 ```jsdoc
 /**
  * @param {Object} nodes - An object containing static nodes.
- * @param {Object} nodes.component - The node that encapsulates the overall component.
+ * @param {array} nodes.contexts - An array of all of the navigation contexts that exist.
  * @param {Object} nodes.reference - The node that stores reference data, or receives focus.
- * @param {array} nodes.contexts - An array of all of the interaction contexts that exist.
  * @param {array} nodes.views - An array of all of the views that exist.
  * /
 ```

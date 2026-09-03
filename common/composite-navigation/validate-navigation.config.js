@@ -7,10 +7,6 @@ function validateNavigationConfig(props) {
 		errors.push(new Error('An ID is required.'));
 	}
 
-	if (props.attributes.component === null) {
-		errors.push(new Error('The "componentNode" attribute is required.'));
-	}
-
 	if (!props.multiAxis) {
 		const referenceString = `[${props.attributes.reference}="${props.id}"]`;
 		const referenceNode = document.querySelector(referenceString);

@@ -1,9 +1,10 @@
 /**
  * @param {object} params
- * @param {string} params.viewNode - The data- attribute for the view elements.
- * @param {string} params.viewID - The data- attribute used to link controls and views.
- * @param {string} params.controlID - The data- attribute used to link views and controls.
- * @param {string} params.display - The data- attribute tracking the display status of views.
+ * @param {object} params.attributes
+ * @param {string} params.attributes.viewNode - The data- attribute for the view elements.
+ * @param {string} params.attributes.viewID - The data- attribute used to link controls and views.
+ * @param {string} params.attributes.controlID - The data- attribute used to link views and controls.
+ * @param {string} params.attributes.display - The data- attribute tracking the display status of views.
  * @returns object for the view configuration.
  */
 

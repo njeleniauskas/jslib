@@ -28,7 +28,6 @@ import getViewConfig from './library/get-view-config.js';
  * @param {string} [params.attributes.display] - The data- attribute tracking the display status of views.
  *
  * Composite navigation params
- * @param {string} [params.attributes.componentNode] - The data- attribute for the component node.
  * @param {string} [params.attributes.contextNode] - The data- attribute for context nodes.
  * @param {string} [params.attributes.parentNode] - The data- attribute for the parent node.
  * @param {string} [params.attributes.childNode] - The data- attribute for child nodes.
@@ -68,17 +67,13 @@ class DisplaySwitcherComposite {
 			referenceNodes = getReferenceNodes({
 				'id': this.props.id,
 				'nodes': {
-					'component': {
-						'array': false,
-						'attribute': this.props.attributes.component
+					'contexts': {
+						'array': true,
+						'attribute': this.props.attributes.context
 					},
 					'reference': {
 						'array': false,
 						'attribute': this.props.attributes.reference
-					},
-					'contexts': {
-						'array': true,
-						'attribute': this.props.attributes.context
 					},
 					'views': {
 						'array': true,

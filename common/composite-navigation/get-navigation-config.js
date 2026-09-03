@@ -2,9 +2,8 @@
  * Configure the read-only parameters for a composite navigator. Fallback config is a roving tabindex with no ARIA.
  * @param {Object} params - An object containing all parameters.
  * @param {string} params.id - The id that defines the context of data- attributes.
- * @param {string} [params.attributes.componentNode] - The data- attribute for the component node.
+ * @param {string} [params.attributes.contextNode] - The data- attribute for the navigation context node(s).
  * @param {string} [params.attributes.referenceNode] - The data- attribute for the reference node.
- * @param {string} [params.attributes.contextNode] - The data- attribute for context nodes.
  * @param {string} [params.attributes.parentNode] - The data- attribute for the parent node.
  * @param {string} [params.attributes.childNode] - The data- attribute for child nodes.
  * @param {string} [params.attributes.eventNode] - The data- attribute for the node events will be attached to.
@@ -24,9 +23,6 @@ function getNavigationConfig(params) {
 		'attributes': {}
 	};
 
-	let fallbackDescendantAttribute = null;
-	let fallbackParentAttribute = fallbackAttribute;
-
 	props.id  = 'id' in params ? params.id : undefined;
 	props.attributes.orientation = 'orientation' in attributes ? attributes.orientation : 'data-orientation';
 	props.attributes.referenceFocus = 'referenceFocus' in attributes ? attributes.referenceFocus : 'data-focused';
@@ -43,6 +39,8 @@ function getNavigationConfig(params) {
 		props.navigationType = 'activedescendant';
 	}
 
+	let fallbackDescendantAttribute = null;
+
 	if (props.navigationType === 'activedescendant') {
 		fallbackDescendantAttribute = 'data-activedescendant';
 	}
@@ -50,22 +48,12 @@ function getNavigationConfig(params) {
 	props.attributes.activeDescendant = 'activeDescendant' in attributes ?
 		attributes.activeDescendant : fallbackDescendantAttribute;
 
-	if ('contextNode' in attributes) {
-		fallbackParentAttribute = attributes.contextNode;
-	}
-
-	if ('componentNode' in attributes && !('contextNode' in attributes)) {
-		fallbackParentAttribute = attributes.componentNode;
-	}
-
-	props.attributes.component = 'componentNode' in attributes ?
-		attributes.componentNode : 'data-cn';
-	props.attributes.reference = 'referenceNode' in attributes ?
-		attributes.referenceNode : props.attributes.component;
 	props.attributes.context = 'contextNode' in attributes ?
-		attributes.contextNode : props.attributes.component;
+		attributes.contextNode : 'data-cn';
+	props.attributes.reference = 'referenceNode' in attributes ?
+		attributes.referenceNode : props.attributes.context;
 	props.attributes.parent = 'parentNode' in attributes ?
-		attributes.parentNode : fallbackParentAttribute;
+		attributes.parentNode : props.attributes.context;
 	props.attributes.child = 'childNode' in attributes ?
 		attributes.childNode : 'data-cn-child';
 

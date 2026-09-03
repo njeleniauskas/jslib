@@ -6,12 +6,12 @@ import resetFocusState from './reset-focus-state.js';
  */
 
 function handleGlobalPointerdownEvent(event, module) {
-	const componentQueryString = `[${module.props.attributes.component}="${module.props.id}"]`;
-	const isWithinComponent = (event.target.closest(componentQueryString) !== null);
+	const contextQueryString = `[${module.props.attributes.context}="${module.props.id}"]`;
+	const isWithinContext = (event.target.closest(contextQueryString) !== null);
 
 	module.state.isPointerEvent = true;
 
-	if (!isWithinComponent) {
+	if (!isWithinContext) {
 		resetFocusState(module);
 
 		module.state.clickEscapesContext = false;

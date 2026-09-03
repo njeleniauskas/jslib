@@ -7,15 +7,6 @@ import handleClickEvent from './handle-click-event.js';
 import handleKeyupEvent from './handle-keyup-event.js';
 
 function addEvents(module) {
-	module.data.nodes.component.addEventListener(
-		'focusin',
-		() => handleFocusinEvent(module)
-	);
-	module.data.nodes.component.addEventListener(
-		'focusout',
-		(event) => handleFocusoutEvent(event, module)
-	);
-
 	document.addEventListener(
 		'pointerdown',
 		(event) => handleGlobalPointerdownEvent(event, module)
@@ -30,27 +21,39 @@ function addEvents(module) {
 		module.state.isKeyEvent = true;
 	});
 
-	module.data.nodes.component.addEventListener(
-		'keydown',
-		(event) => handleKeydownEvent(event, module)
-	);
-
 	document.addEventListener('keyup', () => {
 		module.state.isKeyEvent = false;
 	});
 
-	module.data.nodes.component.addEventListener(
-		'pointerdown',
-		(event) => handlePointerdownEvent(event, module)
-	);
-	module.data.nodes.component.addEventListener(
-		'click',
-		(event) => handleClickEvent(event, module)
-	);
-	module.data.nodes.component.addEventListener(
-		'keyup',
-		(event) => handleKeyupEvent(event, module)
-	);
+
+	module.data.nodes.contexts.forEach((context) => {
+		context.addEventListener(
+			'focusin',
+			() => handleFocusinEvent(module)
+		);
+		context.addEventListener(
+			'focusout',
+			(event) => handleFocusoutEvent(event, module)
+		);
+
+		context.addEventListener(
+			'pointerdown',
+			(event) => handlePointerdownEvent(event, module)
+		);
+		context.addEventListener(
+			'click',
+			(event) => handleClickEvent(event, module)
+		);
+
+		context.addEventListener(
+			'keydown',
+			(event) => handleKeydownEvent(event, module)
+		);
+		context.addEventListener(
+			'keyup',
+			(event) => handleKeyupEvent(event, module)
+		);
+	});
 }
 
 export default addEvents;
