@@ -3,7 +3,7 @@
  * @param {class} module - The class module.
  */
 
-function setReferenceNodes(nodes, module) {
+function setDomNodes(nodes, module) {
 	const keys = Object.keys(nodes);
 
 	keys.forEach((key) => {
@@ -11,4 +11,4 @@ function setReferenceNodes(nodes, module) {
 	});
 }
 
-export default setReferenceNodes;
+export default setDomNodes;

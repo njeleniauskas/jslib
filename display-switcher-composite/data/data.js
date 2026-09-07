@@ -1,9 +1,8 @@
 const createData = () => {
 	return {
 		nodes: {
-			component: null,
-			reference: null,
 			contexts: null,
+			component: null,
 			views: null,
 		}
 	};

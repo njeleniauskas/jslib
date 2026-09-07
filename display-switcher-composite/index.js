@@ -3,14 +3,14 @@ import createData from './data/data.js';
 import createState from './data/state.js';
 
 import getNavigationConfig from '../common/composite-navigation/get-navigation-config.js';
-import getReferenceNodes from '../common/composite-navigation/get-reference-nodes.js';
+import getDomNodes from '../common/composite-navigation/get-dom-nodes.js';
 import getNavigationContext from '../common/composite-navigation/get-navigation-context.js';
 import getLanguageAndNavigationContext from '../common/composite-navigation/get-language-and-navigation-context.js';
 import validateNavigationConfig from '../common/composite-navigation/validate-navigation.config.js';
-import validateReferenceNodes from '../common/composite-navigation/validate-reference-nodes.js';
+import validateDomNodes from '../common/composite-navigation/validate-dom-nodes.js';
 
 import setConfiguration from './library/set-configuration.js';
-import setReferenceNodes from './library/set-reference-nodes.js';
+import setDomNodes from './library/set-dom-nodes.js';
 import setLanguageAndNavigationData from './library/set-language-and-navigation-data.js';
 import setNavigationContext from './library/set-navigation-context.js';
 import addEvents from './library/add-events.js';
@@ -35,7 +35,7 @@ import getViewConfig from './library/get-view-config.js';
  * @param {string} [params.attributes.contextState] - The data- attribute to ID the current context.
  * @param {string} [params.attributes.orientation] - Optional property to assign aria- string.
  * @param {string} [params.attributes.activeDescendant] -  Optional property to assign aria- string.
- * @param {string} [params.attributes.referenceFocus] - The reference attribute based on the type of navigation.
+ * @param {string} [params.attributes.componentFocus] - The component attribute based on the type of navigation.
  * @param {string} [params.attributes.childFocus] - The child attribute based on the type of navigation.
  * @param {string} [params.attributes.selected] - The attribute that expresses the state of a control (selected, checked, etc…).
  *
@@ -54,7 +54,7 @@ class DisplaySwitcherComposite {
 		try {
 			const navigationProps = getNavigationConfig(params);
 			const viewProps = getViewConfig(params);
-			let referenceNodes;
+			let component;
 			let contextNodes;
 			let languageAndNavigationData;
 
@@ -64,16 +64,16 @@ class DisplaySwitcherComposite {
 				'viewConfig': viewProps,
 			}, this.props);
 
-			referenceNodes = getReferenceNodes({
+			component = getDomNodes({
 				'id': this.props.id,
 				'nodes': {
 					'contexts': {
 						'array': true,
 						'attribute': this.props.attributes.context
 					},
-					'reference': {
+					'component': {
 						'array': false,
-						'attribute': this.props.attributes.reference
+						'attribute': this.props.attributes.component
 					},
 					'views': {
 						'array': true,
@@ -82,8 +82,8 @@ class DisplaySwitcherComposite {
 				}
 			});
 
-			validateReferenceNodes(referenceNodes);
-			setReferenceNodes(referenceNodes, this);
+			validateDomNodes(component);
+			setDomNodes(component, this);
 
 			contextNodes = getNavigationContext(
 				'initial',
@@ -100,7 +100,7 @@ class DisplaySwitcherComposite {
 			setNavigationContext(contextNodes, this);
 
 			languageAndNavigationData = getLanguageAndNavigationContext({
-				'node': this.data.nodes.reference,
+				'node': this.data.nodes.component,
 				'orientationAttribute': this.props.attributes.orientation
 			});
 

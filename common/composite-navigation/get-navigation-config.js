@@ -3,14 +3,14 @@
  * @param {Object} params - An object containing all parameters.
  * @param {string} params.id - The id that defines the context of data- attributes.
  * @param {string} [params.attributes.contextNode] - The data- attribute for the navigation context node(s).
- * @param {string} [params.attributes.referenceNode] - The data- attribute for the reference node.
+ * @param {string} [params.attributes.componentNode] - The data- attribute for the node that represents the component.
  * @param {string} [params.attributes.parentNode] - The data- attribute for the parent node.
  * @param {string} [params.attributes.childNode] - The data- attribute for child nodes.
  * @param {string} [params.attributes.eventNode] - The data- attribute for the node events will be attached to.
  * @param {string} [params.attributes.orientation] - Optional property to assign aria- string.
  * @param {string} [params.attributes.activeDescendant] -  Optional property to assign aria- string.
- * @param {string} [params.attributes.referenceFocus] - String based on roving or reference navigation needs.
- * @param {string} [params.attributes.childFocus] - String based on roving or reference navigation needs.
+ * @param {string} [params.attributes.componentFocus] - String based on roving or component navigation needs.
+ * @param {string} [params.attributes.childFocus] - String based on roving or component navigation needs.
  * @param {string} [params.attributes.selected] - Used to allow function to know last component selection.
  * @param {string} [params.attributes.contextState] - Used to identify which context should be used for navigation.
  * @returns {Object} Properties to overwrite global object data.
@@ -25,7 +25,7 @@ function getNavigationConfig(params) {
 
 	props.id  = 'id' in params ? params.id : undefined;
 	props.attributes.orientation = 'orientation' in attributes ? attributes.orientation : 'data-orientation';
-	props.attributes.referenceFocus = 'referenceFocus' in attributes ? attributes.referenceFocus : 'data-focused';
+	props.attributes.componentFocus = 'componentFocus' in attributes ? attributes.componentFocus : 'data-focused';
 	props.attributes.childFocus = 'childFocus' in attributes ? attributes.childFocus : 'tabindex';
 	props.attributes.selected = 'selected' in attributes ? attributes.selected : 'data-selected';
 	props.selection = 'selected' in attributes ? true : false;
@@ -50,8 +50,8 @@ function getNavigationConfig(params) {
 
 	props.attributes.context = 'contextNode' in attributes ?
 		attributes.contextNode : 'data-cn';
-	props.attributes.reference = 'referenceNode' in attributes ?
-		attributes.referenceNode : props.attributes.context;
+	props.attributes.component = 'componentNode' in attributes ?
+		attributes.componentNode : props.attributes.context;
 	props.attributes.parent = 'parentNode' in attributes ?
 		attributes.parentNode : props.attributes.context;
 	props.attributes.child = 'childNode' in attributes ?

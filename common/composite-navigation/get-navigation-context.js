@@ -14,7 +14,7 @@
  * @param {node} target - The event target.
  * @param {string} queryString - The query string to get the closest parent context.
  *
- * Nudge args
+ * Key args
  * @param {node} context - The current context node.
  * @param {array} contexts - All context nodes for the component.
  * @param {string} direction - The direction to move to the next context.
@@ -32,7 +32,7 @@ const resolvers = {
 	pointer: ({ target, queryString }) => {
 		return target.closest(queryString);
 	},
-	nudge: ({ context, contexts, direction }) => {
+	key: ({ context, contexts, direction }) => {
 		const currentIndex = contexts.indexOf(context);
 		const targetIndex = currentIndex + (direction === 'next' ? 1 : -1);
 		const isWithinBounds = targetIndex >= 0 && targetIndex < contexts.length;

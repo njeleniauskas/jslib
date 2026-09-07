@@ -19,7 +19,7 @@ function handleKeydownEvent(event, module) {
 		let targetElementIndex;
 		let validNavigationKeys;
 		let languageAndNavigationData = getLanguageAndNavigationContext({
-			'node': module.data.nodes.reference,
+			'node': module.data.nodes.component,
 			'orientationAttribute': module.props.attributes.orientation
 		});
 

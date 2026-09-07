@@ -3,7 +3,7 @@ const createProps = () => {
 		id: null,
 		attributes: {
 			context: null,
-			reference: null,
+			component: null,
 			parent: null,
 			child: null,
 
@@ -15,7 +15,7 @@ const createProps = () => {
 			contextState: null,
 			orientation: null,
 			activeDescendant: null,
-			referenceFocus: null,
+			componentFocus: null,
 			childFocus: null,
 			selected: null,
 			display: null,
@@ -28,7 +28,7 @@ const createProps = () => {
 		},
 
 		navigationType: null,
-		selection: false,
+		selection: false, //not used
 		multiAxis: false,
 	};
 };

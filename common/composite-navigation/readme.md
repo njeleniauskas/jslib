@@ -38,14 +38,14 @@ const args = {
 //other available attributes and their default values
 attributes : {
 	contextNode: 'data-cn',
-	referenceNode: 'data-cn', //falls back to context
+	componentNode: 'data-cn', //falls back to context
 	parentNode: 'data-cn', //falls back to context
 	childNode: 'data-cn-child',
 
 	contextState: 'data-cn-current',
 	orientation: 'data-orientation',
 	activeDescendant: 'data-activedescendant',
-	referenceFocus: 'data-focused',
+	componentFocus: 'data-focused',
 	childFocus: 'tabindex',
 	selected: 'data-selected',
 }
@@ -59,7 +59,7 @@ There are two common engineering patterns that can handle composite navigation, 
 <br>
 
 - **Roving Navigaiton**: Combines interactive children with `tabindex` to manage focus. As child elements become "focused", tabindex values change from `-1` to `0`. This allows child elements to be included in the normal tab sequence.
-- **Reference Navigation**: The parent element is the focusable element (not children), and the current "active" child element is identified by the `aria-activedescendant` attribute on the reference node (via the `id` attribute on the child).
+- **Reference Navigation**: The parent element is the focusable element (not children), and the current "active" child element is identified by the `aria-activedescendant` attribute on the component node (via the `id` attribute on the child).
 
 <br>
 
@@ -68,7 +68,7 @@ When setting up a component that uses this module, only a few attribute configur
 
 **Config 1 (roving)**
 ```javascript
-	referenceNode: 'data-{reference}' //not 'tabindex'
+	componentNode: 'data-{component}' //not 'tabindex'
 	childNode: 'tabindex'
 ```
 
@@ -76,26 +76,26 @@ When setting up a component that uses this module, only a few attribute configur
 
 **Config 2 (roving)**
 ```javascript
-	referenceNode: 'data-{reference}' //not 'tabindex'
+	componentNode: 'data-{component}' //not 'tabindex'
 	activeDescendant: 'data-{activedescendant}' //not 'aria-activedescendant'
 	childNode: 'tabindex'
 ```
 
-*Note: This pattern enables a reference-like operation, without actually including the accessible endpoints. It is included in case authors wish to monitor the `data-activedescendant` attribute, while using a roving navigation pattern.*
+*Note: This pattern enables a component-like operation, without actually including the accessible endpoints. It is included in case authors wish to monitor the `data-activedescendant` attribute, while using a roving navigation pattern.*
 
 <br>
 
-**Config 3 (reference)**
+**Config 3 (component)**
 ```javascript
-	referenceNode: 'data-{reference}'
-	referenceFocus: 'tabindex'
+	componentNode: 'data-{component}'
+	componentFocus: 'tabindex'
 	activeDescendant: 'aria-activedescendant'
 	childNode: 'data-{child}' //not 'tabindex'
 ```
 
 <br>
 
-**Config 4 (reference)**
+**Config 4 (component)**
 A fourth config will be available once multiAxis navigation is enabled.
 
 <br>
@@ -120,7 +120,7 @@ As previously noted, the element representing the navigation context must be a `
 
 Apart from this requirement however the HTML architecture can be very flexible and meet many different design approaches. However, because of this flexibility some details needs to be clarified.
 
-First, descriptive arguments are tied to specific nodes internally. This is reflected in the argument names — for example, the `activeDescendant` attribute must be added to the `referenceNode` to work. The following example shows the explicit argument relationships that exist internally, and represents the (near) total available HTML flexibility that is possible:
+First, descriptive arguments are tied to specific nodes internally. This is reflected in the argument names — for example, the `activeDescendant` attribute must be added to the `componentNode` to work. The following example shows the explicit argument relationships that exist internally, and represents the (near) total available HTML flexibility that is possible:
 
 <br>
 
@@ -129,11 +129,11 @@ First, descriptive arguments are tied to specific nodes internally. This is refl
 <context
 	data-{context}="{id}">
 
-<reference
-	data-{reference}="{id}"
+<component
+	data-{component}="{id}"
 	{orientation}
 	{active-descendant}="{child-id}"
-	{reference-focus}>
+	{component-focus}>
 
 <parent
 	data-{parent}="{id}">
@@ -147,12 +147,12 @@ First, descriptive arguments are tied to specific nodes internally. This is refl
 
 <br>
 
-Many times this kind of explicit property-to-html setup isn't needed, so internally, many nodes will fallback to other elements based on which attributes are passed in `args`. And as a result, a single html element can occupy several roles — for an example, a single container element functioning as the `context`, `reference`, and `parent` node simultaneously.
+Many times this kind of explicit property-to-html setup isn't needed, so internally, many nodes will fallback to other elements based on which attributes are passed in `args`. And as a result, a single html element can occupy several roles — for an example, a single container element functioning as the `context`, `component`, and `parent` node simultaneously.
 
 <br>
 
 ```html
-<!--the context node is also acting as the reference and parent node in this example -->
+<!--the context node is also acting as the component and parent node in this example -->
 <context
 	data-{context}="{id}"
 	{orientation}>
@@ -166,13 +166,13 @@ Many times this kind of explicit property-to-html setup isn't needed, so interna
 
 <br>
 
-Note that attributes to define the navigation configuration would also be needed in this setup, depending on whether the component uses roving or reference navigation.
+Note that attributes to define the navigation configuration would also be needed in this setup, depending on whether the component uses roving or component navigation.
 
 ### Context, Reference, and Parent attributes/nodes
-While many times, it will not be valuable to explicitly set up the `contextNode`, `referenceNode`, and `parentNode` attributes, there is a reason why each exists.
+While many times, it will not be valuable to explicitly set up the `contextNode`, `componentNode`, and `parentNode` attributes, there is a reason why each exists.
 
 - **contextNode**: multiple context nodes can be provided in case a component needs to switch navigation contexts (internally), or if the collection of children will be rendered dynamically.
-- **referenceNode**: use this attribute when the reference node should be different from a navigation context.
+- **componentNode**: use this attribute when the component node should be different from a navigation context.
 - **parentNode**: provide when the containing element and children will be dynamically rendered. Here, the context node will remain as the stable entry point to the DOM.
 
 <br>
@@ -190,7 +190,7 @@ The following keys are available to use once the component is in focus. These ke
 
 ### Additional Notes
 #### Element Focus is Required
-Regardless of the navigation pattern being used, there **must** be a single element within a component using this pattern that is focusable (either the reference node, or a child). This is required so that assistive technologies can communicate actions and state properly to users.
+Regardless of the navigation pattern being used, there **must** be a single element within a component using this pattern that is focusable (either the component node, or a child). This is required so that assistive technologies can communicate actions and state properly to users.
 
 <br>
 
@@ -202,7 +202,7 @@ As an example, in a roving navigation pattern, while children technically get fo
 <br>
 
 #### Elements in the DOM need to be focusable on instantiation
-When a component using this module is instantiated, it checks interactivity for the reference/child components. If neither are focusable when this module is invoked, the module will not validate.
+When a component using this module is instantiated, it checks interactivity for the component/child components. If neither are focusable when this module is invoked, the module will not validate.
 
 
 <br>

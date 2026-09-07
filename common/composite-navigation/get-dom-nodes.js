@@ -8,7 +8,7 @@
  * @returns {Object} The nodes needed for operation.
  */
 
-function getReferenceNodes(params) {
+function getDomNodes(params) {
 	const id = params.id;
 	const keys = Object.keys(params.nodes);
 	const nodes = {};
@@ -61,4 +61,4 @@ function getReferenceNodes(params) {
 	return nodes;
 }
 
-export default getReferenceNodes;
+export default getDomNodes;

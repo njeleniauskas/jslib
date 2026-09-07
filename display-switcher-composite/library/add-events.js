@@ -25,7 +25,6 @@ function addEvents(module) {
 		module.state.isKeyEvent = false;
 	});
 
-
 	module.data.nodes.contexts.forEach((context) => {
 		context.addEventListener(
 			'focusin',

@@ -1,7 +1,7 @@
 /**
  * Get the index of a target element based on whether selection is possible.
- * @param {Object} params - An object containing all parameters.
- * @param {boolean} params.selection
+ * @param {Object} params
+ * @param {boolean} params.selection - NOT USED
  * @param {array} params.array - The array to look for the node with the correct index.
  * @param {string} [params.selectedAttribute] - The target attribute being looked for.
  * @returns {number}

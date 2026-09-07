@@ -10,20 +10,24 @@ function updateFocusState(targetIndex, module) {
 	const targetChild = module.state.navigation.children[targetIndex];
 	const targetChildValue = targetChild.getAttribute(module.props.attributes.childFocus);
 
-	const referenceState = getFocusValuesByAttribute(module.props.attributes.referenceFocus);
+	const componentState = getFocusValuesByAttribute(module.props.attributes.componentFocus);
 	const childState = getFocusValuesByAttribute(module.props.attributes.childFocus);
-	const referenceAttribute = module.props.attributes.referenceFocus;
+	const componentAttribute = module.props.attributes.componentFocus;
 	const childAttribute = module.props.attributes.childFocus;
 
 
 	//this will never return true on activedescendant…
-	const isReferenceFocused = isFocusAttributePresentAndTrue({
-		'attribute': referenceAttribute,
-		'node': module.data.nodes.reference
+	const isComponentFocused = isFocusAttributePresentAndTrue({
+		'attribute': componentAttribute,
+		'node': module.data.nodes.component
 	});
 
-	if (isReferenceFocused === false) {
-		module.data.nodes.reference.setAttribute(referenceAttribute, referenceState.focus);
+	if (isComponentFocused === false) {
+		module.data.nodes.component.setAttribute(componentAttribute, componentState.focus);
+
+		if (module.data.nodes.component !== module.state.navigation.context) {
+			module.state.navigation.context.setAttribute('data-focused', 'true');
+		}
 	}
 
 	if (targetChildValue !== childState.focus) {
@@ -46,7 +50,7 @@ function updateFocusState(targetIndex, module) {
 		const id = 'id';
 		const childID = targetChild.getAttribute(id);
 
-		module.data.nodes.reference.setAttribute(module.props.attributes.activeDescendant, childID);
+		module.data.nodes.component.setAttribute(module.props.attributes.activeDescendant, childID);
 	}
 }
 

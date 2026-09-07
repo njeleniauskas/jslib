@@ -31,7 +31,7 @@ Assuming all of the dependencies are in the right place, setting up this compone
 <br>
 
 ### Configuration
-Setting up the script module and configuration is fairly easy, and depends on the type of navigation the author wishes to implement. Both roving and reference navigation patterns are available, however, the most common setup authors will use is a roving navigation pattern:
+Setting up the script module and configuration is fairly easy, and depends on the type of navigation the author wishes to implement. Both roving and component navigation patterns are available, however, the most common setup authors will use is a roving navigation pattern:
 
 <br>
 
@@ -145,7 +145,7 @@ Second, both controls and views need a data- attribute to store a common value t
 
 <br>
 
-Lastly, if reference navigation is being used, each control will need an ID to communicate the right activedescendant value to the reference node.
+Lastly, if component navigation is being used, each control will need an ID to communicate the right activedescendant value to the component node.
 
 <br>
 
@@ -163,7 +163,7 @@ When using this module, three "data" objects are used for internal functionality
 /**
  * @param {string} props.id - The id that defines the context of data- attributes.
  * @param {string} props.attributes.context - The data- attribute for the context nodes.
- * @param {string} props.attributes.reference - The data- attribute for the reference node.
+ * @param {string} props.attributes.component - The data- attribute for the component node.
  * @param {string} props.attributes.parent - The data- attribute for the parent node.
  * @param {string} props.attributes.child - The data- attribute for child nodes.
  *
@@ -174,8 +174,8 @@ When using this module, three "data" objects are used for internal functionality
  * @param {string} props.attributes.contextState - Identifies which context should be used for navigation.
  * @param {string} props.attributes.orientation - Optional property to assign aria- string.
  * @param {string} props.attributes.activeDescendant -  Optional property to assign aria- string.
- * @param {string} props.attributes.referenceFocus - String based on roving or reference navigation needs.
- * @param {string} props.attributes.childFocus - String based on roving or reference navigation needs.
+ * @param {string} props.attributes.componentFocus - String based on roving or component navigation needs.
+ * @param {string} props.attributes.childFocus - String based on roving or component navigation needs.
  * @param {string} props.attributes.selected - Used to allow function to know last component selection.
  * @param {string} props.attributes.display - The attribute used to control the visibility of views in the DOM.
  */
@@ -183,13 +183,13 @@ When using this module, three "data" objects are used for internal functionality
 
 <br>
 
-The `data` object stores the static node references for the module:
+The `data` object stores the static node components for the module:
 
 ```javascript
 /**
  * @param {Object} nodes - An object containing static nodes.
  * @param {array} nodes.contexts - An array of all of the navigation contexts that exist.
- * @param {Object} nodes.reference - The node that stores reference data, or receives focus.
+ * @param {Object} nodes.component - The node that stores component data, or receives focus.
  * @param {array} nodes.views - An array of all of the views that exist.
  * /
 ```

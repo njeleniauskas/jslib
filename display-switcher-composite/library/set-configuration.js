@@ -10,14 +10,14 @@ function setConfiguration(params, props) {
 	//nav config
 	props.id = navConfig.id;
 	props.attributes.context = navConfig.attributes.context;
-	props.attributes.reference = navConfig.attributes.reference;
+	props.attributes.component = navConfig.attributes.component;
 	props.attributes.parent = navConfig.attributes.parent;
 	props.attributes.child = navConfig.attributes.child;
 
 	props.attributes.contextState = navConfig.attributes.contextState;
 	props.attributes.orientation = navConfig.attributes.orientation;
 	props.attributes.activeDescendant = navConfig.attributes.activeDescendant;
-	props.attributes.referenceFocus = navConfig.attributes.referenceFocus;
+	props.attributes.componentFocus = navConfig.attributes.componentFocus;
 	props.attributes.childFocus = navConfig.attributes.childFocus;
 	props.attributes.selected = navConfig.attributes.selected;
 

@@ -3,23 +3,27 @@ import getFocusValuesByAttribute from '../../common/composite-navigation/get-foc
 
 function resetFocusState(module) {
 	const targetElementIndex = getTargetElementIndexByFocus({
-		'array': module.state.navigation.children,
 		'selection': module.props.selection,
+		'array': module.state.navigation.children,
 		'childAttribute': module.props.attributes.child,
 		'selectedAttribute': module.props.attributes.selected
 	});
 	const targetElement = module.state.navigation.children[targetElementIndex];
-	const referenceStates = getFocusValuesByAttribute(module.props.attributes.referenceFocus);
+	const componentStates = getFocusValuesByAttribute(module.props.attributes.componentFocus);
 	const childStates = getFocusValuesByAttribute(module.props.attributes.childFocus);
 
-	let referenceHasAttribute = module.data.nodes.reference.hasAttribute(module.props.attributes.referenceFocus);
-	let referenceAttributeValue;
+	let componentHasAttribute = module.data.nodes.component.hasAttribute(module.props.attributes.componentFocus);
+	let componentAttributeValue;
 
-	if (referenceHasAttribute) {
-		referenceAttributeValue = module.data.nodes.reference.getAttribute(module.props.attributes.referenceFocus);
+	if (componentHasAttribute) {
+		componentAttributeValue = module.data.nodes.component.getAttribute(module.props.attributes.componentFocus);
 
-		if (isNaN(referenceAttributeValue)) {
-			module.data.nodes.reference.setAttribute(module.props.attributes.referenceFocus, referenceStates.blur);
+		if (isNaN(componentAttributeValue)) {
+			module.data.nodes.component.setAttribute(module.props.attributes.componentFocus, componentStates.blur);
+
+			if (module.data.nodes.component !== module.state.navigation.context) {
+				module.state.navigation.context.setAttribute('data-focused', 'false');
+			}
 		}
 	}
 
@@ -38,7 +42,7 @@ function resetFocusState(module) {
 	if (module.props.attributes.activeDescendant !== null) {
 		const id = 'id';
 		const controlID = targetElement.getAttribute(id);
-		module.data.nodes.reference.setAttribute(module.props.attributes.activeDescendant, controlID);
+		module.data.nodes.component.setAttribute(module.props.attributes.activeDescendant, controlID);
 	}
 }
 

@@ -1,10 +1,10 @@
 /**
  * Check whether the elements being used for this component are valid.
- * @param {Object} params - An object containing the reference nodes.
+ * @param {Object} params - An object containing the component nodes.
  * @param {array} params.contexts - The context nodes from the DOM.
  */
 
-function validateReferenceNodes(params) {
+function validateDomNodes(params) {
 	const validElements = new Set(['DIV', 'TABLE']);
 	const errors = [];
 
@@ -20,4 +20,4 @@ function validateReferenceNodes(params) {
 	}
 }
 
-export default validateReferenceNodes;
+export default validateDomNodes;
