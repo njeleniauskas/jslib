@@ -11,7 +11,7 @@ function isAttributeValueBoolean(string) {
 		'number': ['0', '-1'],
 		'boolean': ['true', 'false'],
 	};
-	
+
 	if (itemInArray(values.number, string)) {
 		return false;
 	}

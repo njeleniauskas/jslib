@@ -2,14 +2,14 @@ import emptyObject from '../../../common/utilities/empty-object.js';
 import updateFilterGroup from './update-filter-group.js';
 
 /**
- * 
+ *
  * @param {object} module - The filter module.
  * @param {object} filterGroup - The filter group passed from a FilterGroup component.
  */
 
 function handleFilterGroupUpdate(module, filterGroup) {
 	updateFilterGroup(module.state.filters, filterGroup);
-	
+
 	if (emptyObject(module.state.filters)) {
 		module.state.filtered = false;
 	} else {

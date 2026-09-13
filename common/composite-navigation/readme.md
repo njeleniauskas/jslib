@@ -47,7 +47,6 @@ attributes : {
 	activeDescendant: 'data-activedescendant',
 	componentFocus: 'data-focused',
 	childFocus: 'tabindex',
-	selected: 'data-selected',
 }
 ```
 
@@ -110,11 +109,6 @@ Orientation is used internally to set up keyboard functionality, and if authors 
 
 <br>
 
-#### Selected
-Different components need different "selection" attributes to function properly. For example, a composite-navigation component could be a radiogroup, in which case `aria-checked` needs to be passed to this attribute. Similarly, a `tablist` needs the `aria-selected` attribute to function properly.
-
-<br>
-
 ### HTML, and Attribute Relationships
 As previously noted, the element representing the navigation context must be a `<div>` or `<table>` — the latter being used to represent interactive grids or tables.
 
@@ -141,8 +135,7 @@ First, descriptive arguments are tied to specific nodes internally. This is refl
 <child
 	id="{child-id}"
 	data-{child}="{id}"
-	{child-focus}
-	{selected}>
+	{child-focus}>
 ```
 
 <br>

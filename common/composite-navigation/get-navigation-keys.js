@@ -2,7 +2,7 @@ import itemInArray from '../utilities/item-in-array.js';
 
 /**
  * Organize the correct keys for a composite element's navigation.
- * @param {Object} params - An object containing all parameters.
+ * @param {Object} params
  * @param {string} params.orientation - The component's orientation.
  * @param {Object} params.languageSettings - The document's language settings.
  * @returns {Object} Organized into primary axis and axis-shifting keys.
@@ -29,13 +29,16 @@ function getNavigationKeys(params) {
 	//fallback default
 	let mainAxisKeys = keys.horizontal;
 	let crossAxisKeys = keys.vertical;
-	let keyPrev; 
+	let keyPrev;
 	let keyNext;
-	let keyShiftPrev;
-	let keyShiftNext;
+	let keyCrossAxisPrev;
+	let keyCrossAxisNext;
 	let lang = language.direction;
 	let mode = language.writingMode;
-	let result = {};
+	let result = {
+		main: {},
+		cross: {}
+	};
 
 	//set horizontal or vertical keys
 	if (orientation === 'horizontal' && mode === 'horizontal-tb' ||
@@ -53,11 +56,11 @@ function getNavigationKeys(params) {
 		mainAxisKeys = keys.vertical;
 		crossAxisKeys = keys.horizontal;
 	}
-	
+
 	keyPrev = mainAxisKeys.one;
 	keyNext = mainAxisKeys.two;
-	keyShiftPrev = crossAxisKeys.one;
-	keyShiftNext = crossAxisKeys.two;
+	keyCrossAxisPrev = crossAxisKeys.one;
+	keyCrossAxisNext = crossAxisKeys.two;
 
 	//main axis reversal
 	if (orientation === 'horizontal' && lang === 'ltr' && mode === 'sideways-lr' ||
@@ -72,7 +75,7 @@ function getNavigationKeys(params) {
 		keyPrev = mainAxisKeys.two;
 		keyNext = mainAxisKeys.one;
 	}
-	
+
 	//cross-axis reveral
 	if (orientation === 'horizontal' && lang === 'ltr' && mode === 'vertical-rl' ||
 	orientation === 'horizontal' && lang === 'ltr' && mode === 'sideways-rl' ||
@@ -83,14 +86,14 @@ function getNavigationKeys(params) {
 	orientation === 'vertical' && lang === 'rtl' && mode === 'vertical-lr' ||
 	orientation === 'vertical' && lang === 'rtl' && mode === 'vertical-rl' ||
 	orientation === 'vertical' && lang === 'rtl' && mode === 'sideways-rl') {
-		keyShiftPrev = crossAxisKeys.two;
-		keyShiftNext = crossAxisKeys.one;
+		keyCrossAxisPrev = crossAxisKeys.two;
+		keyCrossAxisNext = crossAxisKeys.one;
 	}
 
-	result.prev = [keyPrev].concat(['Home']);
-	result.next = [keyNext].concat(['End']);
-	result.shiftPrev = [keyShiftPrev].concat(['PageUp']);
-	result.shiftNext = [keyShiftNext].concat(['PageDown']);
+	result.main.prev = [keyPrev].concat(['Home']);
+	result.main.next = [keyNext].concat(['End']);
+	result.cross.prev = [keyCrossAxisPrev].concat(['PageUp']);
+	result.cross.next = [keyCrossAxisNext].concat(['PageDown']);
 
 	return result;
 }

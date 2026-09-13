@@ -1,7 +1,7 @@
 /**
- * 
- * @param {object} module 
- * @param {object} DataCollection 
+ *
+ * @param {object} module
+ * @param {object} DataCollection
  */
 
 function connectDataCollection(module, DataCollection) {

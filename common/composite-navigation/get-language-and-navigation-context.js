@@ -3,23 +3,23 @@ import getDocumentLanguageSettings from '../utilities/get-document-language-sett
 
 /**
  * Get the core state of the navigator.
- * @param {Object} params - An object containing all parameters.
+ * @param {Object} params
  * @param {Object} params.node - The node to evaluate it's orientation.
- * @param {string} params.orientationAttribute - The attribute storing the orientation of the component.
+ * @param {string} params.orientation - The attribute storing the orientation of the component.
  * @returns {Object} The core, context-based data needed for the navigator.
  */
 
 function getLanguageAndNavigationContext(params) {
 	const node = params.node;
-	const orientationAttribute = params.orientationAttribute;
+	const orientation = params.orientation;
 	const state = {};
 
-	if (!node.hasAttribute(orientationAttribute)) {
-		throw new Error('Orientation attribute missing.');
+	if (!node.hasAttribute(orientation)) {
+		throw new Error('Orientation attribute missing. Cannot get navigation context.');
 	}
 
 	state.language = getDocumentLanguageSettings();
-	state.orientation = node.getAttribute(orientationAttribute);
+	state.orientation = node.getAttribute(orientation);
 	state.navigationKeys = getNavigationKeys({
 		'orientation': state.orientation,
 		'languageSettings': state.language

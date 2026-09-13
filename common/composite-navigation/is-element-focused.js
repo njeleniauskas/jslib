@@ -2,28 +2,20 @@ import isFocusAttributePresentAndTrue from './is-focus-attribute-present-and-tru
 
 /**
  * Check to see if the component is currently focused.
- * @param {Object} params - An object containing all parameters.
- * @param {Object} params.node - The node being considered.
- * @param {string} params.focusAttribute - The attribute that needs to be evaluated.
+ * @param {node} element - The element being tested.
+ * @param {string} attribute - The attribute to test against (when native focus isn't available).
  * @returns {boolean}
  */
 
-function isElementFocused(params) {
-	const node = params.node;
-	const focusAttribute = params.focusAttribute;
-
-	let isFocused = false;
-
-	if (focusAttribute === 'tabindex') {
-		isFocused = (document.activeElement === node);
-	} else {
-		isFocused = isFocusAttributePresentAndTrue({
-			'attribute': focusAttribute,
-			'node': node
-		});
+function isElementFocused(element, attribute) {
+	if (element === document.activeElement) {
+		return true;
 	}
-	
-	return isFocused;
+
+	return isFocusAttributePresentAndTrue({
+		'node': element,
+		'attribute': attribute,
+	});
 }
 
 export default isElementFocused;
