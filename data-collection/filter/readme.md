@@ -40,7 +40,7 @@ In order to have an effect on the collection, this class relies on `FilterGroup`
 <br>
 
 ### Getting a FilterGroup State
-On first setup, the filter module needs to collect the current state of the filters in the DOM. This is done by two class methods: `getGroupedFilterKeys()` and `getFilterGroups()`. These two methods need to be called after the dataset has been fetched and is ready as they will trigger a `emitter.emit('process-collection')` event. To prevent errors, these methods should be called within the returned promise of the `DataColletion.getCollection()` method:
+On first setup, the filter module needs to collect the current state of the filters in the DOM. This is done by two class methods: `getGroupedFilterKeys()` and `getFilterGroups()`. These two methods need to be called after the dataset has been fetched and is ready as they will trigger a `emitter.emit('{id}:process-collection')` event. To prevent errors, these methods should be called within the returned promise of the `DataColletion.getCollection()` method:
 
 <br>
 

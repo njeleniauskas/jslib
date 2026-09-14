@@ -14,7 +14,6 @@ function validatePersistentNodes(params) {
 		}
 	});
 
-
 	if (errors.length > 0) {
 		throw new AggregateError(errors, 'Invalid DOM Elements:');
 	}

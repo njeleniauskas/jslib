@@ -28,7 +28,7 @@ class DataCollectionFilter {
 
 		this.init(params);
 	}
-	
+
 	init(params) {
 		try {
 			validateConfig(params);
@@ -37,7 +37,7 @@ class DataCollectionFilter {
 		} catch (errors) {
 			if (errors instanceof AggregateError) {
 				console.error(errors.message)
-				
+
 				for (const error of errors.errors) {
 					console.error(error.message);
 				}
@@ -46,7 +46,7 @@ class DataCollectionFilter {
 			}
 		}
 	}
-	
+
 	setConfiguration(params) {
 		const {emitter, id, ...args} = params;
 		this.props = {...this.props, ...args};
@@ -54,7 +54,7 @@ class DataCollectionFilter {
 		this.id = params.id;
 	}
 
-	
+
 	//public methods
 	getFilterGroups() {
 		this.emitter.emit('get-filter-groups', true);

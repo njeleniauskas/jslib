@@ -14,7 +14,7 @@ function handleKeyupEvent(event, module) {
 	const targetChild = module.state.nodes.focusedChild;
 
 	if (module.emitter !== null) {
-		module.emitter.emit(`${module.id}OnKeyup`, {
+		module.emitter.emit(`${module.name}/${module.id}:focus-target-clicked`, {
 			children,
 			targetChild
 		});

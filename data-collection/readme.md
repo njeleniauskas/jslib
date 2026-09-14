@@ -14,7 +14,7 @@ A DataCollection is a array of items whose display can be manipulated by a user 
 
 
 ## Basic Setup
-While a the feature can be set up in a few different ways, the basic requirements of a data collection are: 
+While a the feature can be set up in a few different ways, the basic requirements of a data collection are:
 
 - Including the `DataCollection` class.
 - Including the `DataCollectionPresenter` class.
@@ -63,7 +63,7 @@ const presenterArgs = {
 		'list': template,
 	},
 	emitter: emitter
-};	
+};
 
 const presenterModule = new DataCollectionPresenter(presenterArgs);
 
@@ -78,7 +78,7 @@ collection.getCollection()
 
 <br>
 
-With the overall setup, there are three important notes to be made. First, each collection needs to share a unique ID so that processing can be bundled around that collection. Second, the `EventEmitter` must be instantiated before everything else. And finally, authors only need to explicitly run the `emitter.emit('process-collection')` event if the collection is not first rendered server-side.
+With the overall setup, there are three important notes to be made. First, each collection needs to share a unique ID so that processing can be bundled around that collection. Second, the `EventEmitter` must be instantiated before everything else. And finally, authors only need to explicitly run the `emitter.emit('{id}:process-collection')` event if the collection is not first rendered server-side.
 
 See each module for additional details on how each can be configured.
 

@@ -3,6 +3,7 @@ import updateViewState from './update-view-state.js';
 
 function handleUpdateFocusState(module, params) {
 	const { targetChild } = params;
+	console.log('post update')
 	const isSelected = targetChild.getAttribute(module.props.attributes.selected) === 'true';
 
 	if (!isSelected) {

@@ -8,6 +8,13 @@ import updateFocusState from './update-focus-state.js';
  */
 
 function handleKeydownEvent(event, module) {
+	if (module.emitter !== null) {
+		module.emitter.emit(`${module.name}/${module.id}:keydown`, {
+			event,
+			module
+		});
+	}
+
 	const mainAxisKeys = module.state.navigationKeys.main.prev.concat(module.state.navigationKeys.main.next);
 
 	// extend to cross-axis movement (eventually)
@@ -27,9 +34,8 @@ function handleKeydownEvent(event, module) {
 			module.state.nodes.focusedChild = module.state.nodes.children[targetIndex];
 
 			if (module.emitter !== null) {
-				module.emitter.emit(`${module.id}OnKeydown`, {
-					targetChild: module.state.nodes.focusedChild,
-					previousTargetChild: module.state.nodes.lastFocusedChild,
+				module.emitter.emit(`${module.name}/${module.id}:focus-state-updated`, {
+					targetChild: module.state.nodes.focusedChild
 				});
 			}
 		}

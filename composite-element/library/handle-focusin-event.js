@@ -1,15 +1,11 @@
-import processNavigationContext from './process-navigation-context.js';
 import resolveTargetIndex from './resolve-target-index.js';
 import updateFocusState from './update-focus-state.js';
 
 function handleFocusinEvent(module) {
 	if (module.state.isInitial) {
-		processNavigationContext(module, 'initial',
-			{
-				contexts: module.nodes.contexts,
-				contextState: module.props.attributes.contextState
-			}
-		);
+		module.processNavigationContext('initial');
+
+		console.log(module.state.nodes)
 
 		const targetIndex = resolveTargetIndex(module);
 		const targetChild = module.state.nodes.children[targetIndex];
@@ -21,9 +17,8 @@ function handleFocusinEvent(module) {
 		module.state.isInitial = false;
 
 		if (module.emitter !== null) {
-			module.emitter.emit(`${module.id}OnFocusin`, {
-				targetChild,
-				targetIndex
+			module.emitter.emit(`${module.name}/${module.id}:focus-state-updated`, {
+				targetChild
 			});
 		}
 

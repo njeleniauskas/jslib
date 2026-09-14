@@ -8,6 +8,13 @@ import updateFocusState from './update-focus-state.js';
  */
 
 function handlePointerdownEvent(event, module) {
+	if (module.emitter !== null) {
+		module.emitter.emit(`${module.name}/${module.id}:pointerdown`, {
+			event,
+			module
+		});
+	}
+
 	const queryString = `[${module.props.attributes.child}="${module.id}"]`;
 	const clickedChild = event.target.closest(queryString);
 
@@ -41,7 +48,7 @@ function handlePointerdownEvent(event, module) {
 		module.state.nodes.focusedChild = clickedChild;
 
 		if (module.emitter !== null) {
-			module.emitter.emit(`${module.id}OnPointerdown`, {
+			module.emitter.emit(`${module.name}/${module.id}:focus-state-updated`, {
 				targetChild: clickedChild
 			});
 		}

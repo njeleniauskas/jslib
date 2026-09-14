@@ -1,5 +1,6 @@
 function setConfiguration(module, config) {
 	module.id = config.id;
+	module.name = config.name;
 	module.props.attributes.context = config.attributes.context;
 	module.props.attributes.component = config.attributes.component;
 	module.props.attributes.parent = config.attributes.parent;

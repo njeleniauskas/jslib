@@ -13,7 +13,7 @@ function handleFocusoutEvent(event, module) {
 		resetModule(module);
 
 		if (module.emitter !== null) {
-			module.emitter.emit(`${module.id}OnFocusout`, {
+			module.emitter.emit(`${module.name}/${module.id}:reset`, {
 				context: module.state.nodes.context
 			});
 		}

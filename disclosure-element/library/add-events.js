@@ -6,7 +6,7 @@ function addEvents(module) {
 		module.nodes.target.setAttribute(module.props.attributes.visibility, String(pressed));
 
 		if (module.emitter) {
-			module.emitter.emit('onClick', !pressed);
+			module.emitter.emit('disclosure-element:click', !pressed);
 		}
 	});
 }

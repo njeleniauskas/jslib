@@ -11,7 +11,7 @@ function addEmitterEvents(module) {
 	module.emitter.add('connect-data-collection', (args) => connectDataCollection(module, args));
 	module.emitter.add('update-collection-name', (args) => updateCollectionName(module, args));
 	module.emitter.add('update-presenter-state', (args) => updateState(module, args));
-	module.emitter.add(`process-collection-${module.id}`, () => renderCollection(module), 3);
+	module.emitter.add(`${module.id}:process-collection`, () => renderCollection(module), 3);
 }
 
 export default addEmitterEvents;

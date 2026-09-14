@@ -18,7 +18,7 @@ function handleFilterGroupUpdate(module, filterGroup) {
 
 	if (module.state.ready) {
 		if (module.state.filtered || !module.state.filtered && (module.data.ref.length !== module.data.live.length)) {
-			module.emitter.emit(`process-collection-${module.id}`);
+			module.emitter.emit(`${module.id}:process-collection`);
 		}
 	}
 }

@@ -1,9 +1,9 @@
 import filterCollection from './filter-collection.js';
 
 /**
- * 
- * @param {object} filter 
- * @param {object} params 
+ *
+ * @param {object} filter
+ * @param {object} params
  */
 
 function processFilter(module) {

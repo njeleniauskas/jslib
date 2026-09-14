@@ -25,6 +25,8 @@ function getNavigationConfig(params) {
 
 	props.id = 'id' in params ?
 		params.id : undefined;
+	props.name = 'name' in params ?
+		params.name : 'composite-element';
 	props.attributes.orientation = 'orientation' in attributes ?
 		attributes.orientation : 'data-orientation';
 

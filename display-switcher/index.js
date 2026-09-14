@@ -16,6 +16,8 @@ class DisplaySwitcher extends CompositeElement {
 	}
 
 	extendCompositeElement(params) {
+		this.name = 'name' in params ? params.name : 'display-switcher';
+
 		this.props.attributes = {
 			...this.props.attributes,
 			...normalizeConfig(params)

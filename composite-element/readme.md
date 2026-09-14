@@ -123,31 +123,28 @@ const args = {
 
 <br>
 
-Second, an event emitter can be passed to this class (via `args.emitter`) so that authors can use internal emitter events to react to changes in state. They are as follows, and their names both follow the event listeners that they are tied to, and are prefixed by the `id` of the class:
+Second, an event emitter can be passed to this class (via `args.emitter`) so that authors can use internal emitter events to react to events and changes in state. Each event follows the template `{name}/{id}:{event}`, and are generic hooks into the event listener, or express a specific thing that has happened:
 
-- `OnGlobalPointerdown`: fires after the component resets to its initial state (pointer event only).
-- `OnPointerdown`: fires after the component's focus state is updated.
-- `OnKeydown`: fires after the component's focus state is updated.
-- `OnFocusin`: fires when the component first receives focus.
-- `OnFocusout`: fires after the component resets to its initial state (key event only).
-- `OnClick`: fires at the end of the click event.
-- `OnKeyup`: fires after any selection key (Space or Enter) is released.
+- `pointerdown`: fires on the pointerdown event.
+- `keydown`: fires on the keydown event.
+- `focus-state-updated`: fires immediately after the focus state has changed (during a pointerdown or keydown event).
+- `focus-target-clicked`: fires on a click or keyup event when a valid focus target exists.
+- `reset`: fires after the component resets to its initial state.
 
 <br>
 
-Note that the actual name of these functions are prefixed by the `id` of the component. So an id of `ce1` with the `OnClick` name will create the `ce1OnClick` function name. This prefixing allows a shared emitter to reserve events tied to this component specifically.
+The default name for this class is `composite-element`, but that can be overridden to anything. But this means that the specific emitter event for `focus-state-updated` could be `tablist/global:focus-state-updated`. This template allows a shared emitter to reserve events tied to this component specifically.
 
 <br>
 
 In addition, each emitter event provides a params object with different data for use:
 
-- `OnGlobalPointerdown`: provides the `context` that was last in focus.
-- `OnPointerdown`: provides `targetChild` that is receiving focus.
-- `OnKeydown`: provides the `targetChild` as well as the `previousTargetChild`.
-- `OnFocusin`: provides the `targetChild` and its corresponding `targetIndex`.
-- `OnFocusout`: provides the `context` that was last in focus (the one being left).
-- `OnClick`: provides the `children` of the current context and the `targetChild`.
-- `OnKeyup`: provides the `children` of the current context and the `targetChild`.
+- `pointerdown`: the `event` object and class `module`.
+- `keydown`: the `event` object and class `module`.
+- `focus-state-updated`: the `targetChild` that has focus just received focus.
+- `focus-target-clicked`: the `children` of the current context and the `targetChild` that has focus.
+- `reset`: provides the `context` that was last in focus.
+
 
 <br>
 

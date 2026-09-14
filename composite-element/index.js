@@ -6,9 +6,10 @@ import getNavigationConfig from '../common/composite-navigation/get-navigation-c
 import validateNavigationConfig from '../common/composite-navigation/validate-navigation.config.js';
 import validatePersistentNodes from '../common/composite-navigation/validate-persistent-nodes.js';
 import getPersistentNodes from '../common/composite-navigation/get-persistent-nodes.js';
+import getNavigationContext from '../common/composite-navigation/get-navigation-context.js';
 import setPersistentNodes from './library/set-persistent-nodes.js';
 import setConfiguration from './library/set-configuration.js';
-import processNavigationContext from './library/process-navigation-context.js';
+import setNavigationContext from './library/set-navigation-context.js';
 import addEvents from './library/add-events.js';
 import setCustomFunctions from './library/set-custom-functions.js';
 
@@ -19,6 +20,7 @@ import setCustomFunctions from './library/set-custom-functions.js';
 class CompositeElement {
 	constructor(params) {
 		this.id = null;
+		this.name = null;
 		this.props = createProps();
 		this.nodes = createNodes();
 		this.state = createState();
@@ -47,7 +49,7 @@ class CompositeElement {
 	setup(params) {
 		this.processConfig(params);
 		this.processNodes();
-		this.processContext();
+		this.processNavigationContext('initial');
 		addEvents(this);
 	}
 
@@ -80,13 +82,17 @@ class CompositeElement {
 		setPersistentNodes(this, nodes);
 	}
 
-	processContext() {
-		processNavigationContext(this, 'initial',
-			{
+	processNavigationContext(type, params) {
+		if (type === 'initial') {
+			params = {
 				contexts: this.nodes.contexts,
 				contextState: this.props.attributes.contextState
-			}
-		);
+			};
+		}
+
+		const context = getNavigationContext(this, type, params);
+
+		setNavigationContext(this, context);
 	}
 }
 

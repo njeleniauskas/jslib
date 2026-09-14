@@ -15,7 +15,7 @@ function handleGlobalPointerdownEvent(event, module) {
 		resetModule(module);
 
 		if (module.emitter !== null) {
-			module.emitter.emit(`${module.id}OnGlobalPointerdown`, {
+			module.emitter.emit(`${module.name}/${module.id}:reset`, {
 				context: module.state.nodes.context
 			});
 		}

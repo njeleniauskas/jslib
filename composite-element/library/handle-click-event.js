@@ -8,11 +8,15 @@ function handleClickEvent(event, module) {
 		return;
 	}
 
+	if (module.state.nodes.pointerEventChild !== event.target) {
+		return;
+	}
+
 	const children = module.state.nodes.children;
 	const targetChild = module.state.nodes.pointerEventChild;
 
 	if (module.emitter !== null) {
-		module.emitter.emit(`${module.id}OnClick`, {
+		module.emitter.emit(`${module.name}/${module.id}:focus-target-clicked`, {
 			children,
 			targetChild
 		});
