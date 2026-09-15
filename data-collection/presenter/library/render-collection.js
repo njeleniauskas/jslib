@@ -48,7 +48,9 @@ function renderCollection(presenter, params) {
 		presenter.nodes.liveRegion.innerHTML = message;
 	}
 
-	presenter.emitter.emit('render-collection-end');
+	presenter.emitter.emit('render-collection-end', {
+		displaySize: presenter.state.displaySize
+	});
 }
 
 export default renderCollection;
