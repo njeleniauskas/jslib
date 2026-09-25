@@ -41,18 +41,18 @@ class DataCollectionPresenter {
 			displaySize: null,
 		};
 
-		this.init(params);
+		this.#init(params);
 	}
-	
-	init(params) {
+
+	#init(params) {
 		try {
 			validateConfig(params);
-			this.setConfiguration(params);
-			this.initializePresenter();
+			this.#setConfiguration(params);
+			this.#initializePresenter();
 		} catch (errors) {
 			if (errors instanceof AggregateError) {
 				console.error(errors.message)
-				
+
 				for (const error of errors.errors) {
 					console.error(error.message);
 				}
@@ -62,7 +62,7 @@ class DataCollectionPresenter {
 		}
 	}
 
-	setConfiguration(params) {
+	#setConfiguration(params) {
 		const {emitter, id, ...args} = params;
 		this.props = {...this.props, ...args};
 		this.emitter = params.emitter;
@@ -73,10 +73,10 @@ class DataCollectionPresenter {
 		}
 	}
 
-	initializePresenter() {
+	#initializePresenter() {
 		const templateKeys = Object.keys(this.props.templates);
 		const props = {...this.props, id: this.id};
-		
+
 		this.nodes = getPresenterNodes(props);
 		addEmitterEvents(this);
 		updateState(this, {'display': templateKeys[0]});

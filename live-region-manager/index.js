@@ -10,28 +10,28 @@ class LiveRegionManager {
 		this.node = null;
 		this.queue = new Set();
 		this.delay = 2;
-		this.deliverMessages = debounce(this.updateLiveRegion.bind(this), this.delay);
+		this.deliverMessages = debounce(this.#updateLiveRegion.bind(this), this.delay);
 
-		this.init(params);
+		this.#init(params);
 	}
 
-	init(params) {
+	#init(params) {
 		this.node = document.querySelector(params.node);
-		
+
 		if ('delay' in params) {
 			this.delay = params.delay;
 		}
 	}
 
-	addMessage(message) {
-		this.queue.add(message);
-		this.deliverMessages();
-	}
-
-	updateLiveRegion() {
+	#updateLiveRegion() {
 		if (this.queue.size === 0) return;
 		this.node.textContent = Array.from(this.queue).join(' ');
 		this.queue.clear();
+	}
+
+	addMessage(message) {
+		this.queue.add(message);
+		this.deliverMessages();
 	}
 }
 

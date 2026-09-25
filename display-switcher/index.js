@@ -1,40 +1,43 @@
 import CompositeElement from '../composite-element/index.js';
-import EventEmitter from '../event-emitter/index.js';
 
-import normalizeConfig from './library/normalize-config.js';
-import getTargetIndex from './library/get-target-index.js';
-import addEmitterEvents from './library/add-emitter-events.js';
+import addProps from './library/add-props.js';
+import addNodes from './library/add-nodes.js';
+import addFunctions from './library/add-functions.js';
+import addEvents from './library/add-events.js';
 
 /**
- * @param {object} params
+ * Additional DisplaySwitcher params
+ * @param {Object} params
+ * @param {string} [params.attributes.viewNode] - The attribute used to identify view nodes.
+ * @param {string} [params.attributes.controlID] - The attribute used to link controls and views.
+ * @param {string} [params.attributes.viewID] - The attribute used to link view and controls.
+ * @param {string} [params.attributes.selected] - The attribute representing the selected state.
+ * @param {string} [params.attributes.display] - The attribute representing the display state for views.
  */
 
 class DisplaySwitcher extends CompositeElement {
 	constructor(params) {
-		super(params);
-		this.extendCompositeElement(params);
+		super({ ...params, attributePrefix: 'data-dsw' });
+		this.#extendCompositeElement(params);
 	}
 
-	extendCompositeElement(params) {
-		this.name = 'name' in params ? params.name : 'display-switcher';
+	#extendCompositeElement(params) {
+		try {
+			addProps(this, params);
+			addNodes(this);
+			addFunctions(this, params);
+			addEvents(this);
+		} catch (errors) {
+			if (errors instanceof AggregateError) {
+				console.error(errors.message)
 
-		this.props.attributes = {
-			...this.props.attributes,
-			...normalizeConfig(params)
+				for (const error of errors.errors) {
+					console.error(error.message);
+				}
+			} else {
+				console.error(errors);
+			}
 		}
-
-		if (this.emitter === null) {
-			this.emitter = new EventEmitter();
-		}
-
-		const queryString = `[${this.props.attributes.view}="${this.id}"]`;
-		this.nodes.views = Array.from(document.querySelectorAll(queryString));
-
-		if (!('targetIndex' in this.functions)) {
-			this.functions.targetIndex = getTargetIndex;
-		}
-
-		addEmitterEvents(this);
 	}
 }
 

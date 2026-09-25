@@ -69,14 +69,14 @@ class FilterGroup {
 			filter: {},
 		};
 
-		this.init(params);
+		this.#init(params);
 	}
 
-	init(params) {
+	#init(params) {
 		try {
 			validateFilterGroupConfig(params);
-			this.setConfiguration(params);
-			this.initializeComponent();
+			this.#setConfiguration(params);
+			this.#initializeComponent();
 		} catch (errors) {
 			if (errors instanceof AggregateError) {
 				console.error(errors.message)
@@ -90,7 +90,7 @@ class FilterGroup {
 		}
 	}
 
-	setConfiguration(params) {
+	#setConfiguration(params) {
 		const {emitter, ...props} = params;
 
 		this.props = {...this.props, ...props};
@@ -101,7 +101,7 @@ class FilterGroup {
 		}
 	}
 
-	initializeComponent() {
+	#initializeComponent() {
 		getNodes(this.nodes, this.props.attributes);
 		addInterfaceEvents(this);
 

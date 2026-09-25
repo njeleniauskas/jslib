@@ -39,13 +39,13 @@ class DataCollection {
 			live: null,
 		};
 
-		this.init(params);
+		this.#init(params);
 	}
 
-	init (params) {
+	#init (params) {
 		try {
 			validateConfig(params);
-			this.setConfiguration(params);
+			this.#setConfiguration(params);
 		} catch (errors) {
 			if (errors instanceof AggregateError) {
 				console.error(errors.message)
@@ -59,7 +59,7 @@ class DataCollection {
 		}
 	}
 
-	setConfiguration(params) {
+	#setConfiguration(params) {
 		const { data: { args, ...data }, ...props } = params;
 
 		this.props = {...this.props, ...data};

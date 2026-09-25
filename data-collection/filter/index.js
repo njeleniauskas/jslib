@@ -26,13 +26,13 @@ class DataCollectionFilter {
 			ready: false
 		};
 
-		this.init(params);
+		this.#init(params);
 	}
 
-	init(params) {
+	#init(params) {
 		try {
 			validateConfig(params);
-			this.setConfiguration(params);
+			this.#setConfiguration(params);
 			addEmitterEvents(this);
 		} catch (errors) {
 			if (errors instanceof AggregateError) {
@@ -47,7 +47,7 @@ class DataCollectionFilter {
 		}
 	}
 
-	setConfiguration(params) {
+	#setConfiguration(params) {
 		const {emitter, id, ...args} = params;
 		this.props = {...this.props, ...args};
 		this.emitter = params.emitter;

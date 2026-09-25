@@ -37,10 +37,10 @@ class OverlayButton {
 			blocked: false,
 		};
 
-		this.init(params);
+		this.#init(params);
 	}
 
-	init(params) {
+	#init(params) {
 		try {
 			validateConfig(params);
 			initializeConfiguration(this, params);

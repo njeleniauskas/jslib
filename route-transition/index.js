@@ -18,10 +18,10 @@ class RouteTransition {
 		this.nodes;
 		this.props = params;
 
-		this.init(params);
+		this.#init(params);
 	}
 
-	init(params) {
+	#init(params) {
 		document.addEventListener('readystatechange', (event) => {
 			const isLoading = (event.target.readyState === 'loading');
 			const query = '(prefers-reduced-motion: reduce)';
@@ -33,7 +33,7 @@ class RouteTransition {
 
 				this.links = links;
 				this.nodes = animationNodes;
-			
+
 				links.forEach((link) => {
 					link.addEventListener('click', (event) => {
 						delayLinkRouting(event, link, params.delay);

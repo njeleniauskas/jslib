@@ -31,10 +31,10 @@ class ThemeControl {
 		this.controls = null;
 		this.nodes = null;
 
-		this.init(params);
+		this.#init(params);
 	}
 
-	init(params) {
+	#init(params) {
 		try {
 			validateConfig(params);
 			setConfig(this, params);
