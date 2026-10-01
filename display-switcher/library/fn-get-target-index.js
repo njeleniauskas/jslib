@@ -3,7 +3,7 @@ function getTargetIndex({ children, pointerEventChild, attributes }) {
 		return children.indexOf(pointerEventChild);
 	}
 
-	return children.findIndex((element) => element.getAttribute(attributes.selection) === 'true');
+	return children.findIndex((element) => element.getAttribute(attributes.selected) === 'true');
 };
 
 export default getTargetIndex;
