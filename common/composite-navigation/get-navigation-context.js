@@ -22,19 +22,22 @@ import getLanguageAndNavigationContext from './get-language-and-navigation-conte
  */
 
 const resolvers = {
-	initial: ({ contexts, contextState }) => {
-		if (contexts.length === 1) {
-			return contexts[0];
+	initial: ({ contexts, initialContext }) => {
+		if (initialContext !== null) {
+			return initialContext;
 		} else {
-			return contexts.find((context) => context.getAttribute(contextState) === 'true');
+			return contexts[0];
 		}
 	},
-	pointer: ({ target, queryString }) => {
-		return target.closest(queryString);
+	attribute: ({ contexts, attribute, value }) => {
+		return contexts.find((context) => context.getAttribute(attribute) === value);
 	},
-	key: ({ context, contexts, step }) => {
-		// for context changing (adjacent or larger steps)
-	}
+	pointer: ({ node, queryString }) => {
+		return node.closest(queryString);
+	},
+	key: ({ args }) => {
+		// change by step size (what args needed)
+	},
 }
 
 function getNavigationContext(module, type, params) {
@@ -46,20 +49,17 @@ function getNavigationContext(module, type, params) {
 	const parentSelector = `[${module.props.attributes.parent}="${module.id}"]`;
 	const childSelector = `[${module.props.attributes.child}="${module.id}"]`;
 
-	let hasParent = context.querySelector(parentSelector);
-	let hasChildren = context.querySelector(childSelector);
-	let parentNode;
+	let hasChildren = context.querySelector(childSelector) !== null;
+	let parentNode = context.querySelector(parentSelector);
 	let children;
 
-	if (hasChildren === null) {
+	if (!hasChildren) {
 		parentNode = null;
 		children = null;
 	}
 
-	if (hasChildren !== null) {
-		if (hasParent !== null) {
-			parentNode = context.querySelector(parentSelector);
-		} else {
+	if (hasChildren) {
+		if (parentNode === null) {
 			parentNode = context;
 		}
 

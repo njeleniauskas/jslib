@@ -1,5 +1,5 @@
 import numberWithinRange from '../utilities/number-within-range.js';
-import itemInArray from '../utilities/item-in-array.js';
+import inArray from '../utilities/in-array.js';
 
 /**
  * Get the index of an element by the key pressed.
@@ -18,16 +18,25 @@ function getElementIndexByKey(params) {
 	const keysNext = params.navigationKeys.next;
 
 	const currentIndex = elements.indexOf(focusedElement);
-	const totalElements = elements.length - 1;
-	const range = [0, totalElements];
+	const lastIndex = elements.length - 1;
+	const range = [0, lastIndex];
+
+	//unconfirmed if still useful
+	if (focusedElement === null) {
+		if (inArray(keysNext, key)) {
+			return 0;
+		}
+
+		return lastIndex;
+	}
 
 	let direction = 'Home';
 	let furthestValue = 0;
 	let targetIndex = currentIndex;
 
-	if (itemInArray(keysNext, key)) {
+	if (inArray(keysNext, key)) {
 		direction = 'End';
-		furthestValue = totalElements;
+		furthestValue = lastIndex;
 	}
 
 	if (key === direction) {

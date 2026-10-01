@@ -1,4 +1,4 @@
-import itemInArray from '../utilities/item-in-array.js'
+import inArray from '../utilities/in-array.js'
 
 /**
  * Test whether an attribute string looks like a number or boolean.
@@ -12,11 +12,11 @@ function isAttributeValueBoolean(string) {
 		'boolean': ['true', 'false'],
 	};
 
-	if (itemInArray(values.number, string)) {
+	if (inArray(values.number, string)) {
 		return false;
 	}
 
-	if (itemInArray(values.boolean, string)) {
+	if (inArray(values.boolean, string)) {
 		return true;
 	}
 }

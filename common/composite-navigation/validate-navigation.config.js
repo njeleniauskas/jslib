@@ -5,10 +5,21 @@ function validateFocusApproach(props) {
 
 	const componentString = `[${props.attributes.component}="${props.id}"]`;
 	const componentNode = document.querySelector(componentString);
+	const componentIsFocusable = isFocusable(componentNode);
 	const childString = `[${props.attributes.child}="${props.id}"]`;
 	const childNode = document.querySelector(childString);
-	const componentIsFocusable = isFocusable(componentNode);
-	const childIsFocusable = isFocusable(childNode);
+
+	let childIsFocusable;
+
+	if (componentNode === null) {
+		errors.push(new Error('Could not find a valid component node.'));
+	}
+
+	if (childNode === null) {
+		childIsFocusable = (props.childFocus === 'tabindex');
+	} else {
+		childIsFocusable = isFocusable(childNode);
+	}
 
 	if (childIsFocusable && componentIsFocusable) {
 		errors.push(new Error('Both the component and control nodes are focusable.'));
@@ -37,7 +48,7 @@ function validateNavigationConfig(props) {
 	}
 
 	if (errors.length > 0) {
-		throw new AggregateError(errors, 'Invalid Configuration:');
+		throw new AggregateError(errors, 'Invalid Composite Element Configuration:');
 	}
 }
 

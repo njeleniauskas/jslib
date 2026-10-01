@@ -37,12 +37,12 @@ const args = {
 
 //other available attributes and their default values
 attributes : {
-	contextNode: 'data-cn',
-	componentNode: 'data-cn', //falls back to context
-	parentNode: 'data-cn', //falls back to context
-	childNode: 'data-cn-child',
+	contextNode: 'data-ce',
+	componentNode: 'data-ce', //falls back to context
+	parentNode: 'data-ce', //falls back to context
+	childNode: 'data-ce-child',
 
-	contextState: 'data-cn-current',
+	contextState: 'data-ce-current',
 	orientation: 'data-orientation',
 	activeDescendant: 'data-activedescendant',
 	componentFocus: 'data-focused',
@@ -202,5 +202,4 @@ When a component using this module is instantiated, it checks interactivity for 
 
 
 ## Future Exploration
-- Add cross-axis navigation support.
-- Add cross-axis enter/exit memory.
+- Add multi-axis (context + 0 or more segments) navigation support.

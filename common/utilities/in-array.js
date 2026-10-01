@@ -5,8 +5,8 @@
  * @returns {boolean}
  */
 
-function itemInArray(array, itemChecked) {
+function inArray(array, itemChecked) {
 	return array.some((item) => item === itemChecked);
 }
 
-export default itemInArray;
+export default inArray;

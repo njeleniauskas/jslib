@@ -11,6 +11,7 @@
  * @param {string} [params.attributes.orientation] - Optional property to assign aria- string.
  * @param {string} [params.attributes.activeDescendant] - Optional property to assign aria- string.
  *
+ * @param {string} [params.attributes.contextRole] - Used to identify the role of each context when multiples exist.
  * @param {string} [params.attributes.contextState] - Used to identify which context should be used for navigation.
  * @param {string} [params.attributes.componentFocus] - The attribute used for the component's focus state.
  * @param {string} [params.attributes.childFocus] - The attribute used for a child's focus state.
@@ -18,11 +19,12 @@
  */
 function getNavigationConfig(params) {
 	const attributes = (params.attributes ?? {});
-	const fallbackRoot = 'data-cn';
 	const props = {
 		'attributes': {}
 	};
 
+	props.attributePrefix = 'attributePrefix' in params ?
+		params.attributePrefix : 'data-cn';
 	props.id = 'id' in params ?
 		params.id : undefined;
 	props.name = 'name' in params ?
@@ -32,14 +34,13 @@ function getNavigationConfig(params) {
 
 	props.navigationType = 'navigationType' in params ?
 		params.navigationType : 'roving';
-	props.multiAxis = 'multiAxis' in params ?
-		true : false;
 	props.attributes.activeDescendant = 'activeDescendant' in attributes ?
 		attributes.activeDescendant : 'data-activedescendant';
 
 	props.attributes.componentFocus = 'componentFocus' in attributes ?
 		attributes.componentFocus : 'data-focused';
 
+	const fallbackRoot = props.attributePrefix;
 	const childFocusFallback = props.navigationType === 'roving' ? 'tabindex' : 'data-focused';
 
 	props.attributes.childFocus = 'childFocus' in attributes ?
@@ -54,8 +55,10 @@ function getNavigationConfig(params) {
 	props.attributes.child = 'childNode' in attributes ?
 		attributes.childNode : `${fallbackRoot}-child`;
 
+	props.attributes.contextRole = 'contextRole' in attributes ?
+		attributes.contextRole : `${fallbackRoot}-role`;
 	props.attributes.contextState = 'contextState' in attributes ?
-		attributes.contextState : `${fallbackRoot}-current`;
+		attributes.contextState : `${fallbackRoot}-selected`;
 
 	return props;
 }

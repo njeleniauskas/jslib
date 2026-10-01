@@ -1,4 +1,4 @@
-import itemInArray from '../utilities/item-in-array.js';
+import inArray from '../utilities/in-array.js';
 
 /**
  * Organize the correct keys for a composite element's navigation.
@@ -35,23 +35,19 @@ function getNavigationKeys(params) {
 	let keyCrossAxisNext;
 	let lang = language.direction;
 	let mode = language.writingMode;
-	let result = {
-		main: {},
-		cross: {}
-	};
 
 	//set horizontal or vertical keys
 	if (orientation === 'horizontal' && mode === 'horizontal-tb' ||
-		orientation === 'vertical' && itemInArray(modes.vertical, mode) ||
-		orientation === 'vertical' && itemInArray(modes.sideways, mode)
+		orientation === 'vertical' && inArray(modes.vertical, mode) ||
+		orientation === 'vertical' && inArray(modes.sideways, mode)
 	) {
 		mainAxisKeys = keys.horizontal;
 		crossAxisKeys = keys.vertical;
 	}
 
 	if (orientation === 'vertical' && mode === 'horizontal-tb' ||
-		orientation === 'horizontal' && itemInArray(modes.vertical, mode) ||
-		orientation === 'horizontal' && itemInArray(modes.sideways, mode)
+		orientation === 'horizontal' && inArray(modes.vertical, mode) ||
+		orientation === 'horizontal' && inArray(modes.sideways, mode)
 	) {
 		mainAxisKeys = keys.vertical;
 		crossAxisKeys = keys.horizontal;
@@ -90,10 +86,24 @@ function getNavigationKeys(params) {
 		keyCrossAxisNext = crossAxisKeys.one;
 	}
 
-	result.main.prev = [keyPrev].concat(['Home']);
-	result.main.next = [keyNext].concat(['End']);
-	result.cross.prev = [keyCrossAxisPrev].concat(['PageUp']);
-	result.cross.next = [keyCrossAxisNext].concat(['PageDown']);
+	const mainAll = [keyPrev, keyNext, 'Home', 'End'];
+	const crossAll = [keyCrossAxisPrev, keyCrossAxisNext, 'PageUp', 'PageDown'];
+
+	const result = {
+		all: [...mainAll, ...crossAll],
+		main: {
+			all: mainAll,
+			prev: [keyPrev, 'Home'],
+			next: [keyNext, 'End'],
+			jump: ['Home', 'End'],
+		},
+		cross: {
+			all: crossAll,
+			prev: [keyCrossAxisPrev, 'PageUp'],
+			next: [keyCrossAxisNext, 'PageDown'],
+			jump: ['PageUp', 'PageDown'],
+		}
+	};
 
 	return result;
 }
