@@ -2,7 +2,8 @@ function resolveTargetIndex(module) {
 	if ('targetIndex' in module.functions) {
 		return module.functions.targetIndex({
 			children: module.state.nodes.children,
-			pointerEventChild: module.state.nodes.pointerEventChild
+			pointerEventChild: module.state.nodes.pointerEventChild,
+			attributes: module.props.attributes,
 		});
 	}
 
