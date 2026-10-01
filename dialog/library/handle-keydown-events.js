@@ -1,4 +1,4 @@
-import itemInArray from '../../common/utilities/item-in-array.js';
+import inArray from '../../common/utilities/in-array.js';
 import handleClearEvent from './handle-clear-event.js';
 
 /**
@@ -7,7 +7,7 @@ import handleClearEvent from './handle-clear-event.js';
  */
 
 function handleKeydownEvents(event, module) {
-	if (module.state.opened && itemInArray(module.props.keys.clear, event.key)) {
+	if (module.state.opened && inArray(module.props.keys.clear, event.key)) {
 		handleClearEvent(module);
 	}
 }
