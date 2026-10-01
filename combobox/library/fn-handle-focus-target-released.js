@@ -2,9 +2,9 @@ import getContextChildren from './get-context-children.js';
 import handleFocusedChild from './handle-focused-child.js';
 
 function focusTargetReleased(params) {
-	const { module, eventType, children, targetChild } = params;
+	const { module, event, children, targetChild } = params;
 
-	if (eventType === 'click') {
+	if (event === 'click') {
 		const args = {
 			children: children,
 			targetChild: targetChild,

@@ -1,7 +1,7 @@
 function handleFocusStateUpdated(params) {
-	const { module, eventType, targetChild } = params;
-	const discloseOnFocusin = module.props.disclosable && module.props.discloseOnFocusin && eventType === 'focusin';
-	const discloseOnKeydown = module.props.disclosable && eventType === 'keydown';
+	const { module, event, targetChild } = params;
+	const discloseOnFocusin = module.props.disclosable && module.props.discloseOnFocusin && event === 'focusin';
+	const discloseOnKeydown = module.props.disclosable && event === 'keydown';
 
 	if (discloseOnFocusin || discloseOnKeydown) {
 		module.nodes.listbox.setAttribute(module.props.attributes.display, 'false');
