@@ -26,9 +26,9 @@ function handleFocusinEvent(event, module) {
 
 	module.state.isInitial = false;
 
-	module.functions.focusStateUpdated?.({ module, eventType: event.type, targetChild });
+	module.functions.focusStateUpdated?.({ module, event, targetChild });
 	module.emitter?.emit(`${module.name}/${module.id}:focus-state-updated`, {
-		eventType: event.type,
+		event,
 		targetChild
 	});
 }

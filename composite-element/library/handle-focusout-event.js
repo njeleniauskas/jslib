@@ -9,7 +9,8 @@ function handleFocusoutEvent(event, module) {
 	const contextSelector = `[${module.props.attributes.context}="${module.id}"]`;
 	const targetOutsideContext = event.relatedTarget !== null ? event.relatedTarget.closest(contextSelector) === null : false;
 
-	if (module.state.isKeyEvent && targetOutsideContext) {
+	// if (module.state.isKeyEvent && targetOutsideContext) { // ← originally this; error: prevents focus moving on child click
+	if (targetOutsideContext) {
 		const context = module.state.nodes.context;
 		resetModule(module);
 

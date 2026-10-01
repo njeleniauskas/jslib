@@ -39,9 +39,9 @@ function handleKeydownEvent(event, module) {
 		module.state.nodes.lastFocusedChild = module.state.nodes.focusedChild;
 		module.state.nodes.focusedChild = module.state.nodes.children[targetIndex];
 
-		module.functions.focusStateUpdated?.({ module, eventType: event.type, targetChild: module.state.nodes.focusedChild });
+		module.functions.focusStateUpdated?.({ module, event, targetChild: module.state.nodes.focusedChild });
 		module.emitter?.emit(`${module.name}/${module.id}:focus-state-updated`, {
-			eventType: event.type,
+			event,
 			targetChild: module.state.nodes.focusedChild
 		});
 	}

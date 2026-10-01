@@ -39,9 +39,9 @@ function handlePointerdownEvent(event, module) {
 		module.state.nodes.lastFocusedChild = focusedChild;
 		module.state.nodes.focusedChild = clickedChild;
 
-		module.functions.focusStateUpdated?.({ module, eventType: event.type, targetChild: clickedChild });
+		module.functions.focusStateUpdated?.({ module, event, targetChild: clickedChild });
 		module.emitter?.emit(`${module.name}/${module.id}:focus-state-updated`, {
-			eventType: event.type,
+			event,
 			targetChild: clickedChild
 		});
 	}

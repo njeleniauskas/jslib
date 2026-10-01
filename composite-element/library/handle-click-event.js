@@ -15,9 +15,9 @@ function handleClickEvent(event, module) {
 	const children = module.state.nodes.children ?? [];
 	const targetChild = module.state.nodes.pointerEventChild;
 
-	module.functions.focusTargetReleased?.({ module, eventType: event.type, children, targetChild });
+	module.functions.focusTargetReleased?.({ module, event, children, targetChild });
 	module.emitter?.emit(`${module.name}/${module.id}:focus-target-released`, {
-		eventType: event.type,
+		event,
 		children: [...children],
 		targetChild
 	});

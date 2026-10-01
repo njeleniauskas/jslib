@@ -142,8 +142,8 @@ Each callback/emitter event provides an object with different data for use:
 - `pointerdownEnd()`: the class `module` and `event` object.
 - `keydownStart()`: the class `module`, `event` object, and and an object called `keydownState` for internal keydown logic.
 - `keydownEnd()`: the class `module` and `event` object.
-- `focusStateUpdated()`: the class `module`, `eventType`, and `targetChild` that has focus just received focus.
-- `focusTargetReleased()`: the class `module`, `eventType`, `children` of the current context, and the `targetChild` that has focus.
+- `focusStateUpdated()`: the class `module`, `event`, and `targetChild` that has focus just received focus.
+- `focusTargetReleased()`: the class `module`, `event`, `children` of the current context, and the `targetChild` that has focus.
 - `reset()`: class `module` and `context` that was last in focus.
 
 <br>
