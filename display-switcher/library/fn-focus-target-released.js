@@ -1,20 +1,11 @@
-import updateSingleSelection from '../../common/group-selection/update-single-selection.js';
-import updateViewState from './update-view-state.js';
+
+import processSelection from './process-selection.js';
 
 function focusTargetReleased(params) {
-	const { module, targetChild } = params;
-	const isSelected = targetChild.getAttribute(module.props.attributes.selected) === 'true';
+	const { event } = params;
 
-	if (!isSelected) {
-		const targetID = targetChild.getAttribute(module.props.attributes.controlID);
-
-		updateSingleSelection(module.state.nodes.children, {
-			'targetNode': targetChild,
-			'selectionAttribute': module.props.attributes.selected,
-			'selectionByValue': true,
-		});
-
-		updateViewState(module, targetID);
+	if (event.type === 'click') {
+		processSelection(params);
 	}
 }
 
