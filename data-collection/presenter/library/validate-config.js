@@ -31,15 +31,15 @@ function validateConfig(params) {
 
 	if (validPropertyValue(params, 'attributes')) {
 		if (!validPropertyValue(params.attributes, 'container')) {
-			errors.push(new Error('Data- attribute for the container is missing.'));
+			errors.push(new Error('The attribute for the container is missing.'));
 		}
 
 		if (!validPropertyValue(params.attributes, 'collection')) {
-			errors.push(new Error('Data- attribute for the collection is missing.'));
+			errors.push(new Error('The attribute for the collection is missing.'));
 		}
 
 		if (!validPropertyValue(params.attributes, 'liveRegion')) {
-			errors.push(new Error('Data- attribute for the live region is missing.'));
+			errors.push(new Error('The attribute for the live region is missing.'));
 		}
 	}
 

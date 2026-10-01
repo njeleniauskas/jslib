@@ -37,14 +37,16 @@ async function collectData(type, params) {
 		results = JSON;
 	}
 
-	if (validPropertyValue(params, 'prefilter') && Object.keys(params.prefilter).length !== 0) {
-		results = prefilterCollection(results, params.prefilter);
+	const args = (params.args ?? {});
+
+	if (validPropertyValue(args, 'prefilter') && Object.keys(args.prefilter).length !== 0) {
+		results = prefilterCollection(results, args.prefilter);
 	}
 
-	if (validPropertyValue(params, 'presort') && Object.keys(params.presort).length !== 0) {
+	if (validPropertyValue(args, 'presort') && Object.keys(args.presort).length !== 0) {
 		results = presortCollection(results, {
-			'prop': params.presort.prop,
-			'direction': params.presort.direction
+			'prop': args.presort.prop,
+			'direction': args.presort.direction
 		});
 	}
 

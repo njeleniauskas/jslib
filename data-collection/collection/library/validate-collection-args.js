@@ -5,18 +5,21 @@ function validateCollectionArgs(params) {
 		return true;
 	}
 
-	if (!('type' in params)) {
-		throw new Error ('getCollection: A type is required to process the data correctly.');
+	if (params.resource === null) {
+		errors.push(new Error ('A resource must be provided (was null).'));
 	}
 
-	if (!('name' in params)) {
-		throw new Error ('getCollection: A name must be provided to describe the collection.');
+	if (params.type === null) {
+		errors.push(new Error ('A type is required to process data correctly (was null).'));
 	}
 
-	if (!('resource' in params)) {
-		throw new Error ('getCollection: A resource must be provided to fetch data.');
+	if (params.name === null) {
+		errors.push(new Error ('A name must be provided to describe the collection (was null).'));
 	}
 
+	if (errors.length > 0) {
+		throw new AggregateError(errors, 'getCollection() Failed:');
+	}
 }
 
 export default validateCollectionArgs;

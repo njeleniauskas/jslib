@@ -2,6 +2,7 @@ import validateConfig from './library/validate-config.js';
 import getCollectionArgs from './library/get-collection-args.js';
 import validateCollectionArgs from './library/validate-collection-args.js';
 import collectData from './library/collect-data.js';
+import handleErrors from '../../common/utilities/handle-errors.js';
 
 /**
  * The core DataCollection class, containing the reference and live datasets.
@@ -25,8 +26,8 @@ class DataCollection {
 		this.id = null;
 		this.props = {
 			name: null,
-			type: null,
 			resource: null,
+			type: null,
 			args: {
 				objectKeyName: null,
 				prefilter: null,
@@ -47,31 +48,19 @@ class DataCollection {
 			validateConfig(params);
 			this.#setConfiguration(params);
 		} catch (errors) {
-			if (errors instanceof AggregateError) {
-				console.error(errors.message)
-
-				for (const error of errors.errors) {
-					console.error(error.message);
-				}
-			} else {
-				console.error(errors);
-			}
+			handleErrors(errors);
 		}
 	}
 
 	#setConfiguration(params) {
-		const { data: { args, ...data }, ...props } = params;
+		const { data: { args = {}, ...data } = {}, ...props } = params;
 
 		this.props = {...this.props, ...data};
-		this.props.args = {...this.props.args, ...args};
+		this.props.args = { ...this.props.args, ...args };
 		this.emitter = props.emitter;
 		this.id = props.id;
-
-		this.props.type = 'type' in params.data ? params.data.type : 'file';
 	}
 
-
-	//public methods
 	async getCollection(params) {
 		try {
 			const args = getCollectionArgs(params, this);
@@ -84,8 +73,8 @@ class DataCollection {
 			//shallow copy (prevents ref mutation errors)
 			this.data.live = this.data.ref.slice();
 			this.emitter.emit('connect-data-collection', this);
-		} catch (error) {
-			console.error(error);
+		} catch (errors) {
+			handleErrors(errors);
 		}
 	}
 };

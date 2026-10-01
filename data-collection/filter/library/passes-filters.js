@@ -1,7 +1,7 @@
-import itemInArray from '../../../common/utilities/item-in-array.js';
+import inArray from '../../../common/utilities/in-array.js';
 
 /**
- * 
+ *
  * @param {object} testObject - The key/array of boolean values from the initial test function.
  * @param {array} groupedFilters - The object of key/arrays for each set of filter groups.
  * @returns boolean
@@ -36,7 +36,7 @@ function passesFilters(testObject, groupedFilters) {
 	}
 
 	testGroups.forEach((array) => {
-		results.push(itemInArray(array, true));
+		results.push(inArray(array, true));
 	});
 
 	return results.every(item => item === true);

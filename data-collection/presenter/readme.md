@@ -55,20 +55,20 @@ The presenter must be supplied a template function (identified by a display key)
 
 ```javascript
 const template = function(data, params) {
-		let collection = document.createElement('ul');
+	let collection = document.createElement('ul');
 
-		collection.setAttribute(params.attribute, params.id);
+	collection.setAttribute(params.attribute, params.id);
 
-		for (const object of data) {
-			const node = document.createElement('li');
+	for (const object of data) {
+		const node = document.createElement('li');
 
-			//..build each collection item
+		//..build each collection item
 
-			collection.appendChild(node);
-		}
-
-		return collection;
+		collection.appendChild(node);
 	}
+
+	return collection;
+}
 ```
 
 <br>
