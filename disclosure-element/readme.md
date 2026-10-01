@@ -24,7 +24,7 @@ const args = {
 	}
 };
 
-const DisclosureElement = new DisclosureElement(args);
+const disclosureElement = new DisclosureElement(args);
 ```
 
 ```javascript
