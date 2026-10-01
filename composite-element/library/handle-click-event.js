@@ -12,17 +12,18 @@ function handleClickEvent(event, module) {
 		return;
 	}
 
-	const children = module.state.nodes.children;
+	const children = module.state.nodes.children ?? [];
 	const targetChild = module.state.nodes.pointerEventChild;
 
-	if (module.emitter !== null) {
-		module.emitter.emit(`${module.name}/${module.id}:focus-target-clicked`, {
-			children,
-			targetChild
-		});
-	}
+	module.functions.focusTargetReleased?.({ module, eventType: event.type, children, targetChild });
+	module.emitter?.emit(`${module.name}/${module.id}:focus-target-released`, {
+		eventType: event.type,
+		children: [...children],
+		targetChild
+	});
 
 	module.state.nodes.pointerEventChild = null;
+	module.state.nodes.pointerEventSiblings = null;
 }
 
 export default handleClickEvent;

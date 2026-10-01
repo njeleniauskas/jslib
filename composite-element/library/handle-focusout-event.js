@@ -7,16 +7,16 @@ import resetModule from './reset-module.js';
 
 function handleFocusoutEvent(event, module) {
 	const contextSelector = `[${module.props.attributes.context}="${module.id}"]`;
-	const isOutsideContext = event.relatedTarget !== null ? event.relatedTarget.closest(contextSelector) === null : false;
+	const targetOutsideContext = event.relatedTarget !== null ? event.relatedTarget.closest(contextSelector) === null : false;
 
-	if (module.state.isKeyEvent && isOutsideContext) {
+	if (module.state.isKeyEvent && targetOutsideContext) {
+		const context = module.state.nodes.context;
 		resetModule(module);
 
-		if (module.emitter !== null) {
-			module.emitter.emit(`${module.name}/${module.id}:reset`, {
-				context: module.state.nodes.context
-			});
-		}
+		module.functions.reset?.({ module, context });
+		module.emitter?.emit(`${module.name}/${module.id}:reset`, {
+			context
+		});
 	}
 }
 

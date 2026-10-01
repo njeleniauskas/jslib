@@ -16,6 +16,7 @@ const createState = () => {
 		isPointerEvent: false,
 		clickEscapesContext: false,
 		isInitial: true,
+		allowShiftNavigation: true,
 
 		language: {
 			direction: null,

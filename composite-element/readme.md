@@ -46,7 +46,7 @@ const args = {
 	}
 };
 
-const CompositeElement = new CompositeElement(args);
+const compositeElement = new CompositeElement(args);
 ```
 
 <br>
@@ -106,6 +106,7 @@ A Composite Element is designed to be extended so that it can be used as the cor
 
 <br>
 
+### Intern
 First, on `focusin` or `reset`, the index of the target child element can be computed differently if a custom function is supplied. This custom function provides two arguments: the children of the current context, and the target child from a poinderdown event (or null). A sample setup is as follows:
 
 ```javascript
@@ -123,27 +124,39 @@ const args = {
 
 <br>
 
-Second, an event emitter can be passed to this class (via `args.emitter`) so that authors can use internal emitter events to react to events and changes in state. Each event follows the template `{name}/{id}:{event}`, and are generic hooks into the event listener, or express a specific thing that has happened:
+In addition, there are several optional callback hooks available internally. They exist so that authors can react to events and changes in state. And each callback has a corresponding emitter event (if supplied), if external behaviors are also needed.
 
-- `pointerdown`: fires on the pointerdown event.
-- `keydown`: fires on the keydown event.
-- `focus-state-updated`: fires immediately after the focus state has changed (during a pointerdown or keydown event).
-- `focus-target-clicked`: fires on a click or keyup event when a valid focus target exists.
-- `reset`: fires after the component resets to its initial state.
-
-<br>
-
-The default name for this class is `composite-element`, but that can be overridden to anything. But this means that the specific emitter event for `focus-state-updated` could be `tablist/global:focus-state-updated`. This template allows a shared emitter to reserve events tied to this component specifically.
+- `pointerdownStart()`: fires at the beginning of the pointerdown event.
+- `pointerdownEnd()`: fires at the end of the pointerdown event.
+- `keydownStart()`: fires at the beginning of the keydown event.
+- `keydownEnd()`: fires at the end of the keydown event.
+- `focusStateUpdated()`: fires immediately after the focus state has changed (during a pointerdown or keydown event).
+- `focusTargetReleased()`: fires on a click or keyup event when a valid focus target exists.
+- `reset()`: fires after the component resets to its initial state.
 
 <br>
 
-In addition, each emitter event provides a params object with different data for use:
+Each callback/emitter event provides an object with different data for use:
 
-- `pointerdown`: the `event` object and class `module`.
-- `keydown`: the `event` object and class `module`.
-- `focus-state-updated`: the `targetChild` that has focus just received focus.
-- `focus-target-clicked`: the `children` of the current context and the `targetChild` that has focus.
-- `reset`: provides the `context` that was last in focus.
+- `pointerdownStart()`: the class `module` and `event` object.
+- `pointerdownEnd()`: the class `module` and `event` object.
+- `keydownStart()`: the class `module`, `event` object, and and an object called `keydownState` for internal keydown logic.
+- `keydownEnd()`: the class `module` and `event` object.
+- `focusStateUpdated()`: the class `module`, `eventType`, and `targetChild` that has focus just received focus.
+- `focusTargetReleased()`: the class `module`, `eventType`, `children` of the current context, and the `targetChild` that has focus.
+- `reset()`: class `module` and `context` that was last in focus.
+
+<br>
+
+Emitter events differ from these callback functions in three ways:
+
+- Each event follows a template for its full name: `{name}/{id}:{event}`.
+- Event names are written in **kebab-case** instead of camelCase: `pointerdown`, `keydown`, `focus-state-updated`, `focus-target-released`, and `reset`.
+- Emitter events do not pass the class module as an argument.
+
+<br>
+
+As an example, the emitter event for `focus-state-updated` might be `tablist/global:focus-state-updated`, depending on the name and id passed.
 
 
 <br>
@@ -164,6 +177,7 @@ When using this module, three internal objects are used for storing different ki
  * @param {string} [params.attributes.orientation] - Optional property to assign aria- string.
  * @param {string} [params.attributes.activeDescendant] - Optional property to assign aria- string.
  *
+ * @param {string} [params.attributes.contextRole] - Used to identify the role a context is representing (e.g. component, listbox, etc…).
  * @param {string} [params.attributes.contextState] - Used to identify which context should be used for navigation.
  * @param {string} [params.attributes.componentFocus] - The attribute used for the component's focus state.
  * @param {string} [params.attributes.childFocus] - The attribute used for a child's focus state.
@@ -219,10 +233,4 @@ Finally, the `state` object handles the context and data state of the module:
 
 ## Additional Notes
 - Using pointer-events: none on children will break some behaviors for this component. Only use it if you want to make sure a child will not activate or change the state of this component somehow.
-
-
-<br>
-
-
-## Future Exploration
-- Expand behaviors to include context switching within this class.
+- If the component element is not also a context element, the `orientation` attribute will need to be placed on both elements for navigation config and semantic correctness.

@@ -1,29 +1,36 @@
 import resolveTargetIndex from './resolve-target-index.js';
 import updateFocusState from './update-focus-state.js';
 
-function handleFocusinEvent(module) {
-	if (module.state.isInitial) {
-		module.processNavigationContext('initial');
+function handleFocusinEvent(event, module) {
+	if (!module.state.isInitial) {
+		return;
+	}
 
-		console.log(module.state.nodes)
+	module.processNavigationContext('initial', {
+		contexts: module.nodes.contexts,
+		initialContext: module.nodes.initialContext
+	});
 
+	let targetChild = null;
+
+	if (module.state.nodes.children !== null) {
 		const targetIndex = resolveTargetIndex(module);
-		const targetChild = module.state.nodes.children[targetIndex];
 
 		updateFocusState(targetIndex, module);
 
-		module.state.nodes.lastFocusedChild = targetChild;
-		module.state.nodes.focusedChild = targetChild;
-		module.state.isInitial = false;
-
-		if (module.emitter !== null) {
-			module.emitter.emit(`${module.name}/${module.id}:focus-state-updated`, {
-				targetChild
-			});
-		}
-
-		return;
+		targetChild = module.state.nodes.children[targetIndex];
 	}
+
+	module.state.nodes.lastFocusedChild = targetChild;
+	module.state.nodes.focusedChild = targetChild;
+
+	module.state.isInitial = false;
+
+	module.functions.focusStateUpdated?.({ module, eventType: event.type, targetChild });
+	module.emitter?.emit(`${module.name}/${module.id}:focus-state-updated`, {
+		eventType: event.type,
+		targetChild
+	});
 }
 
 export default handleFocusinEvent;

@@ -31,7 +31,7 @@ const args = {
 	id: 'ds1'
 };
 
-const DisplaySwitcher = new DisplaySwticher(args);
+const displaySwitcher = new DisplaySwticher(args);
 ```
 
 <br>
@@ -40,11 +40,11 @@ The HTML setup is also simple to implement, only adding a few extra attributes t
 
 ```html
 <Context
-	data-cn="{id}"
+	data-ce="{id}"
 	{orientation}>
 		<Child
-			data-cn-control-id="{linkID}"
-			data-cn-child="{id}"
+			data-ce-control-id="{linkID}"
+			data-ce-child="{id}"
 			{selected}
 			{focused}>
 		</Child>
@@ -52,8 +52,8 @@ The HTML setup is also simple to implement, only adding a few extra attributes t
 </Context>
 
 <View
-	data-cn-view-id="{linkID}"
-	data-cn-view="{id}"
+	data-ce-view-id="{linkID}"
+	data-ce-view="{id}"
 	{display}>
 </View>
 ```
@@ -61,7 +61,7 @@ The HTML setup is also simple to implement, only adding a few extra attributes t
 A few additions that authors may wish to include are as follows:
 
 - Additional attributes can be passed, which include: `viewNode`, `controlID`, `viewID`, `selected`, and `display`. Note that `controlID` and `viewID` need the exact same value to link together.
-- A shared `EventEmitter` can be used by passing it as an argument. But if none is supplied, an internal one will be used.
+- A shared `EventEmitter` can be used by passing it as an argument. This is required for using emitter events.
 
 <br>
 
@@ -86,4 +86,4 @@ Note that for attribute args, `data-` or `aria-` attributes can be supplied. And
 
 
 ## Additional Notes
-- The fallback attribute names follow the naming schema for Composite Navigation (`data-cn-*`). If authors simply wish to implement the simplest form of this class, they can use these defaults.
+- The fallback attribute names follow the naming schema for Composite Navigation (`data-ce-*`). If authors simply wish to implement the simplest form of this class, they can use these defaults.

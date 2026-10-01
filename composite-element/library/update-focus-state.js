@@ -39,6 +39,10 @@ function updateFocusState(targetIndex, module) {
 		const childID = targetChild.getAttribute('id');
 
 		module.nodes.component.setAttribute(module.props.attributes.activeDescendant, childID);
+
+		if (document.activeElement !== module.nodes.component) {
+			module.nodes.component.focus();
+		}
 	}
 }
 

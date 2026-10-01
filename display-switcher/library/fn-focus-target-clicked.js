@@ -1,9 +1,8 @@
 import updateSingleSelection from '../../common/group-selection/update-single-selection.js';
 import updateViewState from './update-view-state.js';
 
-function handleUpdateFocusState(module, params) {
-	const { targetChild } = params;
-	console.log('post update')
+function focusTargetReleased(params) {
+	const { module, targetChild } = params;
 	const isSelected = targetChild.getAttribute(module.props.attributes.selected) === 'true';
 
 	if (!isSelected) {
@@ -19,4 +18,4 @@ function handleUpdateFocusState(module, params) {
 	}
 }
 
-export default handleUpdateFocusState;
+export default focusTargetReleased;

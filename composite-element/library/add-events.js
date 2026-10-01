@@ -32,7 +32,7 @@ function addEvents(module) {
 	module.nodes.contexts.forEach((context) => {
 		context.addEventListener(
 			'focusin',
-			() => handleFocusinEvent(module)
+			(event) => handleFocusinEvent(event, module)
 		);
 		context.addEventListener(
 			'focusout',

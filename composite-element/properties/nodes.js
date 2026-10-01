@@ -2,6 +2,7 @@ const createNodes = () => {
 	return {
 		contexts: null,
 		component: null,
+		initialContext: null,
 	};
 };
 

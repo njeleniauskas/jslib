@@ -9,6 +9,7 @@ const createProps = () => {
 			//state attributes
 			orientation: null,
 			activeDescendant: null,
+			contextRole: null,
 			contextState: null,
 			componentFocus: null,
 			childFocus: null,
@@ -21,7 +22,6 @@ const createProps = () => {
 		},
 
 		navigationType: null,
-		multiAxis: false,
 	};
 };
 

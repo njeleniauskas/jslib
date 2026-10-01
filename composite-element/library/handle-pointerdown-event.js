@@ -8,51 +8,48 @@ import updateFocusState from './update-focus-state.js';
  */
 
 function handlePointerdownEvent(event, module) {
-	if (module.emitter !== null) {
-		module.emitter.emit(`${module.name}/${module.id}:pointerdown`, {
-			event,
-			module
-		});
-	}
+	module.functions.pointerdownStart?.({ event, module });
+	module.emitter?.emit(`${module.name}/${module.id}:pointerdown-start`, {
+		event
+	});
 
-	const queryString = `[${module.props.attributes.child}="${module.id}"]`;
-	const clickedChild = event.target.closest(queryString);
+	const childString = `[${module.props.attributes.child}="${module.id}"]`;
+	module.state.nodes.pointerEventChild = event.target.closest(childString);
 
-	const initialAndRoving = module.state.isInitial && module.props.navigationType === 'roving';
-	const initialAndReference = module.state.isInitial && module.props.navigationType === 'reference';
+	if (module.state.isInitial) return;
+	if (module.state.nodes.pointerEventChild === null) return;
+	if (module.state.nodes.children === null) return;
 
-	module.state.nodes.pointerEventChild = clickedChild;
+	const clickedChild = module.state.nodes.pointerEventChild;
+	const children = module.state.nodes.children;
+	const childStates = getFocusValuesByAttribute(childString);
 
-	if (initialAndRoving || initialAndReference) {
-		return;
-	}
-
-	if (clickedChild === null) {
-		return;
-	}
-
-	const childStates = getFocusValuesByAttribute(queryString);
 	const index = getElementIndexByAttribute({
-		elements: module.state.nodes.children,
+		elements: children,
 		attribute: module.props.attributes.childFocus,
 		value: childStates.focus
 	});
-	const currentSelection = module.state.nodes.children[index];
+	const focusedChild = children[index];
 
-	if (clickedChild !== currentSelection) {
-		const newIndex = module.state.nodes.children.indexOf(clickedChild);
+	if (clickedChild !== focusedChild) {
+		const newIndex = children.indexOf(clickedChild);
 
 		updateFocusState(newIndex, module);
 
-		module.state.nodes.lastFocusedChild = currentSelection;
+		module.state.nodes.lastFocusedChild = focusedChild;
 		module.state.nodes.focusedChild = clickedChild;
 
-		if (module.emitter !== null) {
-			module.emitter.emit(`${module.name}/${module.id}:focus-state-updated`, {
-				targetChild: clickedChild
-			});
-		}
+		module.functions.focusStateUpdated?.({ module, eventType: event.type, targetChild: clickedChild });
+		module.emitter?.emit(`${module.name}/${module.id}:focus-state-updated`, {
+			eventType: event.type,
+			targetChild: clickedChild
+		});
 	}
+
+	module.functions.pointerdownEnd?.({ event, module });
+	module.emitter?.emit(`${module.name}/${module.id}:pointerdown-end`, {
+		event
+	});
 }
 
 export default handlePointerdownEvent;

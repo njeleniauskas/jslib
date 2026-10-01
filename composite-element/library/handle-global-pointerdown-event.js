@@ -12,13 +12,13 @@ function handleGlobalPointerdownEvent(event, module) {
 	const isOutsideContext = event.target !== null ? event.target.closest(contextSelector) === null : false;
 
 	if (isOutsideContext && !module.state.isInitial) {
+		const context = module.state.nodes.context;
 		resetModule(module);
 
-		if (module.emitter !== null) {
-			module.emitter.emit(`${module.name}/${module.id}:reset`, {
-				context: module.state.nodes.context
-			});
-		}
+		module.functions.reset?.({ module, context });
+		module.emitter?.emit(`${module.name}/${module.id}:reset`, {
+			context
+		});
 	}
 }
 
