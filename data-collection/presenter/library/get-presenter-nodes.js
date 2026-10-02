@@ -2,7 +2,7 @@
  *
  * @param {object} params
  * @param {string} params.id - The id of the data attribute.
- * @param {object} params.attributes - The collection data- attribute names.
+ * @param {object} params.attributes - The collection attribute names.
  * @returns object of DOM nodes.
  */
 
@@ -13,7 +13,7 @@ function getPresenterNodes(params) {
 		let string = `[${value}="${params.id}"]`;
 
 		if (key === 'liveRegion') {
-			string = `[${value}]`;
+			string = value;
 		}
 
 		nodes[key] = document.querySelector(string);

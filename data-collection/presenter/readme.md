@@ -37,7 +37,7 @@ const presenterArgs = {
 	attributes: {
 		container: 'data-{container}',
 		collection: 'data-{collection}',
-		liveRegion: 'data-{live-region}'
+		liveRegion: '{live-region}'
 	},
 	templates: {
 		'{display}': template,
