@@ -3,7 +3,7 @@ function handleErrors(errors) {
 		console.error(errors.message)
 
 		for (const error of errors.errors) {
-			console.error(error.message);
+			console.error(error.message, ...(error.cause ?? [error.cause] : []));
 		}
 	} else {
 		console.error(errors);
