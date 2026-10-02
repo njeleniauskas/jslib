@@ -14,6 +14,7 @@ import handleErrors from '../../common/utilities/handle-errors.js';
  * @param {string} [params.data.name] - The human-readable name of the collection (akin to aria-label or name attribute).
  * @param {string} params.data.resource - The uri of the resource needed.
  * @param {string} [params.data.type] - The type of resource being requested [file, or query].
+ * @param {object} [params.data.body] - The requestBody for query function use.
  * @param {object} [params.data.args]
  * @param {string} [params.data.args.objectKeyName] - The property name for the key that will store the object property key. When the JSON is a map (not an array of objects).
  * @param {{prop: string, value: string}[]}} [params.data.args.prefilter] - An array of prefilter key/value objects. * @param {object} [params.data.args.presort]
@@ -28,6 +29,7 @@ class DataCollection {
 			name: null,
 			resource: null,
 			type: null,
+			body: null,
 			args: {
 				objectKeyName: null,
 				prefilter: null,

@@ -21,7 +21,7 @@ const resolvers = {
 	file: async ({ resource }) => {
 		return await fetchJSON(resource);
 	},
-	query: ({ resource, args }) => {
+	query: ({ resource, body }) => {
 		console.warn('This is a stub function. Not ready for use.')
 	}
 };
