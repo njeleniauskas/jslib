@@ -28,7 +28,8 @@ const resolvers = {
 
 async function collectData(type, params) {
 	const resolver = resolvers[type];
-	const data = await resolver(params)
+	const data = await resolver(params);
+
 	let results = [];
 
 	if (typeof data === 'object' && !Array.isArray(data)) {
