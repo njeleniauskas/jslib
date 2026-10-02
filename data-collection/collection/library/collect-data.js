@@ -28,13 +28,13 @@ const resolvers = {
 
 async function collectData(type, params) {
 	const resolver = resolvers[type];
-	const JSON = await resolver(params)
+	const data = await resolver(params)
 	let results = [];
 
-	if (typeof JSON === 'object' && !Array.isArray(JSON)) {
-		results = convertObjectToArray(JSON, params.objectKeyName);
+	if (typeof data === 'object' && !Array.isArray(data)) {
+		results = convertObjectToArray(data, params.objectKeyName);
 	} else {
-		results = JSON;
+		results = data;
 	}
 
 	const args = (params.args ?? {});
