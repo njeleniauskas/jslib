@@ -1,4 +1,3 @@
-import fetchJSON from '../../../common/utilities/fetch-json.js';
 import convertObjectToArray from '../../../common/utilities/convert-object-to-array.js';
 import validPropertyValue from '../../../common/utilities/valid-property-value.js';
 
@@ -18,40 +17,52 @@ import prefilterCollection from './prefilter-collection.js';
  */
 
 const resolvers = {
-	file: async ({ resource }) => {
-		return await fetchJSON(resource);
+	object: ({ resource }) => {
+		return resource;
 	},
-	query: ({ resource, body }) => {
-		console.warn('This is a stub function. Not ready for use.')
+	fetch: async ({ resource, options }) => {
+		const response = await fetch(resource, options);
+		return await response.json();
 	}
-};
+}
 
 async function collectData(type, params) {
 	const resolver = resolvers[type];
 	const data = await resolver(params);
+	let results = handleData(data, params);
 
-	let results = [];
+	if ('transform' in params) {
+		const transform = (params.transform ?? {});
 
-	if (typeof data === 'object' && !Array.isArray(data)) {
-		results = convertObjectToArray(data, params.objectKeyName);
-	} else {
-		results = data;
-	}
+		if (validPropertyValue(transform, 'prefilter') && Object.keys(transform.prefilter).length !== 0) {
+			results = prefilterCollection(results, transform.prefilter);
+		}
 
-	const args = (params.args ?? {});
-
-	if (validPropertyValue(args, 'prefilter') && Object.keys(args.prefilter).length !== 0) {
-		results = prefilterCollection(results, args.prefilter);
-	}
-
-	if (validPropertyValue(args, 'presort') && Object.keys(args.presort).length !== 0) {
-		results = presortCollection(results, {
-			'prop': args.presort.prop,
-			'direction': args.presort.direction
-		});
+		if (validPropertyValue(transform, 'presort') && Object.keys(transform.presort).length !== 0) {
+			results = presortCollection(results, {
+				'prop': transform.presort.prop,
+				'direction': transform.presort.direction
+			});
+		}
 	}
 
 	return results;
+}
+
+function handleData(data, params) {
+	if (typeof data !== 'object' || data === null) {
+		throw new Error('data is not a valid shape (object or array required).');
+	}
+
+	if (typeof data === 'object' && !Array.isArray(data)) {
+		if ('transform' in params) {
+			return convertObjectToArray(data, params.transform.objectKeyName);
+		} else {
+			throw new Error('Transform key missing.');
+		}
+	}
+
+	return data;
 }
 
 export default collectData;

@@ -11,10 +11,11 @@ import handleErrors from '../../common/utilities/handle-errors.js';
  * @param {object} params.emitter - The event emitter.
  *
  * @param {object} [params.data] - The arguments needed (and optional) for data collection.
+ * @param {string} [params.data.type] - The type of resource being requested [object, or featch].
+ * @param {string} [params.data.resource] - The uri of the resource needed.
  * @param {string} [params.data.name] - The human-readable name of the collection (akin to aria-label or name attribute).
- * @param {string} params.data.resource - The uri of the resource needed.
- * @param {string} [params.data.type] - The type of resource being requested [file, or query].
- * @param {object} [params.data.body] - The requestBody for query function use.
+ * @param {object} [params.data.options] - The options used in the fetch request.
+ *
  * @param {object} [params.data.args]
  * @param {string} [params.data.args.objectKeyName] - The property name for the key that will store the object property key. When the JSON is a map (not an array of objects).
  * @param {{prop: string, value: string}[]}} [params.data.args.prefilter] - An array of prefilter key/value objects. * @param {object} [params.data.args.presort]
@@ -26,11 +27,11 @@ class DataCollection {
 	constructor(params) {
 		this.id = null;
 		this.props = {
-			name: null,
-			resource: null,
 			type: null,
-			body: null,
-			args: {
+			resource: null,
+			name: null,
+			options: null,
+			transform: {
 				objectKeyName: null,
 				prefilter: null,
 				presort: null,
