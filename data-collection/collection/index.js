@@ -16,11 +16,11 @@ import handleErrors from '../../common/utilities/handle-errors.js';
  * @param {string} [params.data.name] - The human-readable name of the collection (akin to aria-label or name attribute).
  * @param {object} [params.data.options] - The options used in the fetch request.
  *
- * @param {object} [params.data.args]
- * @param {string} [params.data.args.objectKeyName] - The property name for the key that will store the object property key. When the JSON is a map (not an array of objects).
- * @param {{prop: string, value: string}[]}} [params.data.args.prefilter] - An array of prefilter key/value objects. * @param {object} [params.data.args.presort]
- * @param {string} [params.data.args.presort.prop] - The object property to sort by.
- * @param {'asc' | 'desc'} [params.data.args.presort.direction] - The sort direction needed.
+ * @param {object} [params.data.transform]
+ * @param {string} [params.data.transform.objectKeyName] - The property name for the key that will store the object property key. When the JSON is a map (not an array of objects).
+ * @param {{prop: string, value: string}[]}} [params.data.transform.prefilter] - An array of prefilter key/value objects. * @param {object} [params.data.transform.presort]
+ * @param {string} [params.data.transform.presort.prop] - The object property to sort by.
+ * @param {'asc' | 'desc'} [params.data.transform.presort.direction] - The sort direction needed.
  */
 
 class DataCollection {
