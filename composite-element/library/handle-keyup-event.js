@@ -10,13 +10,14 @@ function handleKeyupEvent(event, module) {
 		return;
 	}
 
-	const children = module.state.nodes.children ?? [];
+	const children = module.state.nodes.children;
+	const clonedChildren = children === null ? null : [...children];
 	const targetChild = module.state.nodes.focusedChild;
 
 	module.functions.focusTargetReleased?.({ module, event, children, targetChild });
 	module.emitter?.emit(`${module.name}/${module.id}:focus-target-released`, {
 		event,
-		children: [...children],
+		children: clonedChildren,
 		targetChild
 	});
 }

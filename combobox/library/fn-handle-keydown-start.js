@@ -74,7 +74,7 @@ const escapeFunction = {
 	softReset: (module) => {
 		resetChildFocus({
 			component: module.nodes.component,
-			children: module.state.nodes.children ?? [],
+			children: module.state.nodes.children,
 			targetChild: null,
 			navigationType: module.props.navigationType,
 			attributes: {

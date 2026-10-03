@@ -4,13 +4,13 @@ import handleFocusedChild from './handle-focused-child.js';
 function focusTargetReleased(params) {
 	const { module, event, children, targetChild } = params;
 
-	if (event === 'click') {
+	if (event.type === 'click') {
 		const args = {
 			children: children,
 			targetChild: targetChild,
 		};
 
-		if (children == null) {
+		if (children === null) {
 			args.children = getContextChildren({
 				context: module.nodes.listbox,
 				attribute: module.props.attributes.child,
