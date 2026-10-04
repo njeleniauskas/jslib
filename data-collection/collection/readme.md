@@ -65,7 +65,7 @@ collection.getCollection({
 		}
 	}
 })
-.then(() => {
+.then((data) => {
 	//fetch returns a promise, then…
 	//update relevant data
 });
@@ -84,6 +84,10 @@ Authors can also control the arguments for this method as well. Note that the cl
 - `name`: The name of the collection for HTML labeling.
 - `options`: An (optional) object that can be passed to a fetch request.
 - `transform`: Transform args process the data after it is retrieved, and can be prefiltered or presorted.
+
+<br>
+
+Finally, getCollection returns a promise with the `data.live` if authors wish to use this data outside of the internal data collection functions. But this is optional.
 
 <br>
 

@@ -22,6 +22,9 @@ const resolvers = {
 	},
 	fetch: async ({ resource, options }) => {
 		const response = await fetch(resource, options);
+
+		if (!response.ok) throw new Error(`Fetch: ${response.error}`);
+
 		return await response.json();
 	}
 }

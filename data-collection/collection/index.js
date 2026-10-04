@@ -76,6 +76,8 @@ class DataCollection {
 			//shallow copy (prevents ref mutation errors)
 			this.data.live = this.data.ref.slice();
 			this.emitter.emit('connect-data-collection', this);
+
+			return this.data.live;
 		} catch (errors) {
 			handleErrors(errors);
 		}
