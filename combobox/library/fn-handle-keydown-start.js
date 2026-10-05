@@ -110,6 +110,10 @@ function handleEscapeKey(event, module) {
 		key = 'softReset';
 	}
 
+	if (module.props.searchable && module.nodes.component.getAttribute('type') === 'search') {
+		event.preventDefault();
+	}
+
 	escapeFunction[key](module);
 }
 
