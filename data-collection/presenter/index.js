@@ -29,10 +29,10 @@ class DataCollectionPresenter {
 			},
 			templates: {},
 			name: null,
-			messages : {
-				empty: null,
-				showing: null,
-			}
+		};
+		this.messages = {
+			empty: null,
+			showing: null,
 		};
 		this.emitter = null;
 		this.liveRegionManager = null;
@@ -74,10 +74,10 @@ class DataCollectionPresenter {
 
 		const messages = params.messages ?? {};
 
-		this.props.messages.empty = 'empty' in messages ?
+		this.messages.empty = 'empty' in messages ?
 			() => `No ${this.props.name} to display.`
 			: messages.empty;
-		this.props.messages.showing = 'showing' in  messages ?
+		this.messages.showing = 'showing' in  messages ?
 			() => `Showing ${this.state.displaySize} ${this.props.name}.`
 			: messages.showing;
 
