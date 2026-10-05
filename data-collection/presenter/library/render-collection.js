@@ -16,9 +16,9 @@ function renderCollection(presenter, params) {
 
 	//at-time interpolation needed here
 	if (presenter.data.live.length === 0) {
-		message = presenter.props.messages.empty();
+		message = presenter.messages.empty();
 	} else {
-		message = presenter.props.messages.showing();
+		message = presenter.messages.showing();
 	}
 
 	const args = {
