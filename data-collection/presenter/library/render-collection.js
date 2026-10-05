@@ -14,11 +14,10 @@ function renderCollection(presenter, params) {
 	let newFragment;
 	let message;
 
-	//at-time interpolation needed here
 	if (presenter.data.live.length === 0) {
-		message = presenter.messages.empty();
+		message = presenter.messages.empty(presenter);
 	} else {
-		message = presenter.messages.showing();
+		message = presenter.messages.showing(presenter);
 	}
 
 	const args = {

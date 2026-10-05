@@ -76,10 +76,10 @@ class DataCollectionPresenter {
 
 		this.messages.empty = 'empty' in messages ?
 			messages.empty
-			: () => `No ${this.props.name} to display.`
+			: (presenter) => `No ${presenter.props.name} to display.`
 		this.messages.showing = 'showing' in  messages ?
 			messages.showing
-			: () => `Showing ${this.state.displaySize} ${this.props.name}.`
+			: (presenter) => `Showing ${presenter.state.displaySize} ${presenter.props.name}.`
 
 		if ('liveRegionManager' in params) {
 			this.liveRegionManager = params.liveRegionManager;
