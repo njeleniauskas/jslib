@@ -5,7 +5,7 @@
  */
 
 function connectDataCollection(module, DataCollection) {
-	if (module.id === DataCollection.id && module.data === null) {
+	if (module.id === DataCollection.id) {
 		module.data = DataCollection.data;
 		module.props.name = DataCollection.props.name;
 		module.state.displaySize = module.data.live.length;
