@@ -4,6 +4,7 @@ import validPropertyValue from '../../../common/utilities/valid-property-value.j
 import presortCollection from './presort-collection.js';
 import prefilterCollection from './prefilter-collection.js';
 
+
 /**
  * @param {string} type - The type of function used to fetch data.
  * @param {object} params
@@ -20,18 +21,21 @@ const resolvers = {
 	object: ({ resource }) => {
 		return resource;
 	},
-	fetch: async ({ resource, options }) => {
+	fetch: async (module, params) => {
+		const { resource, options } = params;
 		const response = await fetch(resource, options);
 
 		if (!response.ok) throw new Error(`Fetch: ${response.error}`);
 
-		return await response.json();
+		const json = await response.json();
+
+		return module.parser(json);
 	}
 }
 
-async function collectData(type, params) {
-	const resolver = resolvers[type];
-	const data = await resolver(params);
+async function collectData(module, params) {
+	const resolver = resolvers[params.type];
+	const data = await resolver(module, params);
 	let results = handleData(data, params);
 
 	if ('transform' in params) {

@@ -2,11 +2,10 @@ function getCollectionArgs(params, module) {
 	const args = {};
 
 	if (!params) {
-		args.name = module.props.name;
-		args.resource = module.props.resource;
 		args.type = module.props.type;
+		args.resource = module.props.resource;
+		args.name = module.props.name;
 		args.options = module.props.options;
-		args.args = module.props.args;
 		args.transform = module.props.transform;
 	} else {
 
@@ -15,12 +14,10 @@ function getCollectionArgs(params, module) {
 		args.name = 'name' in params ? params.name : module.props.name;
 		args.options = 'options' in params ?
 			params.options : {};
-		args.transform = 'transform' in params ?
-			params.transform : {};
 
 		const transformArgs = params.transform ?? {};
-		args.transform = {};
 
+		args.transform = {};
 		args.transform.objectKeyName = 'objectKeyName' in transformArgs ?
 			transformArgs.objectKeyName : module.props.transform.objectKeyName;
 		args.transform.prefilter = 'prefilter' in transformArgs ?

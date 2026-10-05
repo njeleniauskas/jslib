@@ -3,12 +3,14 @@ import getCollectionArgs from './library/get-collection-args.js';
 import validateCollectionArgs from './library/validate-collection-args.js';
 import collectData from './library/collect-data.js';
 import handleErrors from '../../common/utilities/handle-errors.js';
+import parseResponseJSON from './library/parse-response-json.js';
 
 /**
  * The core DataCollection class, containing the reference and live datasets.
  * @param {object} params
  * @param {string | number} params.id - The ID to connect each class together.
  * @param {object} params.emitter - The event emitter.
+ * @param {object} params.parser - A function to parse a fetch request's json response.
  *
  * @param {object} [params.data] - The arguments needed (and optional) for data collection.
  * @param {string} [params.data.type] - The type of resource being requested [object, or featch].
@@ -38,6 +40,7 @@ class DataCollection {
 			}
 		};
 		this.emitter = null;
+		this.parser = null;
 		this.data = {
 			ref: null,
 			live: null,
@@ -60,6 +63,7 @@ class DataCollection {
 
 		this.props = {...this.props, ...data};
 		this.props.args = { ...this.props.args, ...args };
+		this.parser = 'parser' in params ? params.parser : parseResponseJSON;
 		this.emitter = props.emitter;
 		this.id = props.id;
 	}
@@ -72,7 +76,7 @@ class DataCollection {
 
 			this.props = {...this.props, ...args};
 
-			this.data.ref = await collectData(args.type, args);
+			this.data.ref = await collectData(this, args);
 			//shallow copy (prevents ref mutation errors)
 			this.data.live = this.data.ref.slice();
 			this.emitter.emit('connect-data-collection', this);
