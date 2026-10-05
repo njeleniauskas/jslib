@@ -8,13 +8,14 @@ import prefilterCollection from './prefilter-collection.js';
 /**
  * @param {string} type - The type of function used to fetch data.
  * @param {object} params
- * @param {string} params.objectKeyName - The object property name for a named object's key.
- * @param {string} params.presort - The attribute property to sort by.
- * @param {string} params.prefilter - The attribute property to sort by.
- * @param {string[asc|desc]} params.presortDirection  - The sort direction (asc or desc).
+ * @param {string} params.resource - The resouce to draw from [object or fetch uri].
+ * @param {string} [params.options] - The options object passed to a fetch request.
+ * @param {string} [params.objectKeyName] - The object property name for a named object's key.
+ * @param {string} [params.presort] - The attribute property to sort by.
+ * @param {string} [params.prefilter] - The attribute property to sort by.
+ * @param {string[asc|desc]} [params.presortDirection]  - The sort direction (asc or desc).
  *
  *
- * @param {string} params.resource - The resouce to draw from.
  */
 
 const resolvers = {
