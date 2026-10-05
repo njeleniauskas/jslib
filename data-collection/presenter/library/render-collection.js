@@ -16,9 +16,9 @@ function renderCollection(presenter, params) {
 
 	//at-time interpolation needed here
 	if (presenter.data.live.length === 0) {
-		message = `No ${presenter.props.name} to display.`;
+		message = presenter.props.messages.empty();
 	} else {
-		message = `Showing ${presenter.state.displaySize} ${presenter.props.name}.`;
+		message = presenter.props.messages.showing();
 	}
 
 	const args = {

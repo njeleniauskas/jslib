@@ -12,6 +12,10 @@ import addEmitterEvents from './library/add-emitter-events.js';
  * @param {string} params.attributes.collection - The attribute identifying the collection element.
  * @param {string} params.attributes.liveRegion - The attribute identifying the live region.
  * @param {function} params.templates - The item templates, organized by format (key).
+ *
+ * @param {object} [params.messages]
+ * @param {object} [params.messages.empty] - The template to use when no items exist.
+ * @param {object} [params.messages.showing] - The tempalte to use when at least 1 item exists.
  */
 
 class DataCollectionPresenter {
@@ -26,8 +30,8 @@ class DataCollectionPresenter {
 			templates: {},
 			name: null,
 			messages : {
-				emptyCollection: null,
-				updatedCollection: null,
+				empty: null,
+				showing: null,
 			}
 		};
 		this.emitter = null;
@@ -67,6 +71,15 @@ class DataCollectionPresenter {
 		this.props = {...this.props, ...args};
 		this.emitter = params.emitter;
 		this.id = params.id;
+
+		const messages = params.messages ?? {};
+
+		this.props.messages.empty = 'empty' in messages ?
+			() => `No ${presenter.props.name} to display.`
+			: () => messages.empty;
+		this.props.messages.showing = 'showing' in  messages ?
+			() => `Showing ${presenter.state.displaySize} ${presenter.props.name}.`
+			: () => messages.showing;
 
 		if ('liveRegionManager' in params) {
 			this.liveRegionManager = params.liveRegionManager;
