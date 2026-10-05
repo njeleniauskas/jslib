@@ -19,18 +19,16 @@ function createNewFragment(params) {
 		const template = params.templates[params.display];
 
 		collection = template(params.data, {
-			'attribute': params.collectionAttribute,
-			'id': params.id,
 			'startingIndex': params.startingIndex,
 			'endingIndex': params.endingIndex,
 			'message': params.message
 		});
 	} else {
 		collection = document.createElement('div');
-		collection.setAttribute(params.collectionAttribute, params.id);
 		collection.textContent = params.message;
 	}
 
+	collection.setAttribute(params.collectionAttribute, params.id);
 	fragment.appendChild(collection);
 
 	return fragment;

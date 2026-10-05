@@ -80,10 +80,9 @@ Within this function authors have access to a few parameters, three of which are
 ```javascript
 /**
  * @param {array} data - The array of objects to loop through.
- * @param {string} params.attribute - The attribute identifying the collection node.
- * @param {string} params.id - The id of the attribute to correctly query the right node.
  * @param {number} [params.startingIndex] - The index the loop should start at.
  * @param {number} [params.endingIndex] - The index the loop should end at.
+ * @param {number} [params.mesage] - The message to be used.
  */
 ```
 
