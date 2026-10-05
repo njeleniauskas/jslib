@@ -44,15 +44,15 @@ const presenterArgs = {
 	},
 	emitter: emitter,
 	messages: {
-		empty: `No matches found.`,
-		showing: `Showing {num} {objects}`
+		empty: () => `No matches found.`,
+		showing: () => `Showing {num} {objects}`
 	}
 };
 ```
 
 <br>
 
-One specific behavior with arguments are with messages. Custom messages can be passed for when a list is empty (`empty`) or has items (`showing`), and these can be strings or template literals. If a template literal is used, authors may wish to use the values `presenter.props.name` and `presenter.state.displaySize` in those templates to render the right message at call time — for example `Showing ${presenter.state.displaySize} ${presenter.props.name}.` (the fallback mesage for `showing`).
+One specific behavior with arguments are with messages. Custom messages can be passed for when a list is empty (`empty`) or has items (`showing`), and these can be strings or template literals wrapped in an anonymous function (`() =>`). This setup is used so that a template literal uses internal properties like `presenter.props.name` and `presenter.state.displaySize` it will not throw an error. An example of this is ``empty: () => `Showing ${presenter.state.displaySize} ${presenter.props.name}.` ``
 
 <br>
 
