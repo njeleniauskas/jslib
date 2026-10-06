@@ -14,11 +14,15 @@ function processComboboxState(event, module) {
 			value: 'listbox'
 		});
 
-		const child = module.state.nodes.children.find((child) => child.getAttribute(module.props.attributes.childName) === module.state.childNameBeforeMutation);
+		const targetIndex = module.state.nodes.children.findIndex((child) => child.getAttribute(module.props.attributes.childName) === module.state.childNameBeforeMutation);
+		const child = module.state.nodes.children[targetIndex] ?? null;
 
 		module.state.nodes.focusedChild = child;
 		module.state.childNameBeforeMutation = null;
-		updateFocusState(module.state.nodes.children.indexOf(module.state.nodes.focusedChild), module);
+
+		if (child) {
+			updateFocusState(targetIndex, module);
+		}
 	}
 
 	if (module.props.selectable && module.props.selectBehavior === 'coupled') {
