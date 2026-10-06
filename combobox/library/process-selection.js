@@ -44,7 +44,10 @@ function processSelection(module, params) {
 		}
 	}
 
-	module.emitter?.emit(`${module.name}/${module.id}:selection-updated`, { targetChild });
+	module.functions.selectionUpdated?.({ module, targetChild });
+	module.emitter?.emit(`${module.name}/${module.id}:selection-updated`, {
+		targetChild
+	});
 }
 
 export default processSelection;
