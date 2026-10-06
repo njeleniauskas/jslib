@@ -16,6 +16,11 @@ function processSelection(params) {
 		});
 
 		updateViewState(module, targetID);
+
+		module.functions.selectionUpdated?.({ module, targetChild });
+		module.emitter?.emit(`${module.name}/${module.id}:selection-updated`, {
+			targetChild
+		});
 	}
 }
 

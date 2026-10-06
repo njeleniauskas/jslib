@@ -85,5 +85,12 @@ Note that for attribute args, `data-` or `aria-` attributes can be supplied. And
 <br>
 
 
+## Additional events or hooks
+It may be useful to respond to selection changes in this component. And like the CompositElement, authors can leverage a callback hook or emitter event to add additional behaviors. If a callback hook is used, it should be passed as `functions.selectionUpdated`. The emitter event is `${module.name}/${module.id}:selection-updated` and passes the `targedChild` that was just selected.
+
+
+<br>
+
+
 ## Additional Notes
 - The fallback attribute names follow the naming schema for Composite Navigation (`data-ce-*`). If authors simply wish to implement the simplest form of this class, they can use these defaults.
