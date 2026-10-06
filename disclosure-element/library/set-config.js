@@ -1,4 +1,6 @@
 function setConfig(module, params) {
+	module.id = params.id;
+
 	module.props.attributes.control = 'control' in params.attributes ?
 		params.attributes.control : 'data-de-control';
 
