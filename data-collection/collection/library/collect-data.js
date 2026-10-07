@@ -4,7 +4,6 @@ import validPropertyValue from '../../../common/utilities/valid-property-value.j
 import presortCollection from './presort-collection.js';
 import prefilterCollection from './prefilter-collection.js';
 
-
 /**
  * @param {string} type - The type of function used to fetch data.
  * @param {object} params
@@ -14,8 +13,6 @@ import prefilterCollection from './prefilter-collection.js';
  * @param {string} [params.presort] - The attribute property to sort by.
  * @param {string} [params.prefilter] - The attribute property to sort by.
  * @param {string[asc|desc]} [params.presortDirection]  - The sort direction (asc or desc).
- *
- *
  */
 
 const resolvers = {
@@ -26,7 +23,7 @@ const resolvers = {
 		const { resource, options } = params;
 		const response = await fetch(resource, options);
 
-		if (!response.ok) throw new Error(`Fetch: ${response.error}`);
+		if (!response.ok) throw new Error(`Fetch [${response.status}] ${response.statusText}: for ${response.url}`);
 
 		const json = await response.json();
 
