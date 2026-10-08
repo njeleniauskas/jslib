@@ -55,9 +55,10 @@ function handlePointerdownStart(params) {
 	}
 
 	if (event.target === module.state.nodes.context && module.props.disclosable) {
-		const attribute = module.props.attributes.display;
+		const attribute = module.props.attributes.hidden;
 
 		if (module.nodes.listbox.getAttribute(attribute) === 'true') {
+			module.nodes.component.setAttribute(module.props.attributes.expanded, 'true');
 			module.nodes.listbox.setAttribute(attribute, 'false');
 		}
 	}

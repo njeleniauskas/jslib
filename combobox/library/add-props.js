@@ -9,8 +9,10 @@ function addProps(module, params) {
 		attributes.selected : 'data-selected';
 	module.props.attributes.childName = 'childName' in attributes ?
 		attributes.childName : `id`;
-	module.props.attributes.display = 'display' in attributes ?
-		attributes.display : 'data-hidden';
+	module.props.attributes.expanded = 'expanded' in attributes ?
+		attributes.expanded : 'data-expanded';
+	module.props.attributes.hidden = 'hidden' in attributes ?
+		attributes.hidden : 'data-hidden';
 	module.props.attributes.valueMatch = 'valueMatch' in attributes ?
 		attributes.valueMatch : 'data-value-match';
 

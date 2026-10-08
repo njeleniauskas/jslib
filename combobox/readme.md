@@ -93,7 +93,8 @@ Additional attributes are also available to use, overriding their defaults:
 ```javascript
 /**
  * @param {string} attributes.childName - The name of the attribute that stores the value of the item.
- * @param {string} attributes.display - The attribute that marks a listbox as shown/hidden.
+ * @param {string} attributes.expanded - The attribute that indicates a component's listbox is hidden/visible.
+ * @param {string} attributes.hidden - The attribute that marks a listbox as shown/hidden.
  * @param {string} attributes.valueMatch - The attribute used to flag exact matches when a query string is used to represent a selection.
  * @param {string} attributes.selected - The attribute representing the selection state of a child.
  */

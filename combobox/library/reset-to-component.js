@@ -24,7 +24,8 @@ function resetToComponent(module) {
 	});
 
 	if (module.props.disclosable) {
-		module.nodes.listbox.setAttribute(module.props.attributes.display, 'true');
+		module.nodes.component.setAttribute(module.props.attributes.expanded, 'false');
+		module.nodes.listbox.setAttribute(module.props.attributes.hidden, 'true');
 	}
 
 	module.nodes.component.setAttribute(module.props.attributes.activeDescendant, '');

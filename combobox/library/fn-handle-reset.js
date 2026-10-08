@@ -10,9 +10,10 @@ function handleReset(params) {
 	module.nodes.listbox.setAttribute(attribute, 'false');
 
 	if (module.props.disclosable) {
-		const attribute = module.props.attributes.display;
+		const attribute = module.props.attributes.hidden;
 
 		if (module.nodes.listbox.getAttribute(attribute) === 'false') {
+			module.nodes.component.setAttribute(module.props.attributes.expanded, 'false');
 			module.nodes.listbox.setAttribute(attribute, 'true');
 		}
 	}

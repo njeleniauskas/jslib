@@ -50,7 +50,8 @@ function processComboboxState(event, module) {
 	}
 
 	if (module.props.disclosable) {
-		module.nodes.listbox.setAttribute(module.props.attributes.display, 'false');
+		module.nodes.component.setAttribute(module.props.attributes.expanded, 'true');
+		module.nodes.listbox.setAttribute(module.props.attributes.hidden, 'false');
 	}
 }
 

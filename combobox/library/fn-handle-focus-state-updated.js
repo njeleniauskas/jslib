@@ -4,7 +4,8 @@ function handleFocusStateUpdated(params) {
 	const discloseOnKeydown = module.props.disclosable && event.type === 'keydown';
 
 	if (discloseOnFocusin || discloseOnKeydown) {
-		module.nodes.listbox.setAttribute(module.props.attributes.display, 'false');
+		module.nodes.component.setAttribute(module.props.attributes.expanded, 'true');
+		module.nodes.listbox.setAttribute(module.props.attributes.hidden, 'false');
 	}
 
 	// case: listbox is scrollable

@@ -98,7 +98,7 @@ function handleEscapeKey(event, module) {
 
 	if (module.state.nodes.context.getAttribute(role) === 'component'
 		&& module.props.disclosable
-		&& module.nodes.listbox.getAttribute(module.props.attributes.display) === 'false') {
+		&& module.nodes.listbox.getAttribute(module.props.attributes.hidden) === 'false') {
 		key = 'hardReset';
 	}
 
