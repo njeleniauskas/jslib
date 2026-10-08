@@ -6,6 +6,13 @@ function handleFocusStateUpdated(params) {
 	if (discloseOnFocusin || discloseOnKeydown) {
 		module.nodes.listbox.setAttribute(module.props.attributes.display, 'false');
 	}
+
+	// case: listbox is scrollable
+	if (targetChild !== null) {
+		targetChild.scrollIntoView({
+			block: 'nearest'
+		});
+	}
 }
 
 export default handleFocusStateUpdated;
