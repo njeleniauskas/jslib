@@ -10,6 +10,7 @@ import addEmitterEvents from './library/add-emitter-events.js';
  * @param {object} params.attributes
  * @param {string} params.attributes.container - The attribute identifying the container element.
  * @param {string} params.attributes.collection - The attribute identifying the collection element.
+ * @param {string} params.attributes.message - The attribute identifying the message element.
  * @param {string} params.attributes.liveRegion - The attribute identifying the live region.
  * @param {function} params.templates - The item templates, organized by format (key).
  *
@@ -25,6 +26,7 @@ class DataCollectionPresenter {
 			attributes: {
 				container: null,
 				collection: null,
+				message: null,
 				liveRegion: null,
 			},
 			templates: {},

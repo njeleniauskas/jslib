@@ -8,6 +8,7 @@
  * @param {number} params.startingIndex
  * @param {number} params.endingIndex
  * @param {string} params.collectionAttribute
+ * @param {string} params.messageAttribute
  * @param {string} params.message
  */
 
@@ -21,15 +22,21 @@ function createNewFragment(params) {
 		collection = template(params.data, {
 			'startingIndex': params.startingIndex,
 			'endingIndex': params.endingIndex,
-			'message': params.message
+			'attribute': params.collectionAttribute,
+			'id': params.id
 		});
-	} else {
-		collection = document.createElement('div');
-		collection.textContent = params.message;
 	}
 
-	collection.setAttribute(params.collectionAttribute, params.id);
-	fragment.appendChild(collection);
+	const message = document.createElement('div');
+
+	message.setAttribute(params.messageAttribute, params.id);
+	message.textContent = params.message;
+
+	fragment.appendChild(message);
+
+	if (collection instanceof Element) {
+		fragment.appendChild(collection);
+	}
 
 	return fragment;
 }

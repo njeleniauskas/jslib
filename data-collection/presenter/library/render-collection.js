@@ -6,7 +6,7 @@ import createNewFragment from './create-new-fragment.js';
  * @param {object} params.params - Parameters passed to this function (not needed/?)
  */
 
-function renderCollection(presenter, params) {
+function renderCollection(presenter) {
 	presenter.emitter.emit('render-collection-start');
 
 	const attribute = presenter.props.attributes.collection;
@@ -27,6 +27,7 @@ function renderCollection(presenter, params) {
 		'startingIndex': presenter.state.startingIndex,
 		'endingIndex': presenter.state.endingIndex,
 		'collectionAttribute': presenter.props.attributes.collection,
+		'messageAttribute': presenter.props.attributes.message,
 		'id': presenter.id,
 		'message': message
 	};
@@ -34,12 +35,11 @@ function renderCollection(presenter, params) {
 	newFragment = createNewFragment(args);
 	presenter.nodes.collection = presenter.nodes.container.querySelector(`[${attribute}="${id}"]`);
 
-	if (presenter.nodes.collection === null || presenter.nodes.collection === undefined) {
-		presenter.nodes.container.appendChild(newFragment);
-	} else {
-		presenter.nodes.collection.replaceWith(newFragment);
-		presenter.nodes.collection = newFragment;
+	if (presenter.nodes.collection !== null || presenter.nodes.collection !== undefined) {
+		presenter.nodes.container.replaceChildren();
 	}
+
+	presenter.nodes.container.appendChild(newFragment);
 
 	if (presenter.liveRegionManager !== null) {
 		presenter.liveRegionManager.addMessage(message);

@@ -38,6 +38,10 @@ function validateConfig(params) {
 			errors.push(new Error('The attribute for the collection is missing.'));
 		}
 
+		if (!validPropertyValue(params.attributes, 'message')) {
+			errors.push(new Error('The attribute for the message is missing.'));
+		}
+
 		if (!validPropertyValue(params.attributes, 'liveRegion')) {
 			errors.push(new Error('The attribute for the live region is missing.'));
 		}

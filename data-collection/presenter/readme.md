@@ -9,12 +9,13 @@ Because the presenter interacts directly with the DOM, proper setup includes a f
 <br>
 
 ### HTML
-At minimum, HTML for the container and live region must be present. The collection element is optional as it is automatically added on the first render:
+At minimum, HTML for the container and live region must be present. The collection and message elements are optional as they are automatically added on the first render:
 
 <br>
 
 ```html
 <div data-{container}="ID">
+	<div data-{message}>...</div>
 	<div data-{collection}="ID">
 		...
 	</div>
@@ -37,6 +38,7 @@ const presenterArgs = {
 	attributes: {
 		container: 'data-{container}',
 		collection: 'data-{collection}',
+		message: 'data-{message}',
 		liveRegion: '{live-region}'
 	},
 	templates: {
@@ -52,13 +54,13 @@ const presenterArgs = {
 
 <br>
 
-One specific behavior with arguments are with messages. Custom messages can be passed for when a list is empty (`empty`) or has items (`showing`), and these can be strings or template literals wrapped in an anonymous function (`() =>`). This setup is used so that a template literal uses internal properties like `presenter.props.name` and `presenter.state.displaySize` it will not throw an error. An example of this is ``empty: () => `Showing ${presenter.state.displaySize} ${presenter.props.name}.` ``
+One specific behavior with arguments are with messages. Custom messages can be passed for when a list is empty (`empty`) or has items (`showing`), and these can be strings or template literals wrapped in an anonymous function (`() =>`). This setup is used so that a template literal uses internal properties like `presenter.props.name` and `presenter.state.displaySize` it will not throw an error. An example of this is ``empty: () => `Showing ${presenter.state.displaySize} ${presenter.props.name}.` ``.
 
 <br>
 
 
 ### Collection Templates
-The presenter must be supplied a template function (identified by a display key) so it knows how to render the collection. The basic outline of the function is as follows, using an unordered list as the collection element:
+The presenter must be supplied a template function (identified by a display key) so it knows how to render the collection (only the collection). The basic outline of the function is as follows, using an unordered list as the collection element:
 
 <br>
 
@@ -89,9 +91,10 @@ Within this function authors have access to a few parameters, three of which are
 ```javascript
 /**
  * @param {array} data - The array of objects to loop through.
+ * @param {number} [params.attribute] - The attribute to ID the collection element.
+ * @param {number} [params.id] - The id of the module.
  * @param {number} [params.startingIndex] - The index the loop should start at.
  * @param {number} [params.endingIndex] - The index the loop should end at.
- * @param {number} [params.mesage] - The message to be used.
  */
 ```
 
