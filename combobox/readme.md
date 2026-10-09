@@ -28,7 +28,7 @@ Because a Combobox is an extension of a CompositeElement, the core focus and nav
 
 <br>
 
-Setting up more specific functionality is easy to accomplish, but it is possible to only pass an ID and the component will fall back to a more well-established implementation of a Combobox (text input + disclosable listbox):
+Setting up more specific functionality is easy to accomplish, but it is possible to only pass an ID and the component will fall back to a more well-established implementation of a Combobox (text input + disclosable collection):
 
 <br>
 
@@ -54,10 +54,10 @@ Setting up the HTML is also simple as you only need a few extra details beyond a
 	{contextRole}="component"
 	data-cb="{id}">
 
-<Listbox
+<collection
 	{orientation}="vertical"
 	{contextSelected}="true"
-	{contextRole}="listbox"
+	{contextRole}="collection"
 	data-cb="{id}">
 	<Item
 		data-cb-child="{id}"
@@ -65,7 +65,7 @@ Setting up the HTML is also simple as you only need a few extra details beyond a
 		>
 	</Item>
 	...
-</Listbox>
+</collection>
 ```
 
 <br>
@@ -76,14 +76,14 @@ Because a Combobox's behavior can differ a lot, there are several properties tha
 
 | Property | Default | Description |
 | --- | --- | --- |
-| `preseed` | `false` | Whether the listbox elements should already exist in the DOM before interaction, or be fetched on the first query. |
+| `preseed` | `false` | Whether the collection elements should already exist in the DOM before interaction, or be fetched on the first query. |
 | `searchable` | `true` | Must be `true` if using an input that allows typable queries When false, the component element will have its `textContent` written to if selection is both `true` and `coupled`. |
 | `searchDelay` | `150ms` | The delay time used for the query function (debounce timing). |
-| `searchMutatesChildren` | `false` | Indicates that a query will mutate the listbox in the DOM (Combobox will re-assess the context after mutation if `true`).|
-| `disclosable` | `true` | Whether the listbox is disclosable or not. |
-| `discloseOnFocusin` | `true` | When disclosable, should the listbox be displayed when the component receives focus? When `true`, it will also disclose the listbox when the component is clicked. |
+| `searchMutatesChildren` | `false` | Indicates that a query will mutate the collection in the DOM (Combobox will re-assess the context after mutation if `true`).|
+| `disclosable` | `true` | Whether the collection is disclosable or not. |
+| `discloseOnFocusin` | `true` | When disclosable, should the collection be displayed when the component receives focus? When `true`, it will also disclose the collection when the component is clicked. |
 | `returnFocusToComponent` | `true` | When true, return focus back to the component after  a child has been interacted with. |
-| `selectable` | `true` | Whether the listbox items can be selected or not. |
+| `selectable` | `true` | Whether the collection items can be selected or not. |
 | `selectBehavior` | `coupled` | Whether selection should be `coupled` or `independent` from the input query. |
 
 <br>
@@ -93,8 +93,8 @@ Additional attributes are also available to use, overriding their defaults:
 ```javascript
 /**
  * @param {string} attributes.childName - The name of the attribute that stores the value of the item.
- * @param {string} attributes.expanded - The attribute that indicates a component's listbox is hidden/visible.
- * @param {string} attributes.hidden - The attribute that marks a listbox as shown/hidden.
+ * @param {string} attributes.expanded - The attribute that indicates a component's collection is hidden/visible.
+ * @param {string} attributes.hidden - The attribute that marks a collection as shown/hidden.
  * @param {string} attributes.valueMatch - The attribute used to flag exact matches when a query string is used to represent a selection.
  * @param {string} attributes.selected - The attribute representing the selection state of a child.
  */
@@ -188,7 +188,7 @@ const queryFunction = async (event, module) => {
 		// create items and append to the fragment
 	}
 
-	module.nodes.listbox.appendChild(fragment);
+	module.nodes.collection.appendChild(fragment);
 }
 ```
 
@@ -198,7 +198,7 @@ It is also possible ignore all of these properties if the query function gives a
 
 <br>
 
-Lastly, if the query function mutates the DOM authors will need to capture the last focused child before mutation occurs so that focus can be re-applied correctly after the listbox is re-rendered. This means setting `args.searchMutatesChildren` to `true` and then adding a class method call in the query function that captures what child was last in focus:
+Lastly, if the query function mutates the DOM authors will need to capture the last focused child before mutation occurs so that focus can be re-applied correctly after the collection is re-rendered. This means setting `args.searchMutatesChildren` to `true` and then adding a class method call in the query function that captures what child was last in focus:
 
 ```javascript
 const queryFunction = async (event, module) => {
@@ -221,4 +221,4 @@ const queryFunction = async (event, module) => {
 
 
 ## Future Exploration
-- Add a disclosure button functionality for pointers (toggle disclosure of listbox).
+- Add a disclosure button functionality for pointers (toggle disclosure of collection).

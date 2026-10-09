@@ -1,6 +1,6 @@
 import updateFocusState from '../../composite-element/library/update-focus-state.js';
 import processSelectionMatch from './process-selection-match.js';
-import listboxHasChildren from './listbox-has-children.js';
+import collectionHasChildren from './collection-has-children.js';
 
 function processComboboxState(event, module) {
 	if (module.props.preseed) {
@@ -8,11 +8,11 @@ function processComboboxState(event, module) {
 		return;
 	}
 
-	if (module.props.searchMutatesChildren && module.state.nodes.context === module.nodes.listbox) {
+	if (module.props.searchMutatesChildren && module.state.nodes.context === module.nodes.collection) {
 		const nameBeforeMutation = module.state.childNameBeforeMutation;
 		module.state.childNameBeforeMutation = null;
 
-		if (!listboxHasChildren(module)) {
+		if (!collectionHasChildren(module)) {
 			module.processNavigationContext('attribute', {
 				contexts: module.nodes.contexts,
 				attribute: module.props.attributes.contextRole,
@@ -25,7 +25,7 @@ function processComboboxState(event, module) {
 		module.processNavigationContext('attribute', {
 			contexts: module.nodes.contexts,
 			attribute: module.props.attributes.contextRole,
-			value: 'listbox'
+			value: 'collection'
 		});
 
 		const targetIndex = module.state.nodes.children.findIndex((child) => child.getAttribute(module.props.attributes.childName) === nameBeforeMutation);
@@ -51,7 +51,7 @@ function processComboboxState(event, module) {
 
 	if (module.props.disclosable) {
 		module.nodes.component.setAttribute(module.props.attributes.expanded, 'true');
-		module.nodes.listbox.setAttribute(module.props.attributes.hidden, 'false');
+		module.nodes.collection.setAttribute(module.props.attributes.hidden, 'false');
 	}
 }
 

@@ -6,7 +6,7 @@ function resetToComponent(module) {
 
 	if (children === null) {
 		children = getContextChildren({
-			context: module.nodes.listbox,
+			context: module.nodes.collection,
 			attribute: module.props.attributes.child,
 			value: module.id
 		});
@@ -25,7 +25,7 @@ function resetToComponent(module) {
 
 	if (module.props.disclosable) {
 		module.nodes.component.setAttribute(module.props.attributes.expanded, 'false');
-		module.nodes.listbox.setAttribute(module.props.attributes.hidden, 'true');
+		module.nodes.collection.setAttribute(module.props.attributes.hidden, 'true');
 	}
 
 	module.nodes.component.setAttribute(module.props.attributes.activeDescendant, '');

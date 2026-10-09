@@ -7,7 +7,7 @@ function processSelection(module, params) {
 
 	if (children === null) {
 		children = getContextChildren({
-			context: module.nodes.listbox,
+			context: module.nodes.collection,
 			attribute: module.props.attributes.child,
 			value: module.id
 		});

@@ -5,10 +5,10 @@ function handleFocusStateUpdated(params) {
 
 	if (discloseOnFocusin || discloseOnKeydown) {
 		module.nodes.component.setAttribute(module.props.attributes.expanded, 'true');
-		module.nodes.listbox.setAttribute(module.props.attributes.hidden, 'false');
+		module.nodes.collection.setAttribute(module.props.attributes.hidden, 'false');
 	}
 
-	// case: listbox is scrollable
+	// case: collection is scrollable
 	if (targetChild !== null) {
 		targetChild.scrollIntoView({
 			block: 'nearest'

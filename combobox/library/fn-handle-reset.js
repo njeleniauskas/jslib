@@ -7,14 +7,14 @@ function handleReset(params) {
 	const componentContext = module.nodes.component.closest(`[${contextRole}="component"]`);
 
 	componentContext.setAttribute(attribute, 'true');
-	module.nodes.listbox.setAttribute(attribute, 'false');
+	module.nodes.collection.setAttribute(attribute, 'false');
 
 	if (module.props.disclosable) {
 		const attribute = module.props.attributes.hidden;
 
-		if (module.nodes.listbox.getAttribute(attribute) === 'false') {
+		if (module.nodes.collection.getAttribute(attribute) === 'false') {
 			module.nodes.component.setAttribute(module.props.attributes.expanded, 'false');
-			module.nodes.listbox.setAttribute(attribute, 'true');
+			module.nodes.collection.setAttribute(attribute, 'true');
 		}
 	}
 }

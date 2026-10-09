@@ -6,7 +6,7 @@ function handlePointerdownStart(params) {
 	module.state.nodes.pointerEventChild = event.target.closest(queryString);
 
 	if (module.state.nodes.pointerEventChild !== null ||
-		event.target === module.nodes.listbox && document.activeElement === module.nodes.component) {
+		event.target === module.nodes.collection && document.activeElement === module.nodes.component) {
 		event.preventDefault();
 	}
 
@@ -16,7 +16,7 @@ function handlePointerdownStart(params) {
 		module.processNavigationContext('attribute', {
 			contexts: module.nodes.contexts,
 			attribute: module.props.attributes.contextRole,
-			value: 'listbox'
+			value: 'collection'
 		});
 
 		if (module.props.selectable) {
@@ -32,12 +32,12 @@ function handlePointerdownStart(params) {
 			module.nodes.component.focus();
 		}
 
-		//re-establish listbox context
+		//re-establish collection context
 		if (!module.props.returnFocusToComponent) {
 			module.processNavigationContext('attribute', {
 				contexts: module.nodes.contexts,
 				attribute: module.props.attributes.contextRole,
-				value: 'listbox'
+				value: 'collection'
 			});
 		}
 
@@ -50,16 +50,16 @@ function handlePointerdownStart(params) {
 		module.processNavigationContext('attribute', {
 			contexts: module.nodes.contexts,
 			attribute: module.props.attributes.contextRole,
-			value: 'listbox'
+			value: 'collection'
 		});
 	}
 
 	if (event.target === module.state.nodes.context && module.props.disclosable) {
 		const attribute = module.props.attributes.hidden;
 
-		if (module.nodes.listbox.getAttribute(attribute) === 'true') {
+		if (module.nodes.collection.getAttribute(attribute) === 'true') {
 			module.nodes.component.setAttribute(module.props.attributes.expanded, 'true');
-			module.nodes.listbox.setAttribute(attribute, 'false');
+			module.nodes.collection.setAttribute(attribute, 'false');
 		}
 	}
 }

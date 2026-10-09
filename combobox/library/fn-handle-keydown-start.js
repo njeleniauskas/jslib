@@ -43,7 +43,7 @@ function handleNavigationKey(event, module, keydownState) {
 	if (contextRole === 'component'
 		&& inArray(module.state.navigationKeys.cross.all, event.key)) {
 		const children = getContextChildren({
-			context: module.nodes.listbox,
+			context: module.nodes.collection,
 			attribute: module.props.attributes.child,
 			value: module.id
 		});
@@ -54,7 +54,7 @@ function handleNavigationKey(event, module, keydownState) {
 			module.processNavigationContext('attribute', {
 				contexts: module.nodes.contexts,
 				attribute: module.props.attributes.contextRole,
-				value: 'listbox'
+				value: 'collection'
 			});
 		}
 	}
@@ -98,11 +98,11 @@ function handleEscapeKey(event, module) {
 
 	if (module.state.nodes.context.getAttribute(role) === 'component'
 		&& module.props.disclosable
-		&& module.nodes.listbox.getAttribute(module.props.attributes.hidden) === 'false') {
+		&& module.nodes.collection.getAttribute(module.props.attributes.hidden) === 'false') {
 		key = 'hardReset';
 	}
 
-	if (module.state.nodes.context.getAttribute(role) === 'listbox') {
+	if (module.state.nodes.context.getAttribute(role) === 'collection') {
 		key = 'hardReset';
 	}
 
