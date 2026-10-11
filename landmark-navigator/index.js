@@ -45,9 +45,7 @@ class LandmarkNavigator {
 		this.state = this.getState();
 
 		if (!this.state.nodeIsLandmark) {
-			if (!event.shiftKey) {
-				event.preventDefault();
-			}
+			event.preventDefault();
 
 			const landmark = this.state.node.closest(this.attribute);
 
