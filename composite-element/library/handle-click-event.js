@@ -8,7 +8,9 @@ function handleClickEvent(event, module) {
 		return;
 	}
 
-	if (module.state.nodes.pointerEventChild !== event.target) {
+	const attribute = `[${module.props.attributes.child}="${module.id}"]`;
+
+	if (module.state.nodes.pointerEventChild !== event.target.closest(attribute)) {
 		return;
 	}
 

@@ -46,9 +46,12 @@ function handleKeydownEvent(event, module) {
 		});
 	}
 
+	const targetChild = module.state.nodes.focusedChild;
+
 	module.functions.keydownEnd?.({ event, module });
 	module.emitter?.emit(`${module.name}/${module.id}:keydown-end`, {
-		event
+		event,
+		targetChild
 	});
 
 	module.state.keydownStartContext = null;
