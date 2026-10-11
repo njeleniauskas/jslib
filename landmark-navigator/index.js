@@ -53,8 +53,9 @@ class LandmarkNavigator {
 				landmark.setAttribute('tabindex', '-1');
 				landmark.focus();
 			} else {
-				this.nodes[0].setAttribute('tabindex', '-1');
-				this.nodes[0].focus();
+				const index = !event.shiftKey ? 0 : this.lastIndex;
+				this.nodes[index].setAttribute('tabindex', '-1');
+				this.nodes[index].focus();
 			}
 
 			return;
