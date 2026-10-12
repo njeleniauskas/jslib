@@ -2,6 +2,7 @@ import CompositeElement from '../composite-element/index.js';
 
 import addProps from './library/add-props.js';
 import addNodes from './library/add-nodes.js';
+import addEvents from './library/add-events.js';
 import addFunctions from './library/add-functions.js';
 
 /**
@@ -24,6 +25,7 @@ class DisplaySwitcher extends CompositeElement {
 		try {
 			addProps(this, params);
 			addNodes(this);
+			addEvents(this);
 			addFunctions(this, params);
 		} catch (errors) {
 			if (errors instanceof AggregateError) {
