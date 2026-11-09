@@ -9,7 +9,6 @@ class LandmarkNavigator {
 		this.key = null;
 		this.attribute = null;
 		this.lastIndex = null;
-		this.wasF6 = false;
 		this.state = {};
 
 		this.#init(params);
@@ -29,7 +28,6 @@ class LandmarkNavigator {
 	#addEvents() {
 		window.addEventListener('keydown', (event) => {
 			if (event.key !== this.key) return;
-			this.wasF6 = true;
 
 			this.handleKeydownEvent(event);
 		});
