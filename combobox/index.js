@@ -13,10 +13,10 @@ import addNodes from './library/add-nodes.js';
 class Combobox extends CompositeElement {
 	constructor(params) {
 		super({ ...params, navigationType: 'reference', attributePrefix: 'data-cb' });
-		this.#extendCompositeElement(params);
+		this.#extendClass(params);
 	}
 
-	#extendCompositeElement(params) {
+	#extendClass(params) {
 		try {
 			addProps(this, params);
 			addNodes(this);
