@@ -1,31 +1,21 @@
-import removeBracketsFromString from '../../common/utilities/remove-brackets-from-string.js';
-
-/**
- * @param {object} params 
- * @param {object} params.props
- * @param {object} params.nodes
- * @param {object} params.state
- */
-
-function closeDialog(params) {
-	const attribute = removeBracketsFromString(params.props.strings.hidden);
-	params.state.opened = false;
-
+async function closeDialog(module) {
 	document.documentElement.removeAttribute('style');
-	params.nodes.window.classList.remove(params.props.strings.toggle);
-	
-	if (params.state.gateControl) {
-		params.nodes.control.classList.add(params.props.strings.inert);
-	}
-	
-	setTimeout(() => {
-		//only data-attributes are viable
-		params.nodes.window.setAttribute(attribute, 'true');
+	module.nodes.dialog.classList.remove(module.props.strings.transitionIn);
+	module.nodes.dialog.classList.add(module.props.strings.transitionOut);
 
-		if (params.state.gateControl) {
-			params.nodes.control.classList.remove(params.props.strings.inert);
-		}
-	}, params.props.timing);
+	const animations = module.nodes.dialog.getAnimations({ subtree: true });
+
+	await Promise.allSettled(animations.map(anim => anim.finished));
+
+	module.nodes.dialog.setAttribute(module.props.strings.hidden, 'true');
+	module.nodes.dialog.classList.remove(module.props.strings.transitionOut);
+
+	module.nodes.dialog.close();
+
+	module.state.returnElement.focus();
+	module.state.returnElement = null;
+
+	module.emitter?.emit(`dialog/${module.id}:closed`);
 }
 
-export default closeDialog; 
+export default closeDialog;

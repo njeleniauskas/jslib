@@ -1,32 +1,52 @@
-import handleClickEvent from './handle-click-event.js';
-import handleClickOutsideEvent from './handle-click-outside-event.js';
-import handleKeydownEvents from './handle-keydown-events.js';
-import handleTabEvent from './handle-tab-event.js';
-
-/**
- * @param {object} module - The class module.
- */
+import isOutsideElement from './is-outside-element.js';
+import openDialog from './open-dialog.js';
+import closeDialog from './close-dialog.js';
 
 function addEvents(module) {
-	module.nodes.passer.forEach((node) => {
-		node.addEventListener('click', (event) => {
-			handleClickEvent(event, module);
+	document.addEventListener('pointerdown', (event) => {
+		const rect = module.nodes.dialog.getBoundingClientRect();
+		module.state.pointerOriginInside = insideElement(event, rect);
+	});
+
+	document.addEventListener('pointerup', (event) => {
+		const originInside = module.state.pointerOriginInside;
+		module.state.pointerOriginInside = false;
+
+		if (!module.nodes.dialog.open) return;
+		if (originInside) return;
+		if (!isOutsideElement(event, module.nodes.dialog)) return;
+		if (module.nodes.control.includes(event.target)) return;
+
+		closeDialog(module);
+	});
+
+	module.nodes.dialog.addEventListener('click', (event) => {
+		const close = event.target.closest(module.props.strings.close);
+
+		if (!close || !module.nodes.dialog.contains(close)) return;
+
+		closeDialog(module);
+	});
+
+	module.nodes.dialog.addEventListener('cancel', (event) => {
+		event.preventDefault();
+		closeDialog(module);
+	});
+
+	module.nodes.control.forEach((control) => {
+		control.addEventListener('click', () => {
+			if (module.nodes.dialog.open) return;
+
+			openDialog(module, control);
 		});
 	});
+}
 
-	module.nodes.window.addEventListener('keydown', (event) => {
-		if (event.key === 'Tab') {
-			handleTabEvent(event, module);
-		}
-	});
-
-	document.addEventListener('keydown', (event) => {
-		handleKeydownEvents(event, module);
-	});
-
-	document.addEventListener('click', (event) => {
-		handleClickOutsideEvent(event, module);
-	});
+function insideElement(event, rect) {
+	return event.clientX >= rect.left &&
+		event.clientX <= rect.right &&
+		event.clientY >= rect.top &&
+		event.clientY <= rect.bottom;
 }
 
 export default addEvents;

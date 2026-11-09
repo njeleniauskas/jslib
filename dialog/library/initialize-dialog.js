@@ -1,34 +1,17 @@
-import removeBracketsFromString from '../../common/utilities/remove-brackets-from-string.js'
-import collectInteractiveElements from '../../common/focus-trap/collect-interactive-elements.js';
-import getFirstAndLastElements from '../../common/focus-trap/get-first-and-last-elements.js';
-
-/**
- * @param {object} module - The class module.
- */
+import openDialog from './open-dialog.js';
 
 function initializeDialog(module) {
-	const strings = module.props.strings;
-	const controlString = removeBracketsFromString(strings.control);
+	const queryStrings = module.props.strings;
 
-	module.nodes.passer = Array.from(document.querySelectorAll(strings.passer));
-	module.nodes.receiver = Array.from(document.querySelectorAll(strings.receiver));
-	module.nodes.window = document.querySelector(strings.window);
-	module.nodes.control = module.nodes.passer.find((element) => element.hasAttribute(controlString));
+	module.nodes.control = [...document.querySelectorAll(queryStrings.control)];
+	module.nodes.dialog = document.querySelector(queryStrings.dialog);
 
-	const windowInteractive = (module.nodes.window.hasAttribute('tabindex') 
-		&& module.nodes.window.getAttribute('tabindex') === '-1');
-	const nodes = collectInteractiveElements(module.nodes.window);
-
-	module.nodes.ix = {...getFirstAndLastElements(nodes)};
-
-	if (windowInteractive) {
-		module.state.windowInteractive = true;
+	if (module.nodes.dialog.nodeName.toLowerCase() !== 'dialog') {
+		throw new Error('Dialog: <dialog> element is required for the dialog element.');
 	}
 
-	const hasInert = (module.props.strings.hasOwnProperty('inert') && module.props.strings.inert !== '');
-
-	if (hasInert) {
-		module.state.gateControl = true;
+	if (module.props.startOpen) {
+		openDialog(module, document);
 	}
 }
 

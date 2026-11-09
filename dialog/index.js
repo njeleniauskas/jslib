@@ -3,53 +3,67 @@ import initializeDialog from './library/initialize-dialog.js';
 import addEvents from './library/add-events.js';
 
 /**
- * A class handling a single dialog component.
- * @param {object} strings - Strings used to identify nodes, or represent statedness.
- * @param {string} strings.passer - The attribute for the passing node.
- * @param {string} strings.receiver - The attribute for the receiving node.
- * @param {string} strings.window - The string for the window node.
- * @param {string} strings.control - The string for the control node.
- * @param {string} strings.hidden - The string controlling the availability of the window to the user (for assistive technologies).
- * @param {string} [strings.toggle] - The string controlling the transition state of the window.
- * @param {string} [strings.inert] - The string gating interaction on the control element (if a delay is used).
- * @param {string} [timing] - The delay window for toggling the hidden string to the "hidden" state.
- * 
- * Note: this function should be retired in 2025–6 once Safari catches up.
-*/
+ * @param {object} params
+ * @param {string} [params.id] - The id of the component.
+ *
+ * @param {object} [params.strings]
+ * @param {string} [params.strings.control] - Identifies control nodes.
+ * @param {string} [params.strings.dialog] - Identifies the dialog node.
+ * @param {string} [params.strings.close] - Identifies close nodes.
+ * @param {string} [params.strings.hidden] - The data attribue that identifies the dialog as visible or hidden.
+ * @param {string} [params.strings.transitionIn] - The class for the opening transition.
+ * @param {string} [params.strings.transitionOut] - The class for the closing transition.
+ *
+ * @param {boolean} params.isModal - Whether the dialog should behave as a modal or non-modal dialog.
+ * @param {boolean} params.startOpen - Should the dialog start opened or not.
+ * @param {boolean} [params.emitter] - The event emitter class.
+ */
 
 class Dialog {
 	constructor(params) {
+		this.id = null;
 		this.props = {
 			strings: {
-				passer: null,
-				receiver: null,
 				control: null,
-				window: null,
+				dialog: null,
+				close: null,
 				hidden: null,
-				toggle: null,
-				inert: null,
+				transitionIn: null,
+				transitionOut: null,
 			},
-			keys: {
-				clear: ['Escape']
-			},
-			timing: 0,
+			isModal: null,
+			startOpen: null,
 		};
-		this.nodes = {};
+		this.nodes = {
+			control: null,
+			dialog: null,
+			close: null
+		};
+		this.emitter = null;
 		this.state = {
-			stack: [],
-			length: 0,
-			opened: false,
-			windowInteractive: false,
-			gateControl: false,
+			returnElement: null,
+			pointerOriginInside: false,
 		};
 
-		this.init(params);
+		this.#init(params);
 	}
 
-	init(params) {
-		setConfiguration(this, params);
-		initializeDialog(this);
-		addEvents(this);
+	#init(params) {
+		try {
+			setConfiguration(this, params);
+			initializeDialog(this);
+			addEvents(this);
+		} catch (errors) {
+			if (errors instanceof AggregateError) {
+				console.error(errors.message)
+
+				for (const error of errors.errors) {
+					console.error(error.message);
+				}
+			} else {
+				console.error(errors);
+			}
+		}
 	}
 }
 

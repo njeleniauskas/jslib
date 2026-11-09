@@ -1,20 +1,18 @@
-import removeBracketsFromString from '../../common/utilities/remove-brackets-from-string.js';
-
-/**
- * @param {object} params 
- * @param {object} params.props 
- * @param {object} params.nodes 
- * @param {object} params.state 
- */
-
-function openDialog(params) {
-	const attribute = removeBracketsFromString(params.props.strings.hidden);
-	params.state.opened = true;
-
-	//only data-attributes are viable
+function openDialog(module, targetElement) {
 	document.documentElement.setAttribute('style', 'overflow: hidden');
-	params.nodes.window.setAttribute(attribute, 'false');
-	params.nodes.window.classList.add(params.props.strings.toggle);
+
+	if (module.props.isModal) {
+		module.nodes.dialog.showModal();
+	} else {
+		module.nodes.dialog.show();
+	}
+
+	module.nodes.dialog.setAttribute(module.props.strings.hidden, 'false');
+	module.nodes.dialog.classList.add(module.props.strings.transitionIn);
+
+	module.state.returnElement = targetElement;
+
+	module.emitter?.emit(`dialog/${module.id}:opened`);
 }
 
-export default openDialog; 
+export default openDialog;
