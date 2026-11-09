@@ -1,18 +1,27 @@
 function formatSrc(string, format) {
-	const regex = /\{[^}]*\}/;
+	const parts = getURIParts(string);
+	let result = format;
 
-	if (format.split(regex).length === 1) {
-		return string;
+	for (const [key, value] of Object.entries(parts)) {
+		result = result.replace(key, value);
 	}
 
-	const index = string.lastIndexOf('.');
+	return result;
+}
 
-	if (index === -1) return string;
+function getURIParts(string) {
+	const indexPath = string.lastIndexOf('/');
+	const indexExtension = string.lastIndexOf('.');
 
-	const file = string.slice(0, index);
-	const extension = string.slice(index);
+	const path = indexPath !== -1 ? string.slice(0, indexPath + 1) : '';
+	const extension = string.slice(indexExtension);
+	const file = string.slice(indexPath === -1 ? 0 : indexPath + 1, indexExtension);
 
-	return format.replace(regex, file) + extension;
+	return {
+		'{path}': path,
+		'{ext}': extension,
+		'{file}': file
+	};
 }
 
 export default formatSrc;

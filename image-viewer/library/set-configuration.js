@@ -15,9 +15,9 @@ function setConfiguration(module, params) {
 		strings.image : `[data-iv-image="${module.id}"]`;
 
 	module.props.strings.imageSrc = 'imageSrc' in strings ?
-		strings.imageSrc : '{file}';
+		strings.imageSrc : '{path}{file}{ext}';
 	module.props.strings.thumbnailSrc = 'thumbnailSrc' in strings ?
-		strings.thumbnailSrc : '{file}-thumb';
+		strings.thumbnailSrc : '{path}{file}-thumb{ext}';
 
 	module.props.strings.imageControl = 'imageControl' in strings ?
 		strings.imageControl : `[data-iv-control="${module.id}"]`;

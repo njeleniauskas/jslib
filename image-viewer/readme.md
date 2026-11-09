@@ -108,11 +108,11 @@ emitter.emit(`image-viewer/set1:can-update`, { canUpdate: true });
 <br>
 
 ### Image Sources
-By default, the image referenced on the control (in `data-src`) is the default name for the images that will be used in the viewer. However, if different images need to be used for the gallery images or thumbnails, authors can provide a template for `imageSrc` and `thumbnailSrc` to change each.
+By default, the image reference on the control (in `data-src`) is the default name for the images that will be used in the viewer. However, if different images need to be used for the gallery images or thumbnails, authors can provide a template for `imageSrc` and `thumbnailSrc` to change each.
 
 <br>
 
-To accomplish this, authors only need to include any strings within brackets, e.g. `{file}` or `{path}`, and any additional information will be inserted in the correct position. With `/path/to/image.png` for example, if `imageSrc: {file}-lg` and `thumbnailSrc: {file}-thumb` are provided, the resulting src strings will be `/path/to/image-lg.png` and `/path/to/img-thumb.png`.
+To accomplish this, authors can include the `{path}`, `{file}`, and `{ext}` placeholders in a template, and the class will reformat the uri to match. For example, using `/path/to/image.png` with `imageSrc: {path}{file}-lg{ext}` will result in the image src being `/path/to/image-lg.png`. Note that `{file}` and `{ext}` are required (at minimum) for a valid URI to be constructed.
 
 <br>
 
