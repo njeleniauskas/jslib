@@ -27,10 +27,10 @@ class DisclosureElement {
 		this.emitter = null;
 		this.functions = new Set();
 
-		this.init(params);
+		this.#init(params);
 	}
 
-	init(params) {
+	#init(params) {
 		validateConfig(params);
 		setConfig(this, params);
 		getNodes(this);

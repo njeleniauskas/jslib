@@ -9,7 +9,7 @@ function validateConfig(params) {
 	}
 
 	if (errors.length > 0) {
-		throw new AggregateError(errors, 'Overlay Button:');
+		throw new AggregateError(errors, 'Disclosure Element:');
 	}
 }
 
