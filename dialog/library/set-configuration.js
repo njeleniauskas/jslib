@@ -27,6 +27,13 @@ function setConfiguration(module, params) {
 	module.props.startOpen = 'startOpen' in params ?
 		params.startOpen : false;
 
+	const functions = 'functions' in params ? params.functions : {};
+
+	module.functions.dialogOpened = 'dialogOpened' in functions ?
+		functions.dialogOpened : null;
+	module.functions.dialogClosed = 'dialogClosed' in functions ?
+		functions.dialogClosed : null;
+
 	if (!('id' in params) && 'emitter' in params) {
 		throw new Error('An ID must exist when an emitter is used.');
 	}

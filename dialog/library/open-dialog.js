@@ -12,6 +12,7 @@ function openDialog(module, targetElement) {
 
 	module.state.returnElement = targetElement;
 
+	module.functions?.dialogOpened();
 	module.emitter?.emit(`dialog/${module.id}:opened`);
 }
 

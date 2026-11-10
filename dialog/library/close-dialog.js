@@ -15,6 +15,7 @@ async function closeDialog(module) {
 	module.state.returnElement.focus();
 	module.state.returnElement = null;
 
+	module.functions?.dialogClosed();
 	module.emitter?.emit(`dialog/${module.id}:closed`);
 }
 

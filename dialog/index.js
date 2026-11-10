@@ -39,6 +39,10 @@ class Dialog {
 			dialog: null,
 			close: null
 		};
+		this.functions = {
+			dialogOpened: null,
+			dialogClosed: null,
+		};
 		this.emitter = null;
 		this.state = {
 			returnElement: null,

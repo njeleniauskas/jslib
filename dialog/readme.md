@@ -49,6 +49,18 @@ By default, a dialog will be moded. However, additional arguments may also be in
  */
 ```
 
+<br>
+
+In addition to these paramaters, if authors need to include side-effects from opening or closing a dialog, they can pass in functions that will called when the dialog is opened or closed. Those two arguments are:
+
+```javascript
+const args = {
+	functions: {
+		dialogOpened: openedFn,
+		dialogClosed: closedFn
+	}
+};
+```
 
 <br>
 
