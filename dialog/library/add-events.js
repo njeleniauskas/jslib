@@ -41,7 +41,7 @@ function addEvents(module) {
 		});
 	});
 
-	module.functions?.events(module);
+	module.functions.events?.(module);
 }
 
 function insideElement(event, rect) {
