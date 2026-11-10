@@ -51,14 +51,26 @@ By default, a dialog will be moded. However, additional arguments may also be in
 
 <br>
 
-In addition to these paramaters, if authors need to include side-effects from opening or closing a dialog, they can pass in functions that will called when the dialog is opened or closed. Those two arguments are:
+## Custom Events
+In addition to these paramaters, if authors need to include custom events or side-effects from opening or closing a dialog, they can pass in functions to accomplish this:
 
 ```javascript
 const args = {
 	functions: {
+		events: eventFn,
 		dialogOpened: openedFn,
 		dialogClosed: closedFn
 	}
+};
+```
+
+<br>
+
+Note that the event function has access to the class itself, so any internal parameters are available for use if needed.
+
+```javascript
+const eventFn = (module) => {
+	// add custom event listeners here
 };
 ```
 

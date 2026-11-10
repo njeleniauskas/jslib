@@ -29,6 +29,8 @@ function setConfiguration(module, params) {
 
 	const functions = 'functions' in params ? params.functions : {};
 
+	module.functions.events = 'events' in functions ?
+		functions.events : null;
 	module.functions.dialogOpened = 'dialogOpened' in functions ?
 		functions.dialogOpened : null;
 	module.functions.dialogClosed = 'dialogClosed' in functions ?

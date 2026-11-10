@@ -40,6 +40,8 @@ function addEvents(module) {
 			openDialog(module, control);
 		});
 	});
+
+	module.functions?.events(module);
 }
 
 function insideElement(event, rect) {
