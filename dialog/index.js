@@ -47,6 +47,7 @@ class Dialog {
 		this.state = {
 			returnElement: null,
 			pointerOriginInside: false,
+			cancelable: true,
 		};
 
 		this.#init(params);

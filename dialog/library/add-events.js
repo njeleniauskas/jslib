@@ -29,6 +29,8 @@ function addEvents(module) {
 	});
 
 	module.nodes.dialog.addEventListener('cancel', (event) => {
+		if (!module.state.cancelable) return;
+
 		event.preventDefault();
 		closeDialog(module);
 	});
