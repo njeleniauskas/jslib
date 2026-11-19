@@ -1,18 +1,14 @@
-# Event Emitter
-A class to handle reactive events in an application.
-
 ![Static Badge](https://img.shields.io/badge/Version-1.0-%2327B17E)
 ![Static Badge](https://img.shields.io/badge/Status-Stable-%2327B17E)
-
-
-<br>
-
-## Overview
-The `EventEmitter` class is similar to most standard versions of this class. The methods that can be used are `add`, `remove`, and `emit`. And there is one special edition. Note that in order to reliably unsubscribe a function, it must not be anonymous.
+---
 
 <br>
 
-### Specific Function Orders
+# Overview
+The `EventEmitter` class is similar to most standard versions of this class, handling reactive events in an application. The methods that can be used are `add`, `remove`, and `emit`. And there is one special edition. Note that in order to reliably unsubscribe a function, it must not be anonymous.
+
+<br>
+
 When adding events to a queue, an optional 3rd argument can be supplied in case authors wish to control the order functions get run in. An example of this is the following:
 
 <br>

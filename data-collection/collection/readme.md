@@ -1,11 +1,8 @@
-# DataCollection
+# Overview
 The `DataCollection` class has two responsibilities: getting the collection, and storing it. Nearly everything else is handled in a different module.
-
 
 <br>
 
-
-## Setup
 The basic setup of the collection module is as follows:
 
 ```javascript
@@ -47,8 +44,8 @@ It should be noted that the `type`, `resource` and `name` arguments must be pass
 
 <br>
 
-## Behavior and Usage
-### Getting a Collection
+# Behavior and Usage
+## Getting a Collection
 In order for the entire feature to work, a dataset must be retrieved. This is handled by the `getCollection()` method, which can either use the instantiated arguments, or ones provided to the method directly. The latter example is shown below:
 
 <br>
@@ -91,7 +88,7 @@ Finally, getCollection returns a promise with the `data.live` if authors wish to
 
 <br>
 
-### Pre-Filtering and Sorting
+## Pre-Filtering and Sorting
 If arguments are provided, the data collection can be filtered and/or sorted to condition the reference data as needed. Note however that if these features are used that only shallow keys are available for pre-filtering/sorting at present (no nested keys). Filters do however take an array of objects to allow multiple filters to be used:
 
 ```javascript

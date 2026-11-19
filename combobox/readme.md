@@ -1,16 +1,13 @@
-# Combobox
-A component that handles the behaviors for different element + list combinations.
-
 ![Static Badge](https://img.shields.io/badge/Version-1.0-%2327B17E)
 ![Static Badge](https://img.shields.io/badge/Status-Stable-%2327B17E)
 ![Static Badge](https://img.shields.io/badge/Language-JavaScript-%232C67BF)
 ![Static Badge](https://img.shields.io/badge/License-MIT-%232C67BF)
-
+---
 
 <br>
 
 
-## Overview
+# Overview
 Broadly, a Combobox is a class of component + collection that can be configured to be one of several more specific components. But practically, it is a CompositeElement made up of a single (focusable) element that represents or controls another element in some way.
 
 <br>
@@ -23,7 +20,7 @@ Because this definition is so broad a Combobox can be a lot of things: a simple 
 <br>
 
 
-## Usage
+# Usage
 Because a Combobox is an extension of a CompositeElement, the core focus and navigation behaviors follow that module. And because of the nature of a Combobox, only the **reference** navigation pattern is allowed for this component.
 
 <br>
@@ -101,7 +98,7 @@ Additional attributes are also available to use, overriding their defaults:
 ```
 
 
-## Custom Query Functions
+# Custom Query Functions
 The most important aspect of a Combobox is that it ***does not handle*** the getting of data or rendering it to the DOM. For this reason, authors need to provide a custom function if they wish to handle data that is not **already** in the DOM, such as an API query, or fetch request.
 
 <br>
@@ -211,7 +208,7 @@ const queryFunction = async (event, module) => {
 <br>
 
 
-## Additional Notes
+# Notes
 - For this class to work properly, the component node must be either a context node, or a child of one (with the same 'component' role).
 - In addition to the emitter events for a CompositeElement, one additional one exists for when the query function ends, called `query-function-end`.
 - The orientation of the context element that contains the component must be the same as the writing direction of the component for context switching to work properly. In other words, an inline text input must have `orientation=horizontal` (required for cross-axis context switching to work properly).
@@ -220,5 +217,5 @@ const queryFunction = async (event, module) => {
 <br>
 
 
-## Future Exploration
+# Future Exploration
 - Add a disclosure button functionality for pointers (toggle disclosure of collection).

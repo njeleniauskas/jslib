@@ -1,13 +1,15 @@
-# Theme Control
-A class to control theme switching.
-
 ![Static Badge](https://img.shields.io/badge/Version-1.0-%2327B17E)
 ![Static Badge](https://img.shields.io/badge/Status-Stable-%2327B17E)
+---
 
 <br>
 
-## Overview and Use
-At minimum, a control element needs to exist in the DOM, and arguments passes to the class:
+# Overview and Use
+A `ThemeControl` is a class that handles theme switching behaviors.
+
+<br>
+
+To set one up, a control element needs to exist in the DOM at minimum, and arguments passed to the class:
 
 <br>
 
@@ -43,9 +45,9 @@ Finally, CSS should contain the custom properties/styles that each theme name wi
 
 <br>
 
-## Notes
+# Notes
 - The default state of the theme is populated from the user's system preference.
 - The root data attribute is needed to set the theme. CSS should be written to be controlled by the value of this attribute.
-- Multi-state controls rely on `props.themes` to select the order of themes. 
+- Multi-state controls rely on `props.themes` to select the order of themes.
 - If using multi-state controls, the name of the theme can be communicated via the `props.strings.controlState` pointer. However, authors should also provide context for the control as well, such as: Theme: `dark`.
 - If using single-state controls, a separate function will be needed to handle the right aria-selected/pressed states that need to be communicated.

@@ -1,10 +1,8 @@
-# DataCollectionFilter
+## Overview
 The `DataCollectionFilter` class handles the live filtering of the collection. It relies on additional `FilterGroup` components to collect active filters from the interface.
 
 <br>
 
-
-## Setup
 The basic configuration of the filter module is very simple as it only needs an ID and an emitter to function:
 
 <br>
@@ -33,13 +31,13 @@ In addition to the emitter, the overall filter class can be given two additional
 <br>
 
 
-## Behavior and Usage
-### The FilterGroup Component
+# Behavior and Usage
+## The FilterGroup Component
 In order to have an effect on the collection, this class relies on `FilterGroup` components to pass in their state (via emitter) to function. See the filter group module for information on how to set up fitler groups.
 
 <br>
 
-### Getting a FilterGroup State
+## Getting a FilterGroup State
 On first setup, the filter module needs to collect the current state of the filters in the DOM. This is done by two class methods: `getGroupedFilterKeys()` and `getFilterGroups()`. These two methods need to be called after the dataset has been fetched and is ready as they will trigger a `emitter.emit('{id}:process-collection')` event. To prevent errors, these methods should be called within the returned promise of the `DataColletion.getCollection()` method:
 
 <br>
@@ -59,7 +57,7 @@ During normal operation, these updates are handled automatically.
 
 <br>
 
-### Input Delimiters
+## Input Delimiters
 When using `<input>` elements as filters, users can use delimiters to separate or conditionalize the contents of the input:
 
 - Commas (`,`) will separate each value so that multple values from the input can be tested (e.g. `"string, another string"`). For number ranges, a comma separates the two values of the range (e.g. `"3, 5"`).
@@ -67,12 +65,12 @@ When using `<input>` elements as filters, users can use delimiters to separate o
 
 <br>
 
-### Filter Values
+## Filter Values
 For binary selection, values should match the value desired, ignoring case sensitivity. One special case exists however. When a filter control has the `all` value, it will always return `true` for the entire filter group when selected. This should only be used for single-selection, binary filter groups (it's only relevant there).
 
 In addition, `FilterGroup` components cannot overlap another existing `FilterGroup`. For example, if one FilterGroup contains `propA` and `propB`, these strings cannot be used in another component (it will throw errors).
 
 <br>
 
-## Roadmap
+# Roadmap
 - allow multiple filter groups of the same type (through disable/swapping, or through filter changes).

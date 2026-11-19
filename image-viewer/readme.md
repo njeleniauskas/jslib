@@ -1,12 +1,10 @@
-# ImageViewer
-A class that handles the viewing of an image (or images).
-
 ![Static Badge](https://img.shields.io/badge/Version-1.0-%2327B17E)
 ![Static Badge](https://img.shields.io/badge/Status-Stable-%2327B17E)
+---
 
 <br>
 
-## Overview and Use
+# Overview and Use
 Broadly, an `ImageViewer` handles different behaviors around viewing a single or multiple images in more detail: whether that's choosing an image to view, or changing the viewed image (or images) within a collection.
 
 <br>
@@ -44,7 +42,7 @@ Beyond this setup a number of different configurations may exist:
 
 <br>
 
-### Type
+## Type
 By default the viewer will be set to `type:static`. However, if set to `dynamic` authors will need to provide a template function that dynamically gets the images that are part of the collection (in the DOM or via a fetch) and build the template that will be inserted into the viewer node. Passing this to the class is as follows:
 
 ```javascript
@@ -67,7 +65,7 @@ Note that the template itself should return a template that will be (internally)
 
 <br>
 
-### Multiple Images
+## Multiple Images
 If more than one image belongs to the same collection a few additional behaviors are available for authors:
 
 - Buttons can be added to step between each image in the collection.
@@ -81,7 +79,7 @@ Adding these additional nodes is as simple as adding elements with the appropria
 <br>
 
 
-### Gating Keydown control
+## Gating Keydown control
 One important detail is that by default, users will not be able to use keys to control the viewer until the internal property `canUpdate` is set to `true`. This ensures that authors can set up the appropriate gate to allow/disallow these behaviors. And there are two ways to do this.
 
 <br>
@@ -107,7 +105,7 @@ emitter.emit(`image-viewer/set1:can-update`, { canUpdate: true });
 
 <br>
 
-### Image Sources
+## Image Sources
 By default, the image reference on the control (in `data-src`) is the default name for the images that will be used in the viewer. However, if different images need to be used for the gallery images or thumbnails, authors can provide a template for `imageSrc` and `thumbnailSrc` to change each.
 
 <br>
@@ -116,12 +114,12 @@ To accomplish this, authors can include the `{path}`, `{file}`, and `{ext}` plac
 
 <br>
 
-### Swiping
+## Swiping
 Swipe behaviors are automatically added if there is more than 1 image in the collection. And authors can control the x-axis distance needed to produce a valid swipe by using the `distanceThreshold` argument (a percentage of `window.innerWidth`).
 
 <br>
 
-## Notes
+# Notes
 The following params can all be changed when initializing the class (via args). Note that when changing any of the node strings, that the querySelector should include the `id` to ensure the right collection is gathered.
 
 ```javascript

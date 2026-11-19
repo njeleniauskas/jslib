@@ -1,13 +1,15 @@
-# Landmark Navigator
-A class that handles the navigation between landmark regions.
-
 ![Static Badge](https://img.shields.io/badge/Version-1.0-%2327B17E)
 ![Static Badge](https://img.shields.io/badge/Status-Stable-%2327B17E)
+---
 
 <br>
 
-## Overview and Use
-Setting up a `LandmarkNavigator` is simple, and only requires that the proper attributes needed to identify each landmark exists in HTML. However, authors can also explicitly pass an attribute and key if they wish.
+# Overview and Use
+A `LandmarkNavigator` is designed to handle the navigation between landmark regions.
+
+<br>
+
+Setup is simple as it only requires that the proper attributes needed to identify each landmark exist in HTML. However, authors can also explicitly pass an attribute and key if they wish.
 
 <br>
 
@@ -33,7 +35,7 @@ A few additional notes should be made about this class too:
 
 <br>
 
-## Assignable properties
+# Assignable properties
 ```javascript
 /**
  * @param {object} params

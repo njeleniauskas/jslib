@@ -1,17 +1,12 @@
-# Focus Passer
-A method of handling focus changes between related elements.
-
-<br>
-
-## Overview
-Focus passing involves moving focus from one element to another by a non-navigation user event: clicking on a passing control, using the `Escape` key, or clicking outside of a context.
+# Overview
+Focus passing involves moving focus from one element to another by a non-navigation user event: clicking on a passing control, using the `Escape` key, or clicking outside of a context. And the functions in this module handle these behaviors.
 
 Focus passing only contains a single JavaScript function to handle the passing behavior, as the triggers can vary, and are generally specific to a component.
 
 
 <br>
 
-## The Structure
+# The Structure
 When setting up focus passing within this library, two attributes are needed to identify the passing element, and the receiving element. Each pair needs to share a unique ID so they can be connected to each-other:
 
 <br>
@@ -30,7 +25,7 @@ Note that a passing element can also be a receiver, enabling many different conf
 
 <br>
 
-## Types of Focus
+# Types of Focus
 Within an interface, there are two types of focus that can occur: direct or indirect.
 
 <br>
@@ -59,13 +54,13 @@ Indirect focus is more involved, as the focus identifier could be a class, attri
  * @param {'attribute' | 'class'} [params.indicatorType] - The type of indicator used.
  * @param {boolean} [params.attributeByValue] - Whether 'statedness' is by a specific value or  the existence of an attribute.
  * @param {'direct' | 'indirect'} type - How focus should be handled. The default is 'direct'.
- */ 
+ */
 ```
 
 
 <br>
 
 
-## Notes
+# Notes
 - Only currently supports same-focus changes, e.g. both nodes are "directly" or "indirectly" focused.
 - Finding the correct nodes is handled elsewhere.

@@ -1,19 +1,18 @@
-# Data Collection
-A collection of modules that handle individual features of a live data collection.
-
 ![Static Badge](https://img.shields.io/badge/Version-1.4-%2327B17E)
 ![Static Badge](https://img.shields.io/badge/Status-Stable-%2327B17E)
+---
 
 <br>
 
-## Overview
+
+# Overview
 A DataCollection is a array of items whose display can be manipulated by a user via an interface — for example, a list of products that can be filtered. Each module handles a specific piece of functionality and may depend on other components/modules to function properly.
 
 
 <br>
 
 
-## Basic Setup
+# Basic Setup
 While a the feature can be set up in a few different ways, the basic requirements of a data collection are:
 
 - Including the `DataCollection` class.
@@ -86,7 +85,7 @@ See each module for additional details on how each can be configured.
 <br>
 
 
-## Feature Roadmap
+# Feature Roadmap
 - Re-integrate sorting module.
 - Re-integrate pagination module.
 - Change pre-filter/sort functions to allow operation via any property depth.

@@ -1,17 +1,14 @@
-# Dialog
-A class handling a single dialog component.
-
 ![Static Badge](https://img.shields.io/badge/Version-1.1-%2327B17E)
 ![Static Badge](https://img.shields.io/badge/Status-Stable-%2327B17E)
+---
 
 <br>
 
-## Overview and Use
-This dialog component is an implementation of a modal or non-modal dialog window.
+# Overview and Use
+A `Dialog` handles a single modal or non-modal dialog window.
 
 <br>
 
-### Configuration
 At minimum, the `Dialog` class needs a way to identify DOM nodes. And this can be accomplished by passing explicit node-identifying strings to the class, or by passing an ID and relying on the default query selector names used internally.
 
 <br>
@@ -51,7 +48,7 @@ By default, a dialog will be moded. However, additional arguments may also be in
 
 <br>
 
-## Custom Events
+# Custom Events
 In addition to these paramaters, if authors need to include custom events or side-effects from opening or closing a dialog, they can pass in functions to accomplish this:
 
 ```javascript
@@ -77,7 +74,7 @@ const eventFn = (module) => {
 <br>
 
 
-## Animations
+# Animations
 If authors wish to animate the opening/closing transitions of the dialog they may do so with CSS. Note that the class will automatically detect the type of transition, and remove class name after that transition/animation ends. A few notes should be made about their behavior:
 
 - The `hidden` attribute should only be used to toggle the display of the dialog.
@@ -88,6 +85,6 @@ If authors wish to animate the opening/closing transitions of the dialog they ma
 <br>
 
 
-## Notes
-- This class handles closing transitions manually at present, assuming that `@starting-style`, `transition-behavior`, and `overlay` will not broadly usable until ~2028–9 (refactor will be done once available).
+# Notes
+- This class handles closing transitions manually at present, assuming that `@starting-style`, `transition-behavior`, and `overlay` will not broadly usable until ~2028–9 (refactor once available).
 - Events tied to children of a dialog are attached to the dialog to avoid DOM mutation issues.

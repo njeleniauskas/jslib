@@ -1,16 +1,13 @@
-# Composite Element
-A class that handles the core navigation and focus behaviors for different kinds of components that need composite navigation.
-
 ![Static Badge](https://img.shields.io/badge/Version-1.0-%2327B17E)
 ![Static Badge](https://img.shields.io/badge/Status-Stable-%2327B17E)
 ![Static Badge](https://img.shields.io/badge/Language-JavaScript-%232C67BF)
 ![Static Badge](https://img.shields.io/badge/License-MIT-%232C67BF)
-
+---
 
 <br>
 
 
-## Overview
+# Overview
 A Composite Element is the core module for building interactive components that require [Composite Navigation](https://github.com/njeleniauskas/jslib/tree/master/common/composite-navigation) — that is, a component that is a single Tab stop, and has children that can be traversed via standard navigation keys.
 
 <br>
@@ -21,7 +18,7 @@ This base class is designed so that it can be extended to build more specific co
 <br>
 
 
-## Usage
+# Usage
 Assuming all of the JS dependencies are in the right place, setting up this component requires three things:
 
 <br>
@@ -32,7 +29,7 @@ Assuming all of the JS dependencies are in the right place, setting up this comp
 
 <br>
 
-### Configuration
+## Configuration
 Setting up the script module and configuration is easy, and depends on the type of navigation the author wishes to implement. Both **roving** and **reference** navigation patterns are available, however, the most common setup authors will use is a roving navigation pattern:
 
 ```javascript
@@ -76,7 +73,7 @@ const CompositeElement = new CompositeElement(args);
 It is also possible to pass the `id` as the ***only argument***, and rely on the component's internal fallback attributes to implement a Composite Element. This will result in a roving navigation pattern, and requires the author to be familiar with what the fallback attributes used in the [Composite Navigation](https://github.com/njeleniauskas/jslib/tree/master/common/composite-navigation) module.
 
 
-### HTML
+## HTML
 Beyond the `CompositeNavigation` and `common/utility/` function requirements, the HTML of the component need, at minimum, the data attributes that will be used to identify the nodes belonging to this component instance. One example of roving navigation is as follows:
 
 ```html
@@ -101,12 +98,12 @@ Finally, authors can structure this component much more explicitly if they wish 
 <br>
 
 
-## Extending the model
+# Extending the model
 A Composite Element is designed to be extended so that it can be used as the core navigation module for other components, like a `tablist`. To aid in this, there are two features that can be used to achieve this result.
 
 <br>
 
-### Intern
+## Intern
 First, on `focusin` or `reset`, the index of the target child element can be computed differently if a custom function is supplied. This custom function provides two arguments: the children of the current context, and the target child from a poinderdown event (or null). A sample setup is as follows:
 
 ```javascript
@@ -163,7 +160,7 @@ As an example, the emitter event for `focus-state-updated` might be `tablist/glo
 
 
 
-## Properties (CompositeElement)
+# Properties (CompositeElement)
 When using this module, three internal objects are used for storing different kinds of data. The `props` object stores read-only data, and is where the configuration is stored:
 
 ```javascript
@@ -231,6 +228,6 @@ Finally, the `state` object handles the context and data state of the module:
 <br>
 
 
-## Additional Notes
+# Notes
 - Using pointer-events: none on children will break some behaviors for this component. Only use it if you want to make sure a child will not activate or change the state of this component somehow.
 - If the component element is not also a context element, the `orientation` attribute will need to be placed on both elements for navigation config and semantic correctness.

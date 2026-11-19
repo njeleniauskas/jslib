@@ -1,14 +1,13 @@
-# DataCollectionPresenter
+# Overview
 The `DataCollectionPresenter` class handles rendering the collection based on how other modules have prepared the live collection.
 
 <br>
 
-## Setup
 Because the presenter interacts directly with the DOM, proper setup includes a few more steps.
 
 <br>
 
-### HTML
+## HTML
 At minimum, HTML for the container and live region must be present. The collection and message elements are optional as they are automatically added on the first render:
 
 <br>
@@ -27,7 +26,7 @@ At minimum, HTML for the container and live region must be present. The collecti
 
 <br>
 
-### Module Arguments
+## Module Arguments
 The module requires a few more arguments beyond the emitter, including a unique id, node attributes, and at least one display template:
 
 <br>
@@ -59,7 +58,7 @@ One specific behavior with arguments are with messages. Custom messages can be p
 <br>
 
 
-### Collection Templates
+## Collection Templates
 The presenter must be supplied a template function (identified by a display key) so it knows how to render the collection (only the collection). The basic outline of the function is as follows, using an unordered list as the collection element:
 
 <br>
@@ -106,8 +105,8 @@ Note that the last two arguments are only useful when the pagination module is i
 <br>
 
 
-## Behavior and Usage
-### Emitter Events for Processing
+# Behavior and Usage
+## Emitter Events for Processing
 Beyond the essential conection/update events that the emitter captures, additional state events exist as well if authors want to add behavior for these stages:
 
 - `render-collection-start`: fires when `renderCollection()` begins
@@ -115,7 +114,7 @@ Beyond the essential conection/update events that the emitter captures, addition
 
 <br>
 
-### Live Region Managers
+## Live Region Managers
 If there are multiple collections in the DOM, you will need to pass a liveEventManager property to the class, so that no messages get lost in processing. To include this functionality, simply pass the LiveRegionManager class to the presenter:
 
 ```javascript
@@ -127,5 +126,5 @@ const presenterArgs = {
 <br>
 
 
-### Template Keys
+## Template Keys
 When passed to the class, template keys identify the type of display that should be rendered — for example 'list' or 'grid'. If more than one template is supplied, the first key in the tempalte object will be the default.

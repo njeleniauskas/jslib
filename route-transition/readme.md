@@ -1,12 +1,10 @@
-# Route Transition
-A class that handles sever-side rendered routing transitions.
-
 ![Static Badge](https://img.shields.io/badge/Version-1.0-%2327B17E)
 ![Static Badge](https://img.shields.io/badge/Status-Stable-%2327B17E)
+---
 
 <br>
 
-## Overview and Use
+# Overview and Use
 The `RouteTransition` class delays the routing of internal links in order to enable more seamless transitions from page to page. It enables visual transitions similar to a single-page app, but with a server-side rendered app (like a php application).
 
 The basic setup requires every argument, and can be seen below:

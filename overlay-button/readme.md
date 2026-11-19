@@ -1,12 +1,14 @@
-# Overlay Button
-A button overlaid onto a user interface.
-
 ![Static Badge](https://img.shields.io/badge/Version-1.0-%2327B17E)
 ![Static Badge](https://img.shields.io/badge/Status-Stable-%2327B17E)
+---
 
 <br>
 
-## Overview and Use
+# Overview and Use
+An `OverlayButton` is simply, a button that is overlaid onto the UI and may behave based on the position of the user in the document.
+
+<br>
+
 To properly set up, a control element needs to exist in the DOM, and the following arguments should be passed at minimum:
 
 <br>
@@ -39,18 +41,18 @@ Additional arguments can also be supplied as needed:
  * @param {string} params.strings.visibility - The class to show/hide the button.
  * @param {string} params.strings.hidden - The attribute used to show/hide content to assistive technologies.
  * @param {number} [params.screenfuls] - The number of screenfuls before showing the button.
- * @param {number} [params.timing] - The delay window for hiding the button. 
+ * @param {number} [params.timing] - The delay window for hiding the button.
  */
 ```
 
 <br>
 
-### Clearing Nodes
+## Clearing Nodes
 If desired, a clearing node can be included. This changes the behavior so that once the node in the viewport it will clear the button.
 
 
 <br>
 
 
-## Notes
+# Notes
 - At present, this class only discloses the element via scrolling.

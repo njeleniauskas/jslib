@@ -1,20 +1,18 @@
-# Composite Navigation
-A module of functions handling the core navigational interaction for many different kinds of composite elements.
-
 ![Static Badge](https://img.shields.io/badge/Version-1.1-%2327B17E)
 ![Static Badge](https://img.shields.io/badge/Status-Stable-%2327B17E)
+---
 
 <br>
 
-## Overview and Purpose
-The goal of this module is to handle the **internal navigational functionality** of a of composite element: e.g. a component that is a single `Tab` stop, and have children that can be traversed via standard navigation keys — for example, a list of tabs (`tablist`) or a list of options users can select from (`listbox`).
+# Overview and Purpose
+The goal of composite navigation functions is to handle the **internal navigational functionality** of a of composite element: e.g. a component that is a single `Tab` stop, and have children that can be traversed via standard navigation keys — for example, a list of tabs (`tablist`) or a list of options users can select from (`listbox`).
 
 
 <br>
 
 
-## Module Design and Usage
-### Requirements
+# Module Design and Usage
+## Requirements
 While this module is very flexible, there are two requirements necessary for it to work:
 
 <br>
@@ -24,7 +22,7 @@ While this module is very flexible, there are two requirements necessary for it 
 
 <br>
 
-### Module Arguments
+## Module Arguments
 When using this module, several arguments can be passed depending on the functionality that is desired. And as noted previously, only the `id` is required — other elements will fall back to other attribute names when not provided.
 
 <br>
@@ -52,7 +50,7 @@ attributes : {
 
 <br>
 
-### Navigation Patterns
+## Navigation Patterns
 There are two common engineering patterns that can handle composite navigation, and both are suppored with this module.
 
 <br>
@@ -62,7 +60,7 @@ There are two common engineering patterns that can handle composite navigation, 
 
 <br>
 
-#### Valid Configurations
+### Valid Configurations
 When setting up a component that uses this module, only a few attribute configurations are valid to help maintain an accessible experience. The following valid parent/child configurations are:
 
 **Config 1 (roving)**
@@ -103,13 +101,13 @@ If no arguments are supplied or some are missing, the fallback configuration for
 
 <br>
 
-### Arguments
-#### Orientation
+## Arguments
+### Orientation
 Orientation is used internally to set up keyboard functionality, and if authors wish to enable aria support for the orientation of a navigation context (for semantic/accessible reasons), `aria-orientation` can be passed via the `orientation` argument.
 
 <br>
 
-### HTML, and Attribute Relationships
+## HTML, and Attribute Relationships
 As previously noted, the element representing the navigation context must be a `<div>` or `<table>` — the latter being used to represent interactive grids or tables.
 
 Apart from this requirement however the HTML architecture can be very flexible and meet many different design approaches. However, because of this flexibility some details needs to be clarified.
@@ -161,7 +159,7 @@ Many times this kind of explicit property-to-html setup isn't needed, so interna
 
 Note that attributes to define the navigation configuration would also be needed in this setup, depending on whether the component uses roving or component navigation.
 
-### Context, Reference, and Parent attributes/nodes
+## Context, Reference, and Parent attributes/nodes
 While many times, it will not be valuable to explicitly set up the `contextNode`, `componentNode`, and `parentNode` attributes, there is a reason why each exists.
 
 - **contextNode**: multiple context nodes can be provided in case a component needs to switch navigation contexts (internally), or if the collection of children will be rendered dynamically.
@@ -170,7 +168,7 @@ While many times, it will not be valuable to explicitly set up the `contextNode`
 
 <br>
 
-### Navigation Keys
+## Navigation Keys
 The following keys are available to use once the component is in focus. These keys are automatically configured to handle every orientation, language direction, and writing mode. And they are organized for multi-axis use as well.
 
 <br>
@@ -181,25 +179,25 @@ The following keys are available to use once the component is in focus. These ke
 
 <br>
 
-### Additional Notes
-#### Element Focus is Required
+## Notes
+### Element Focus is Required
 Regardless of the navigation pattern being used, there **must** be a single element within a component using this pattern that is focusable (either the component node, or a child). This is required so that assistive technologies can communicate actions and state properly to users.
 
 <br>
 
-#### Data Attributes Mimic State
+### Data Attributes Mimic State
 Some data- attributes are used to "mimic" state for elements that do not receive focus. Authors can use these attributes to enable CSS to communicate state to users if they wish to.
 
 As an example, in a roving navigation pattern, while children technically get focus, to a user the "component" is the focus target. And it may be desirable to include styling to indicate this state.
 
 <br>
 
-#### Elements in the DOM need to be focusable on instantiation
+### Elements in the DOM need to be focusable on instantiation
 When a component using this module is instantiated, it checks interactivity for the component/child components. If neither are focusable when this module is invoked, the module will not validate.
 
 
 <br>
 
 
-## Future Exploration
+# Future Exploration
 - Add multi-axis (context + 0 or more segments) navigation support.
