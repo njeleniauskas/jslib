@@ -35,6 +35,10 @@ A few additional notes should be made about this class too:
 
 <br>
 
+One final note, if authors dynamically add landmarks to the DOM, they can pass in an emitter to the class so that the landmark nodes can be updated. This is accomplished by calling the event `landmark-navigator:update-nodes`, after a change has occurred.
+
+<br>
+
 # Assignable properties
 ```javascript
 /**

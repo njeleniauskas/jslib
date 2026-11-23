@@ -10,6 +10,7 @@ class LandmarkNavigator {
 		this.attribute = null;
 		this.lastIndex = null;
 		this.state = {};
+		this.emitter = null;
 
 		this.#init(params);
 	}
@@ -21,6 +22,7 @@ class LandmarkNavigator {
 		this.attribute = 'attribute' in args ? args.attribute : '[data-landmark]';
 		this.nodes = [...document.querySelectorAll(this.attribute)];
 		this.lastIndex = this.nodes.length - 1;
+		this.emitter = 'emitter' in params ? params.emitter : null;
 
 		this.#addEvents();
 	}
@@ -36,6 +38,11 @@ class LandmarkNavigator {
 			node.addEventListener('blur', (event) => {
 				node.removeAttribute('tabindex');
 			});
+		});
+
+		this.emitter?.add('landmark-navigator:update-nodes', () => {
+			this.nodes = [...document.querySelectorAll(this.attribute)];
+			this.lastIndex = this.nodes.length - 1;
 		});
 	}
 
