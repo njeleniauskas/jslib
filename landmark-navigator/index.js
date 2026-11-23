@@ -22,7 +22,7 @@ class LandmarkNavigator {
 		this.attribute = 'attribute' in args ? args.attribute : '[data-landmark]';
 		this.nodes = [...document.querySelectorAll(this.attribute)];
 		this.lastIndex = this.nodes.length - 1;
-		this.emitter = 'emitter' in params ? params.emitter : null;
+		this.emitter = 'emitter' in args ? args.emitter : null;
 
 		this.#addEvents();
 	}
